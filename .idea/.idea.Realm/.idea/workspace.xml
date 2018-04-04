@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1924d2ba-c198-4282-b4cc-80767651471a" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GameController.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="433">
+              <caret line="69" column="51" lean-forward="false" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
+              <folding>
+                <marker date="1517924945513" expanded="false" signature="6:179" ph="..." />
+                <marker date="1517924945513" expanded="true" signature="225:4462" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="913:1042" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="921:1039" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="1078:1216" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="1086:1213" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="2758:2807" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="2846:2904" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="2933:3048" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="3086:3339" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="3250:3336" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="3400:3733" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="3599:3626" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="3763:3868" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="3898:3982" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="4230:4403" ph="{...}" />
+                <marker date="1517924945513" expanded="true" signature="4324:4400" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DialogueManager.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/DialogueManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding>
+                <marker date="1517928037748" expanded="false" signature="6:74" ph="..." />
+                <marker date="1517928037748" expanded="true" signature="121:705" ph="{...}" />
+                <marker date="1517928037748" expanded="true" signature="344:439" ph="{...}" />
+                <marker date="1517928037748" expanded="true" signature="405:436" ph="{...}" />
+                <marker date="1517928037748" expanded="true" signature="476:703" ph="{...}" />
+                <marker date="1517928037748" expanded="true" signature="505:658" ph="{...}" />
+                <marker date="1517928037748" expanded="true" signature="730:870" ph="{...}" />
+                <marker date="1517928037748" expanded="true" signature="818:868" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Character.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Character.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="86" column="37" lean-forward="false" selection-start-line="86" selection-start-column="37" selection-end-line="86" selection-end-column="37" />
+              <folding>
+                <marker date="1517928142939" expanded="false" signature="6:85" ph="..." />
+                <marker date="1517928142939" expanded="true" signature="140:3982" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="410:528" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="418:478" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="485:525" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="1349:1670" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="1790:2134" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="1863:1934" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="1981:2111" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2160:2401" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2182:2205" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2278:2353" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2431:2564" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2540:2561" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2606:2738" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2778:2961" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="2796:2958" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="3124:3196" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="3353:3474" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="3445:3471" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="3548:3929" ph="{...}" />
+                <marker date="1517928142939" expanded="true" signature="3643:3902" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>80</find>
+      <find>200</find>
+      <find>0.35</find>
+      <find>0.65</find>
+      <find>public</find>
+      <find>path</find>
+      <find>,</find>
+      <find>0</find>
+      <find>f</find>
+      <find>offset</find>
+      <find>|</find>
+      <find>step.y</find>
+      <find>step.z</find>
+      <find>tileCoord.</find>
+      <find>blocks[y]</find>
+      <find>lul</find>
+      <find>vector3</find>
+      <find>GetKeyDown</find>
+      <find>GetKey</find>
+      <find>=</find>
+      <find>private readonly</find>
+      <find>readonly</find>
+      <find>NodeSize</find>
+      <find>worldSize</find>
+      <find>R</find>
+      <find>Rando</find>
+      <find>Random</find>
+      <find>Size.y</find>
+      <find>Size.z</find>
+      <find>Camera</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>,</replace>
+      <replace>GameController.mapData</replace>
+      <replace>mapData</replace>
+      <replace>MapData.instance</replace>
+      <replace>200</replace>
+      <replace>300</replace>
+      <replace>0.4</replace>
+      <replace>0.75</replace>
+      <replace>1</replace>
+      <replace>sy</replace>
+      <replace>sz</replace>
+      <replace>floorBlocks</replace>
+      <replace>GetKey</replace>
+      <replace>GetKeyDown</replace>
+      <replace>[SerializeField] private</replace>
+      <replace>Coord.one</replace>
+      <replace>location.size</replace>
+      <replace>Length</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Town.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Region.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Map.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Tile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MeshGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldCamera.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Pathfinding/Pathfinder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Pathfinding/NodeGrid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Pathfinding/Node.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Building.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Entity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Door.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Container.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Doorway.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Equipable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/DoorwayObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/InteractableObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/EntityObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Wall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Item.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/ItemObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/DoorObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/WallObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/StatModifier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/ObjectManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/PrefabManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Character.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Equipment.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/StatsUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/InventoryUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/PlayerCamera.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Body.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Inventory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/ButtonsFrame.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Blueprint.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/UIPanels.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/LocationManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/DialogueManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Coord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Log.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/BodyPart.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/CharacterObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utility.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Location.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUtility.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUI.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/StreamingAssets/Database/Races/Dwarves.json" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Range.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ACA5A92C-578B-4550-940A-DA0E8D8A8D7A/88/25633531/Quaternion.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Coord.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/ItemObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs" />
+        <option value="$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1C0389F6-D955-493F-B702-C64D3CD6B097/a4/512b7a37/Void.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utility.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/PlainWall.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/PrefabManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/WallObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Pathfinding/NodeGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/InventoryUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Interactable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Wall.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Location.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/LocationManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Door.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Container.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Doorway.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Equipment.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/BodyPart.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/PlayerCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/DoorwayObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/DoorObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/ObjectManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Body.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/EntityObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/StatsUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Map.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Region.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Tile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/InteractableObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Entity.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/StatModifier.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Objects/Equipable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Blueprint.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/CharacterObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/MapSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Player.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Dialogue.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/DialogueManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Local/Character.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="240" />
+    <option name="y" value="135" />
+    <option name="width" value="1440" />
+    <option name="height" value="810" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Realm (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="do_not_show_unity_auto_save_notification" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Assets/Plugins/Newtonsoft.Json.dll" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" />
+    <configuration default="true" type="DotNetProject" factoryName=".NET Project">
+      <option name="PROJECT_PATH" value="" />
+      <option name="PROJECT_KIND" value="None" />
+      <option name="PROJECT_TFM" value="" />
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="USE_MONO" value="0" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug">
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1924d2ba-c198-4282-b4cc-80767651471a" name="Default" comment="" />
+      <created>1500030038590</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1500030038590</updated>
+      <workItem from="1500030040919" duration="24651000" />
+      <workItem from="1500104612230" duration="50000" />
+      <workItem from="1500104685316" duration="30144000" />
+      <workItem from="1500141422504" duration="102000" />
+      <workItem from="1500141539087" duration="480000" />
+      <workItem from="1500188246851" duration="12917000" />
+      <workItem from="1500202735847" duration="26677000" />
+      <workItem from="1500273766414" duration="39679000" />
+      <workItem from="1500323904039" duration="303000" />
+      <workItem from="1500363504381" duration="10361000" />
+      <workItem from="1500381768806" duration="7210000" />
+      <workItem from="1500453867047" duration="22000" />
+      <workItem from="1500453902038" duration="14987000" />
+      <workItem from="1500477879535" duration="7334000" />
+      <workItem from="1500487751671" duration="4103000" />
+      <workItem from="1500538932542" duration="29654000" />
+      <workItem from="1500573143344" duration="148000" />
+      <workItem from="1500624137772" duration="11005000" />
+      <workItem from="1500657347600" duration="3012000" />
+      <workItem from="1500708519930" duration="42408000" />
+      <workItem from="1500796362591" duration="9146000" />
+      <workItem from="1500809139785" duration="13171000" />
+      <workItem from="1500826242753" duration="9013000" />
+      <workItem from="1500883872101" duration="27817000" />
+      <workItem from="1500971989868" duration="12483000" />
+      <workItem from="1501054901102" duration="22696000" />
+      <workItem from="1501089503963" duration="5562000" />
+      <workItem from="1501140156216" duration="14743000" />
+      <workItem from="1501228764257" duration="13197000" />
+      <workItem from="1501313847345" duration="17475000" />
+      <workItem from="1501407314563" duration="21478000" />
+      <workItem from="1501438133086" duration="6626000" />
+      <workItem from="1501486026114" duration="207000" />
+      <workItem from="1501487452775" duration="10034000" />
+      <workItem from="1501578541393" duration="14092000" />
+      <workItem from="1501661457249" duration="1491000" />
+      <workItem from="1501685964687" duration="7176000" />
+      <workItem from="1501701040148" duration="3438000" />
+      <workItem from="1501758470502" duration="1484000" />
+      <workItem from="1502882843364" duration="12670000" />
+      <workItem from="1502899881742" duration="2101000" />
+      <workItem from="1502913402045" duration="2067000" />
+      <workItem from="1502982141496" duration="1966000" />
+      <workItem from="1503071501267" duration="6055000" />
+      <workItem from="1503148166237" duration="9188000" />
+      <workItem from="1503165332537" duration="3307000" />
+      <workItem from="1503216208405" duration="6298000" />
+      <workItem from="1503230463788" duration="63000" />
+      <workItem from="1503234873223" duration="636000" />
+      <workItem from="1503303185715" duration="23918000" />
+      <workItem from="1503392607842" duration="8178000" />
+      <workItem from="1503409976081" duration="7538000" />
+      <workItem from="1503420692881" duration="4850000" />
+      <workItem from="1504882451316" duration="9711000" />
+      <workItem from="1504895744948" duration="8401000" />
+      <workItem from="1504941710243" duration="1327000" />
+      <workItem from="1504973859232" duration="3347000" />
+      <workItem from="1505048801773" duration="8250000" />
+      <workItem from="1505108569692" duration="9283000" />
+      <workItem from="1505195289857" duration="7095000" />
+      <workItem from="1505215573462" duration="1516000" />
+      <workItem from="1505228409902" duration="7031000" />
+      <workItem from="1505239111589" duration="179000" />
+      <workItem from="1505289718268" duration="27521000" />
+      <workItem from="1505403842499" duration="2679000" />
+      <workItem from="1505406606973" duration="4374000" />
+      <workItem from="1505414492999" duration="581000" />
+      <workItem from="1505415093239" duration="141000" />
+      <workItem from="1505478505800" duration="13405000" />
+      <workItem from="1505507186948" duration="1960000" />
+      <workItem from="1505542438520" duration="8498000" />
+      <workItem from="1505575324152" duration="1970000" />
+      <workItem from="1505577485281" duration="3865000" />
+      <workItem from="1505649244142" duration="5829000" />
+      <workItem from="1505661147575" duration="199000" />
+      <workItem from="1505661366239" duration="8870000" />
+      <workItem from="1505670936241" duration="1110000" />
+      <workItem from="1505679640486" duration="137000" />
+      <workItem from="1505681473738" duration="448000" />
+      <workItem from="1505714886212" duration="7555000" />
+      <workItem from="1505761285769" duration="4236000" />
+      <workItem from="1505810952856" duration="1420000" />
+      <workItem from="1505812425865" duration="3692000" />
+      <workItem from="1505821455449" duration="1571000" />
+      <workItem from="1505841816185" duration="8818000" />
+      <workItem from="1505887316434" duration="461000" />
+      <workItem from="1505887788280" duration="2189000" />
+      <workItem from="1505927856582" duration="7400000" />
+      <workItem from="1506005251228" duration="10348000" />
+      <workItem from="1506084606418" duration="9187000" />
+      <workItem from="1506106614175" duration="5937000" />
+      <workItem from="1506154292071" duration="749000" />
+      <workItem from="1506161628483" duration="78000" />
+      <workItem from="1506161862068" duration="15382000" />
+      <workItem from="1506249789463" duration="3456000" />
+      <workItem from="1506261635231" duration="2783000" />
+      <workItem from="1506322577296" duration="7645000" />
+      <workItem from="1506364778261" duration="6317000" />
+      <workItem from="1506533544028" duration="3382000" />
+      <workItem from="1506678343605" duration="931000" />
+      <workItem from="1506767350515" duration="15444000" />
+      <workItem from="1506850258395" duration="14866000" />
+      <workItem from="1506929943318" duration="7093000" />
+      <workItem from="1506938346058" duration="609000" />
+      <workItem from="1506967117187" duration="155000" />
+      <workItem from="1506967286137" duration="5239000" />
+      <workItem from="1506974762299" duration="86000" />
+      <workItem from="1506974861419" duration="45000" />
+      <workItem from="1506974937205" duration="29000" />
+      <workItem from="1506974980522" duration="1644000" />
+      <workItem from="1507052179421" duration="5049000" />
+      <workItem from="1507138779321" duration="7097000" />
+      <workItem from="1507220505557" duration="1464000" />
+      <workItem from="1507226886928" duration="574000" />
+      <workItem from="1507276519468" duration="22655000" />
+      <workItem from="1507397859323" duration="7054000" />
+      <workItem from="1507447066389" duration="8829000" />
+      <workItem from="1507459525931" duration="1241000" />
+      <workItem from="1507471414253" duration="4181000" />
+      <workItem from="1507478823706" duration="13049000" />
+      <workItem from="1507539370195" duration="2966000" />
+      <workItem from="1507565407108" duration="1864000" />
+      <workItem from="1507567458720" duration="2360000" />
+      <workItem from="1507577944259" duration="3172000" />
+      <workItem from="1507623902910" duration="3858000" />
+      <workItem from="1507656295663" duration="4187000" />
+      <workItem from="1507705612664" duration="412000" />
+      <workItem from="1507706043757" duration="647000" />
+      <workItem from="1507743387565" duration="8539000" />
+      <workItem from="1507821389596" duration="1088000" />
+      <workItem from="1507822532020" duration="11314000" />
+      <workItem from="1507874107881" duration="9578000" />
+      <workItem from="1507910847679" duration="13188000" />
+      <workItem from="1507965305400" duration="12148000" />
+      <workItem from="1507985959213" duration="8527000" />
+      <workItem from="1507997215390" duration="836000" />
+      <workItem from="1507998407326" duration="3904000" />
+      <workItem from="1508002329653" duration="891000" />
+      <workItem from="1508003509743" duration="523000" />
+      <workItem from="1508004182326" duration="351000" />
+      <workItem from="1508052687840" duration="21752000" />
+      <workItem from="1508082475393" duration="3583000" />
+      <workItem from="1508099680871" duration="549000" />
+      <workItem from="1508137757677" duration="106000" />
+      <workItem from="1508137879383" duration="1737000" />
+      <workItem from="1508144978607" duration="727000" />
+      <workItem from="1508146830577" duration="6779000" />
+      <workItem from="1508164092402" duration="6369000" />
+      <workItem from="1508171604594" duration="5262000" />
+      <workItem from="1508179552816" duration="2606000" />
+      <workItem from="1508267604481" duration="1804000" />
+      <workItem from="1508270009920" duration="150000" />
+      <workItem from="1508432840628" duration="2310000" />
+      <workItem from="1508504368652" duration="2556000" />
+      <workItem from="1508511009424" duration="2289000" />
+      <workItem from="1508519565634" duration="4630000" />
+      <workItem from="1508586878342" duration="1454000" />
+      <workItem from="1508590100856" duration="882000" />
+      <workItem from="1508609435773" duration="2512000" />
+      <workItem from="1508662208545" duration="3235000" />
+      <workItem from="1508673720835" duration="2828000" />
+      <workItem from="1508679919812" duration="2332000" />
+      <workItem from="1508690939610" duration="3652000" />
+      <workItem from="1508695482992" duration="1400000" />
+      <workItem from="1508749188490" duration="2692000" />
+      <workItem from="1508782324096" duration="1065000" />
+      <workItem from="1508913399654" duration="3346000" />
+      <workItem from="1508951007901" duration="864000" />
+      <workItem from="1508952053216" duration="3002000" />
+      <workItem from="1508957080550" duration="1073000" />
+      <workItem from="1509033615105" duration="7601000" />
+      <workItem from="1509180070890" duration="3460000" />
+      <workItem from="1509186519633" duration="5939000" />
+      <workItem from="1509198532597" duration="559000" />
+      <workItem from="1509284298809" duration="288000" />
+      <workItem from="1516641966510" duration="1628000" />
+      <workItem from="1516643610733" duration="2544000" />
+      <workItem from="1516654637493" duration="2337000" />
+      <workItem from="1516731615386" duration="874000" />
+      <workItem from="1516790006779" duration="277000" />
+      <workItem from="1517916135107" duration="6539000" />
+      <workItem from="1517927893123" duration="388000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1139408000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.025520833" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13936928" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13995942" sideWeight="0.49791667" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286004" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10364583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16770834" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="62" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MeshGenerator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="107" lean-forward="false" selection-start-line="3" selection-start-column="107" selection-end-line="3" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1C0389F6-D955-493F-B702-C64D3CD6B097/a4/512b7a37/Void.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Pathfinding/Pathfinder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Utility.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="73" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Coord.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/PlainWall.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/PrefabManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="12" column="51" lean-forward="false" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Pathfinding/NodeGrid.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="113" column="37" lean-forward="false" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/InventoryUI.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="42" column="52" lean-forward="false" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/ItemObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Log.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Wall.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="104" lean-forward="false" selection-start-line="11" selection-start-column="104" selection-end-line="11" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Equipment.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="17" column="102" lean-forward="false" selection-start-line="17" selection-start-column="102" selection-end-line="17" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Inventory.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="100" lean-forward="false" selection-start-line="3" selection-start-column="100" selection-end-line="3" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Doorway.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Container.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="102" lean-forward="false" selection-start-line="18" selection-start-column="102" selection-end-line="18" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Door.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Location.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="25" column="79" lean-forward="false" selection-start-line="25" selection-start-column="79" selection-end-line="25" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/LocationManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/WallObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="36" lean-forward="false" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/DoorObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/DoorwayObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Body.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/PlayerCamera.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/BodyPart.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="28" lean-forward="false" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/ObjectManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="53" column="63" lean-forward="false" selection-start-line="53" selection-start-column="63" selection-end-line="53" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/EntityObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/StatsUI.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="63" lean-forward="false" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="47" lean-forward="false" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Region.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Tile.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="32" column="5" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/InteractableObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Interactable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Entity.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/StatModifier.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Equipable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Blueprint.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/CharacterObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Item.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="68" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Map.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUI.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="72" column="13" lean-forward="false" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapSettings.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldCamera.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="61" lean-forward="true" selection-start-line="26" selection-start-column="61" selection-end-line="26" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Player.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="35" lean-forward="false" selection-start-line="9" selection-start-column="47" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/ButtonsFrame.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/DialogueManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <marker date="1517928037748" expanded="false" signature="6:74" ph="..." />
+            <marker date="1517928037748" expanded="true" signature="121:705" ph="{...}" />
+            <marker date="1517928037748" expanded="true" signature="344:439" ph="{...}" />
+            <marker date="1517928037748" expanded="true" signature="405:436" ph="{...}" />
+            <marker date="1517928037748" expanded="true" signature="476:703" ph="{...}" />
+            <marker date="1517928037748" expanded="true" signature="505:658" ph="{...}" />
+            <marker date="1517928037748" expanded="true" signature="730:870" ph="{...}" />
+            <marker date="1517928037748" expanded="true" signature="818:868" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="69" column="51" lean-forward="false" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
+          <folding>
+            <marker date="1517924945513" expanded="false" signature="6:179" ph="..." />
+            <marker date="1517924945513" expanded="true" signature="225:4462" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="913:1042" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="921:1039" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="1078:1216" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="1086:1213" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="2758:2807" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="2846:2904" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="2933:3048" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="3086:3339" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="3250:3336" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="3400:3733" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="3599:3626" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="3763:3868" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="3898:3982" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="4230:4403" ph="{...}" />
+            <marker date="1517924945513" expanded="true" signature="4324:4400" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Local/Character.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="86" column="37" lean-forward="false" selection-start-line="86" selection-start-column="37" selection-end-line="86" selection-end-column="37" />
+          <folding>
+            <marker date="1517928142939" expanded="false" signature="6:85" ph="..." />
+            <marker date="1517928142939" expanded="true" signature="140:3982" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="410:528" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="418:478" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="485:525" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="1349:1670" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="1790:2134" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="1863:1934" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="1981:2111" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2160:2401" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2182:2205" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2278:2353" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2431:2564" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2540:2561" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2606:2738" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2778:2961" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="2796:2958" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="3124:3196" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="3353:3474" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="3445:3471" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="3548:3929" ph="{...}" />
+            <marker date="1517928142939" expanded="true" signature="3643:3902" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

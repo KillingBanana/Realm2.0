@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: eb314491f4f0b2e41b80ee7d3fd68997
+timeCreated: 1500836041
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - racesDatabase: {fileID: 4900000, guid: d99206f81d9f77443856e936064a734c, type: 3}
+  - climatesDatabase: {fileID: 4900000, guid: adc541df32031c64a891636c8d071d50, type: 3}
+  executionOrder: -100
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

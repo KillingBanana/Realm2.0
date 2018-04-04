@@ -1,0 +1,96 @@
+{
+    "collectiveName": "orcs",
+    "individualName": "orc",
+    "adjective": "orcish",
+    "expansionism": 0.75,
+    "hostility": 1.0,
+    "height": {
+        "min": 0.4000000059604645,
+        "max": 0.699999988079071
+    },
+    "temp": {
+        "min": 0.6000000238418579,
+        "max": 1.0
+    },
+    "humidity": {
+        "min": 0.0,
+        "max": 1.0
+    },
+    "placeNames": [
+        "ar",
+        "für",
+        "got",
+        "hal",
+        "hel",
+        "khol",
+        "khöl",
+        "kron",
+        "krön",
+        "kuch",
+        "kur",
+        "kurch",
+        "nag",
+        "nahk",
+        "nuk",
+        "nungst",
+        "tar",
+        "tun",
+        "von",
+        "vun",
+        "wal"
+    ],
+    "maleFirstNames": [
+        "gunth",
+        "kog",
+        "kohn",
+        "kron",
+        "nuk"
+    ],
+    "femaleFirstNames": [
+        "hal",
+        "na",
+        "ryn",
+        "wal"
+    ],
+    "lastNames": [
+        "ar",
+        "für",
+        "got",
+        "hal",
+        "hel",
+        "khol",
+        "khöl",
+        "kron",
+        "krön",
+        "kuch",
+        "kur",
+        "kurch",
+        "nag",
+        "nahk",
+        "nuk",
+        "nungst",
+        "tar",
+        "tun",
+        "von",
+        "vun",
+        "wal"
+    ],
+    "placeNameLength": {
+        "min": 1,
+        "max": 3
+    },
+    "firstNameLength": {
+        "min": 1,
+        "max": 3
+    },
+    "lastNameLength": {
+        "min": 4,
+        "max": 5
+    },
+    "color": {
+        "r": 0.5873731970787048,
+        "g": 0.7279411554336548,
+        "b": 0.4282006621360779,
+        "a": 0.0
+    }
+}
