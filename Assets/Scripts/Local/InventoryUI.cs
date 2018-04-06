@@ -16,10 +16,12 @@ public class InventoryUI : MonoBehaviour {
 	private readonly List<BodyPart> displayedBodyParts = new List<BodyPart>();
 
 	private void Awake() {
-		character = ObjectManager.playerCharacter;
+		character = LocalManager.PlayerCharacter;
 	}
 
 	private void Update() {
+		if (character == null) return;
+
 		freeSpaceText.text = character.inventory.FreeSpace + "/" + character.inventory.maxSize;
 		itemCountText.text = character.inventory.ItemCount.ToString();
 

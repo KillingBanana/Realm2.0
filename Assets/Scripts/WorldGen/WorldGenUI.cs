@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class WorldGenUI : MonoBehaviour {
 	[SerializeField] private Text tileInfo, mapInfo;
 
-	private Map map;
+	private World world;
 	private MapDisplay mapDisplay;
 	private WorldGenUtility worldGenUtility;
 
@@ -33,12 +33,12 @@ public class WorldGenUI : MonoBehaviour {
 	}
 
 	public void OnMapChanged() {
-		map = GameController.Map;
+		world = GameController.World;
 
-		string mapText = $"Seed: {map.settings.seed}\nPopulation: {map.towns.Sum(t => t.population)}";
+		string mapText = $"Seed: {world.settings.seed}\nPopulation: {world.towns.Sum(t => t.population)}";
 
 		foreach (Climate climate in GameController.Climates) {
-			List<Region> validRegions = map.regions.Where(region => region.climate == climate).ToList();
+			List<Region> validRegions = world.regions.Where(region => region.climate == climate).ToList();
 			int regionsCount = validRegions.Count;
 			if (regionsCount == 0) continue;
 			int tilesCount = validRegions.Sum(region => region.Size);
@@ -50,14 +50,14 @@ public class WorldGenUI : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (GameController.Location != null || map == null || GameController.WorldCamera.dragged) return;
+		if (GameController.Location != null || world == null || GameController.WorldCamera.dragged) return;
 
 		RaycastHit hit;
 		if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit)) {
 			int x = Mathf.FloorToInt(hit.point.x);
-			int y = GameController.Map.size - Mathf.CeilToInt(hit.point.z) - 1;
+			int y = GameController.World.size - Mathf.CeilToInt(hit.point.z) - 1;
 
-			Tile newTile = map.GetTile(x, y);
+			Tile newTile = world.GetTile(x, y);
 
 			if (newTile == null) return;
 

@@ -5,10 +5,10 @@
 
 	public readonly float[,] influence;
 
-	public Civilization(Map map, Race race) {
+	public Civilization(World world, Race race) {
 		this.race = race;
 		Name = race.GetPlaceName();
-		influence = new float[map.size, map.size];
+		influence = new float[world.size, world.size];
 	}
 
 	public override string ToString() => Name;

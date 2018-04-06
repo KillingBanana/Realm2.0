@@ -11,6 +11,7 @@ public abstract class Location {
 	protected Location(Tile tile) {
 		if (tile.location != null) {
 			Debug.LogError($"Adding location to non-empty tile ({tile})");
+			return;
 		}
 
 		this.tile = tile;

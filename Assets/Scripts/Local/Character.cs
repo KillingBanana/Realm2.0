@@ -21,7 +21,7 @@ public sealed class Character : Interactable {
 	public bool HasItem(Item item) => inventory.Contains(item) || equipment.Contains(item);
 	private readonly List<StatModifier> modifiers = new List<StatModifier>();
 
-	public Character(Room room, bool isPlayer = false) : this(room, GameController.RandomRace(), Utility.RandomBool, isPlayer) { }
+	public Character(Room room, bool isPlayer = false) : this(room, GameController.Races.RandomItem(), Utility.RandomBool, isPlayer) { }
 
 	public Character(Room room, Race race, bool isFemale, bool isPlayer = false) {
 		this.room = room;
@@ -31,7 +31,7 @@ public sealed class Character : Interactable {
 		lastName = race.GetLastName();
 
 		this.isPlayer = isPlayer;
-		if (isPlayer) ObjectManager.playerCharacter = this;
+		if (isPlayer) LocalManager.PlayerCharacter = this;
 
 		inventory = new Inventory(this, 100);
 		equipment = new Equipment(this);

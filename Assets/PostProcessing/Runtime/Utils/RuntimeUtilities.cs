@@ -6,6 +6,10 @@ using System.Reflection;
 using System.Text;
 using UnityEngine.Assertions;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace UnityEngine.Rendering.PostProcessing
 {
     using SceneManagement;
@@ -22,7 +26,7 @@ namespace UnityEngine.Rendering.PostProcessing
             {
                 if (m_WhiteTexture == null)
                 {
-                    m_WhiteTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
+                    m_WhiteTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false) { name = "White Texture" };
                     m_WhiteTexture.SetPixel(0, 0, Color.white);
                     m_WhiteTexture.Apply();
                 }
@@ -38,7 +42,7 @@ namespace UnityEngine.Rendering.PostProcessing
             {
                 if (m_BlackTexture == null)
                 {
-                    m_BlackTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
+                    m_BlackTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false) { name = "Black Texture" };
                     m_BlackTexture.SetPixel(0, 0, Color.black);
                     m_BlackTexture.Apply();
                 }
@@ -54,13 +58,62 @@ namespace UnityEngine.Rendering.PostProcessing
             {
                 if (m_TransparentTexture == null)
                 {
-                    m_TransparentTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
+                    m_TransparentTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false) { name = "Transparent Texture" };
                     m_TransparentTexture.SetPixel(0, 0, Color.clear);
                     m_TransparentTexture.Apply();
                 }
 
                 return m_TransparentTexture;
             }
+        }
+
+        static Dictionary<int, Texture2D> m_LutStrips = new Dictionary<int, Texture2D>();
+
+        public static Texture2D GetLutStrip(int size)
+        {
+            Texture2D texture;
+            if (!m_LutStrips.TryGetValue(size, out texture))
+            {
+                int width = size * size;
+                int height = size;
+                var pixels = new Color[width * height];
+                float inv = 1f / (size - 1f);
+
+                for (int z = 0; z < size; z++)
+                {
+                    var offset = z * size;
+                    var b = z * inv;
+
+                    for (int y = 0; y < size; y++)
+                    {
+                        var g = y * inv;
+
+                        for (int x = 0; x < size; x++)
+                        {
+                            var r = x * inv;
+                            pixels[y * width + offset + x] = new Color(r, g, b);
+                        }
+                    }
+                }
+
+                var format = TextureFormat.RGBAHalf;
+                if (!format.IsSupported())
+                    format = TextureFormat.ARGB32;
+                    
+                texture = new Texture2D(size * size, size, format, false, true)
+                {
+                    name = "Strip Lut" + size,
+                    hideFlags = HideFlags.DontSave,
+                    filterMode = FilterMode.Bilinear,
+                    wrapMode = TextureWrapMode.Clamp,
+                    anisoLevel = 0
+                };
+                texture.SetPixels(pixels);
+                texture.Apply();
+                m_LutStrips.Add(size, texture);
+            }
+
+            return texture;
         }
 
         #endregion
@@ -226,6 +279,16 @@ namespace UnityEngine.Rendering.PostProcessing
             get { return GraphicsSettings.renderPipelineAsset != null; } // 5.6+ only
         }
 
+        public static bool supportsDeferredShading
+        {
+            get { return scriptableRenderPipelineActive || GraphicsSettings.GetShaderMode(BuiltinShaderType.DeferredShading) != BuiltinShaderMode.Disabled; }
+        }
+
+        public static bool supportsDepthNormals
+        {
+            get { return scriptableRenderPipelineActive || GraphicsSettings.GetShaderMode(BuiltinShaderType.DepthNormals) != BuiltinShaderMode.Disabled; }
+        }
+
 #if UNITY_EDITOR
         public static bool isSinglePassStereoSelected
         {
@@ -271,6 +334,32 @@ namespace UnityEngine.Rendering.PostProcessing
         public static bool isAndroidOpenGL
         {
             get { return Application.platform == RuntimePlatform.Android && SystemInfo.graphicsDeviceType != GraphicsDeviceType.Vulkan; }
+        }
+
+        public static RenderTextureFormat defaultHDRRenderTextureFormat
+        {
+            get
+            {
+#if UNITY_ANDROID || UNITY_IPHONE || UNITY_TVOS || UNITY_SWITCH || UNITY_EDITOR
+                RenderTextureFormat format = RenderTextureFormat.RGB111110Float;
+#   if UNITY_EDITOR
+                var target = EditorUserBuildSettings.activeBuildTarget;
+                if (target != BuildTarget.Android && target != BuildTarget.iOS && target != BuildTarget.tvOS && target != BuildTarget.Switch)
+                    return RenderTextureFormat.DefaultHDR;
+#   endif // UNITY_EDITOR
+                if (format.IsSupported())
+                    return format;
+#endif // UNITY_ANDROID || UNITY_IPHONE || UNITY_TVOS || UNITY_SWITCH || UNITY_EDITOR
+                return RenderTextureFormat.DefaultHDR;
+            }
+        }
+
+        public static bool isFloatingPointFormat(RenderTextureFormat format)
+        {
+            return format == RenderTextureFormat.DefaultHDR || format == RenderTextureFormat.ARGBHalf || format == RenderTextureFormat.ARGBFloat ||
+                   format == RenderTextureFormat.RGFloat || format == RenderTextureFormat.RGHalf ||
+                   format == RenderTextureFormat.RFloat || format == RenderTextureFormat.RHalf ||
+                   format == RenderTextureFormat.RGB111110Float;
         }
 
         public static void Destroy(UnityObject obj)
@@ -492,20 +581,27 @@ namespace UnityEngine.Rendering.PostProcessing
 
         #region Reflection
 
+        static IEnumerable<Type> m_AssemblyTypes;
+
         public static IEnumerable<Type> GetAllAssemblyTypes()
         {
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(t =>
-                {
-                    // Ugly hack to handle mis-versioned dlls
-                    var innerTypes = new Type[0];
-                    try
+            if (m_AssemblyTypes == null)
+            {
+                m_AssemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(t =>
                     {
-                        innerTypes = t.GetTypes();
-                    }
-                    catch {}
-                    return innerTypes;
-                });
+                        // Ugly hack to handle mis-versioned dlls
+                        var innerTypes = new Type[0];
+                        try
+                        {
+                            innerTypes = t.GetTypes();
+                        }
+                        catch { }
+                        return innerTypes;
+                    });
+            }
+
+            return m_AssemblyTypes;
         }
 
         // Quick extension method to get the first attribute of type T on a given Type

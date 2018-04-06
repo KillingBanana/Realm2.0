@@ -3,30 +3,25 @@ using UnityEngine;
 using Random = System.Random;
 
 [Serializable]
-public struct MapSettings {
-	public MapSize mapSize;
+public class WorldSettings {
+	private WorldSize lastWorldSize;
+
+	public WorldSize worldSize;
 
 	[SerializeField] [Range(1, 2)] private int lodMultiplier;
 
 	public int Size {
 		get {
-			switch (mapSize) {
-				case MapSize.Tiny:
-					return 33;
-				case MapSize.Small:
-					return 65;
-				case MapSize.Medium:
-					return 129;
-				case MapSize.Large:
-					return 257;
-				case MapSize.Huge:
-					return 513;
-
-				default:
-					throw new ArgumentOutOfRangeException();
+			if (lastWorldSize != worldSize) {
+				cachedSize = GetSize(worldSize);
+				lastWorldSize = worldSize;
 			}
+
+			return cachedSize;
 		}
 	}
+
+	private int cachedSize;
 
 	public int Lod => Size / 256 * lodMultiplier;
 
@@ -38,13 +33,13 @@ public struct MapSettings {
 	[Range(1, 10)] public float falloffB;
 	[Range(0, 1)] public float falloffMultiplier;
 
-	[Header("Temperature Map")] [Range(0, 10)]
+	[Header("Temperature World")] [Range(0, 10)]
 	public float tempA;
 
 	[Range(0.5f, 1.5f)] public float tempB;
 	[Range(0, 1)] public float heightTempMultiplier;
 
-	[Header("Humidity Map"), SerializeField]
+	[Header("Humidity World"), SerializeField]
 	private NoiseSettings humiditySettings;
 
 	[Header("Civilizations"), Range(1, 10)]
@@ -74,11 +69,9 @@ public struct MapSettings {
 		for (int j = 0; j < Size; j++) {
 			for (int i = 0; i < Size; i++) {
 				float height = heightMap[i, j];
-				float heightTemp = Mathf.Abs(height - 0.5f) * heightTempMultiplier;
+				float heightTemp = Mathf.Abs(height - 0.33f) * heightTempMultiplier;
 				float latitudeTemp = 1 - Mathf.Abs(maxTempLatitude - j) / (float) maxTempLatitude;
-				float
-					temp = Mathf.Clamp01(latitudeTemp -
-					                     heightTemp); //Mathf.Clamp01(Mathf.Clamp01(1 - Mathf.Abs(mapMiddle - j) / (float) mapMiddle) - heightTemp);
+				float temp = Mathf.Clamp01(latitudeTemp - heightTemp);
 				temp = Evaluate(temp, tempA, tempB);
 				tempMap[i, j] = temp;
 				if (temp < minTemp) {
@@ -165,11 +158,28 @@ public struct MapSettings {
 		return map;
 	}
 
-	private static float Evaluate(float value, float a, float b) =>
-		Mathf.Pow(value, a) / (Mathf.Pow(value, a) + Mathf.Pow(b - b * value, a));
+	private static float Evaluate(float value, float a, float b) => Mathf.Pow(value, a) / (Mathf.Pow(value, a) + Mathf.Pow(b - b * value, a));
+
+	private static int GetSize(WorldSize worldSize) {
+		switch (worldSize) {
+			case WorldSize.Tiny:
+				return 33;
+			case WorldSize.Small:
+				return 65;
+			case WorldSize.Medium:
+				return 129;
+			case WorldSize.Large:
+				return 257;
+			case WorldSize.Huge:
+				return 513;
+
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+	}
 }
 
-public enum MapSize {
+public enum WorldSize {
 	Tiny,
 	Small,
 	Medium,

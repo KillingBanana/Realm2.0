@@ -11,16 +11,14 @@ public class Race {
 
 	[Range(0, 1)] public float expansionism, hostility;
 
-	[SerializeField] private FloatRange height, temp, humidity;
+	[SerializeField, MinMax(0, 1)] private Vector2 height, temp, humidity;
 
 	[SerializeField] private string[] placeNames, maleFirstNames, femaleFirstNames, lastNames;
 	[SerializeField] private IntRange placeNameLength, firstNameLength, lastNameLength;
 
-	public Color skinColor;
-
 	public bool IsValidTile(Tile tile) => !tile.IsWater && height.Contains(tile.height) && temp.Contains(tile.temp) && humidity.Contains(tile.humidity);
 
-	public float GetTileCompatibility(Tile tile) => 1 - ((height.Average - tile.height).Abs() + (temp.Average - tile.temp).Abs() + (humidity.Average - tile.humidity).Abs()) / 3;
+	public float GetTileCompatibility(Tile tile) => 1 - ((height.Average() - tile.height).Abs() + (temp.Average() - tile.temp).Abs() + (humidity.Average() - tile.humidity).Abs()) / 3;
 
 	public string GetPlaceName() {
 		string placeName = "";

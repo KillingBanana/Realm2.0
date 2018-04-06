@@ -61,11 +61,11 @@ namespace UnityEngine.Rendering.PostProcessing
         [DisplayName("Gamma"), Min(0.001f), Tooltip("")]
         public FloatParameter toneCurveGamma = new FloatParameter { value = 1f };
 
-        [DisplayName("Lookup Texture"), Tooltip("Custom log-space lookup texture (strip format, e.g. 1024x32). EXR format is highly recommended or precision will be heavily degraded. Refer to the documentation for more information about how to create such a Lut.")]
-        public TextureParameter logLut = new TextureParameter { value = null };
-
         [DisplayName("Lookup Texture"), Tooltip("Custom lookup texture (strip format, e.g. 256x16) to apply before the rest of the color grading operators. If none is provided, a neutral one will be generated internally.")]
-        public TextureParameter ldrLut = new TextureParameter { value = null }; // LDR only
+        public TextureParameter ldrLut = new TextureParameter { value = null, defaultState = TextureParameterDefault.Lut2D }; // LDR only
+
+        [DisplayName("Contribution"), Range(0f, 1f), Tooltip("How much of the lookup texture will contribute to the color grading effect.")]
+        public FloatParameter ldrLutContribution = new FloatParameter { value = 1f };
 
         [DisplayName("Temperature"), Range(-100f, 100f), Tooltip("Sets the white balance to a custom color temperature.")]
         public FloatParameter temperature = new FloatParameter { value = 0f };
@@ -176,7 +176,9 @@ namespace UnityEngine.Rendering.PostProcessing
             var gradingMode = settings.gradingMode.value;
             var supportComputeTex3D = SystemInfo.supports3DRenderTextures
                 && SystemInfo.supportsComputeShaders
-                && SystemInfo.graphicsDeviceType != GraphicsDeviceType.OpenGLCore;
+                && context.resources.computeShaders.lut3DBaker != null
+                && SystemInfo.graphicsDeviceType != GraphicsDeviceType.OpenGLCore
+                && SystemInfo.graphicsDeviceType != GraphicsDeviceType.OpenGLES3;
 
             if (gradingMode == GradingMode.External)
                 RenderExternalPipeline3D(context);
@@ -307,7 +309,7 @@ namespace UnityEngine.Rendering.PostProcessing
         // LUT (33^3 -> 32^3) but most of the time it's imperceptible.
         void RenderHDRPipeline2D(PostProcessRenderContext context)
         {
-            // For the same reasons as in RenderHDRPipeline3D, regen LUT on evey frame
+            // For the same reasons as in RenderHDRPipeline3D, regen LUT on every frame
             {
                 CheckInternalStripLut();
 
@@ -340,7 +342,7 @@ namespace UnityEngine.Rendering.PostProcessing
                 lutSheet.properties.SetVector(ShaderIDs.InvGamma, invgamma);
                 lutSheet.properties.SetVector(ShaderIDs.Gain, gain);
 
-                lutSheet.properties.SetTexture(ShaderIDs.Curves, GetCurveTexture(false));
+                lutSheet.properties.SetTexture(ShaderIDs.Curves, GetCurveTexture(true));
 
                 var tonemapper = settings.tonemapper.value;
                 if (tonemapper == Tonemapper.Custom)
@@ -386,7 +388,7 @@ namespace UnityEngine.Rendering.PostProcessing
         // LDR color pipeline is rendered to a 2D strip lut (works on every platform)
         void RenderLDRPipeline2D(PostProcessRenderContext context)
         {
-            // For the same reasons as in RenderHDRPipeline3D, regen LUT on evey frame
+            // For the same reasons as in RenderHDRPipeline3D, regen LUT on every frame
             {
                 CheckInternalStripLut();
 
@@ -424,11 +426,18 @@ namespace UnityEngine.Rendering.PostProcessing
 
                 // Generate the lut
                 context.command.BeginSample("LdrColorGradingLut2D");
+
                 var userLut = settings.ldrLut.value;
                 if (userLut == null)
+                {
                     context.command.BlitFullscreenTriangle(BuiltinRenderTextureType.None, m_InternalLdrLut, lutSheet, (int)Pass.LutGenLDRFromScratch);
+                }
                 else
+                {
+                    lutSheet.properties.SetVector(ShaderIDs.UserLut2D_Params, new Vector4(1f / userLut.width, 1f / userLut.height, userLut.height - 1f, settings.ldrLutContribution));
                     context.command.BlitFullscreenTriangle(userLut, m_InternalLdrLut, lutSheet, (int)Pass.LutGenLDR);
+                }
+
                 context.command.EndSample("LdrColorGradingLut2D");
             }
 
@@ -450,13 +459,13 @@ namespace UnityEngine.Rendering.PostProcessing
                 m_InternalLogLut = new RenderTexture(k_Lut3DSize, k_Lut3DSize, 0, format, RenderTextureReadWrite.Linear)
                 {
                     name = "Color Grading Log Lut",
+                    dimension = TextureDimension.Tex3D,
                     hideFlags = HideFlags.DontSave,
                     filterMode = FilterMode.Bilinear,
                     wrapMode = TextureWrapMode.Clamp,
                     anisoLevel = 0,
                     enableRandomWrite = true,
                     volumeDepth = k_Lut3DSize,
-                    dimension = TextureDimension.Tex3D,
                     autoGenerateMips = false,
                     useMipMap = false
                 };
@@ -543,14 +552,14 @@ namespace UnityEngine.Rendering.PostProcessing
             // Use ARGBHalf if possible, fallback on ARGB2101010 and ARGB32 otherwise
             var format = RenderTextureFormat.ARGBHalf;
 
-            if (!SystemInfo.SupportsRenderTextureFormat(format))
+            if (!format.IsSupported())
             {
                 format = RenderTextureFormat.ARGB2101010;
 
                 // Note that using a log lut in ARGB32 is a *very* bad idea but we need it for
                 // compatibility reasons (else if a platform doesn't support one of the previous
                 // format it'll output a black screen, or worse will segfault on the user).
-                if (!SystemInfo.SupportsRenderTextureFormat(format))
+                if (!format.IsSupported())
                     format = RenderTextureFormat.ARGB32;
             }
 

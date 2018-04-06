@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = System.Random;
@@ -17,14 +18,14 @@ public class GameController : MonoBehaviour {
 
 	[SerializeField] private bool screenshots;
 
-	[Header("Map Settings"), SerializeField]
+	[Header("World Settings"), SerializeField]
 	private bool randomMapSeed;
 
 	[SerializeField] public bool autoUpdate;
 
-	[SerializeField] private MapSettings mapSettings;
+	[SerializeField] private WorldSettings worldSettings;
 
-	public static Map Map { get; private set; }
+	public static World World { get; private set; }
 
 	public static Location Location { get; private set; }
 
@@ -50,8 +51,8 @@ public class GameController : MonoBehaviour {
 	private static string RacesPath => Application.streamingAssetsPath + "/Database/Races/";
 	private static string ClimatesPath => Application.streamingAssetsPath + "/Database/Climates/";
 
-	public static MapDisplay MapDisplay => mapDisplay ?? (mapDisplay = Instance.GetComponent<MapDisplay>());
-	public static WorldGenUI WorldGenUI => worldGenUI ?? (worldGenUI = Instance.GetComponent<WorldGenUI>());
+	private static MapDisplay MapDisplay => mapDisplay ?? (mapDisplay = Instance.GetComponent<MapDisplay>());
+	private static WorldGenUI WorldGenUI => worldGenUI ?? (worldGenUI = Instance.GetComponent<WorldGenUI>());
 
 	public static WorldCamera WorldCamera => worldCamera ?? (worldCamera = FindObjectOfType<WorldCamera>());
 	public static DialogueManager DialogueManager => dialogueManager ?? (dialogueManager = FindObjectOfType<DialogueManager>());
@@ -70,26 +71,28 @@ public class GameController : MonoBehaviour {
 	private void Awake() {
 		DontDestroyOnLoad(this);
 
-		GenerateMap();
+		GenerateWorld();
 	}
 
-	public void OnMapSizeChanged(int i) {
-		mapSettings.mapSize = (MapSize) i;
-		GenerateMap();
+	[UsedImplicitly]
+	public void OnWorldSizeChanged(int i) {
+		worldSettings.worldSize = (WorldSize) i;
+		GenerateWorld();
 	}
 
-	public void GenerateMap() {
-		if (randomMapSeed) mapSettings.seed = Random.Next(0, 99999);
-		Map = new Map(mapSettings);
-		OnMapUpdated();
+	public void GenerateWorld() {
+		random = new Random(Seed);
+		if (randomMapSeed) worldSettings.seed = Random.Next(0, 99999);
+		World = new World(worldSettings);
+		OnWorldUpdated();
 	}
 
-	private static void OnMapUpdated() {
+	private static void OnWorldUpdated() {
 		MapDisplay.DrawMap();
 		WorldGenUI.OnMapChanged();
-		WorldCamera.targetPos = new Vector3(Map.size / 2, Map.size / 2, Map.size / 2);
+		WorldCamera.targetPos = new Vector3(World.size / 2, World.size / 2, World.size / 2);
 		if (Instance.screenshots) {
-			ScreenCapture.CaptureScreenshot("Screenshots/" + Map.settings.seed + ".png");
+			ScreenCapture.CaptureScreenshot("Screenshots/" + World.settings.seed + ".png");
 		}
 	}
 
@@ -121,6 +124,4 @@ public class GameController : MonoBehaviour {
 			File.WriteAllText(path + o + ".json", JsonUtility.ToJson(o, true));
 		}
 	}
-
-	public static Race RandomRace() => Races.RandomItem();
 }

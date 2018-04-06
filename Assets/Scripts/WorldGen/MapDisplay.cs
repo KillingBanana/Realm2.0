@@ -10,18 +10,18 @@ public class MapDisplay : MonoBehaviour {
 
 	public static Texture2D mapTexture;
 
-	private static Map Map => GameController.Map;
+	private static World World => GameController.World;
 
 	public void DrawMap() {
-		Mesh mapMesh = MeshGenerator.GenerateTerrainMesh(Map.HeightMap, Map.settings.Lod, Map.size, Mathf.Sqrt(Map.size) * heightMultiplier, heightCurve);
+		Mesh mapMesh = MeshGenerator.GenerateTerrainMesh(World.HeightMap, World.settings.Lod, World.size, Mathf.Sqrt(World.size) * heightMultiplier, heightCurve);
 		meshFilter.sharedMesh = mapMesh;
 		meshCollider.sharedMesh = mapMesh;
-		meshFilter.transform.position = new Vector3(Map.size / 2, 0, Map.size / 2);
+		meshFilter.transform.position = new Vector3(World.size / 2, 0, World.size / 2);
 		DrawTexture();
 	}
 
 	public void DrawTexture() {
-		mapTexture = GameController.Map.GetTexture(WorldGenUI.DrawMode);
+		mapTexture = GameController.World.GetTexture(WorldGenUI.DrawMode);
 		meshRenderer.sharedMaterial.mainTexture = mapTexture;
 	}
 }

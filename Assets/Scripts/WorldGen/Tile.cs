@@ -17,8 +17,6 @@ public class Tile {
 
 	public bool IsWater => Climate.isWater;
 
-	public bool regionPending;
-
 	public Tile(int x, int y, float height, float temp, float humidity) {
 		this.x = x;
 		this.y = y;
@@ -33,6 +31,10 @@ public class Tile {
 	}
 
 	public void SetRegion(Region newRegion) {
+		if (region != null) {
+			Debug.LogWarning("Region not null");
+		}
+
 		region = newRegion;
 		Climate = region.climate;
 		color = Climate.GetColor(height);
@@ -55,5 +57,5 @@ public class Tile {
 		}
 	}
 
-	public override string ToString() => Climate + " tile (" + x + ", " + y + ")";
+	public override string ToString() => $"{Climate} tile ({x}, {y})";
 }

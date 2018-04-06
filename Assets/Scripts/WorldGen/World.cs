@@ -1,27 +1,35 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
-public class Map {
+public class World {
 	private readonly Texture2D texture;
 	private readonly Color[] colors;
 
 	public readonly int size;
 
-	public readonly MapSettings settings;
+	public readonly WorldSettings settings;
 
 	public float[,] HeightMap { get; private set; }
 	private Tile[,] tileMap;
 
 	public readonly List<Region> regions = new List<Region>();
-	public List<Civilization> civilizations = new List<Civilization>();
-	public List<Town> towns = new List<Town>();
+	public readonly List<Civilization> civilizations = new List<Civilization>();
+	public readonly List<Town> towns = new List<Town>();
 
 	private readonly Random random;
 
-	public Map(MapSettings settings) {
+	private const int MaxAttempts = 1000;
+
+	public World(WorldSettings settings) {
+		Stopwatch stopwatch = new Stopwatch();
+		stopwatch.Start();
+
 		this.settings = settings;
 		size = settings.Size;
+
 		random = new Random(settings.seed);
 
 		texture = new Texture2D(size, size) {filterMode = FilterMode.Point};
@@ -30,22 +38,16 @@ public class Map {
 		GenerateTileMap();
 		GenerateRegions();
 		GenerateCivs();
+
+		stopwatch.Stop();
+		Debug.Log($"World generation finished in {stopwatch.ElapsedMilliseconds}ms");
 	}
 
 	public Tile GetTile(int x, int y) => IsInMap(x, y) ? tileMap[x, y] : null;
 
-	public bool IsInMap(int x, int y) => x >= 0 && x < size && y >= 0 && y < size;
+	private bool IsInMap(int x, int y) => x >= 0 && x < size && y >= 0 && y < size;
 
-	public Region RandomRegion() {
-		Region region = null;
-		while (region == null || region.IsWater) {
-			region = regions.RandomItem(random);
-		}
-
-		return region;
-	}
-
-	public Tile RandomTile() => GetTile(random.Next(0, size), random.Next(0, size));
+	private Tile RandomTile() => GetTile(random.Next(0, size), random.Next(0, size));
 
 	private void GenerateTileMap() {
 		tileMap = new Tile[size, size];
@@ -65,60 +67,61 @@ public class Map {
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
 				Tile tile = tileMap[x, y];
-				if (tile.region != null) continue;
-
-				List<Tile> tiles = FindRegion(tile, 1);
-				Region region = new Region(tile.Climate, tiles);
-				regions.Add(region);
+				if (tile.region == null) FindRegion(tile);
 			}
 		}
 	}
 
-	private List<Tile> FindRegion(Tile firstTile, int range) {
-		List<Tile> tiles = new List<Tile>();
+	private void FindRegion(Tile firstTile) {
+		HashSet<Tile> tiles = new HashSet<Tile>();
 		Queue<Tile> queue = new Queue<Tile>();
-		firstTile.regionPending = true;
 		queue.Enqueue(firstTile);
 
 		while (queue.Count > 0) {
 			Tile tile = queue.Dequeue();
 			tiles.Add(tile);
 
-			for (int j = -range; j <= range; j++) {
-				for (int i = -range; i <= range; i++) {
+			for (int j = -1; j <= 1; j++) {
+				for (int i = -1; i <= 1; i++) {
 					Tile newTile = GetTile(tile.x + i, tile.y + j);
 
-					if (newTile == null || newTile.regionPending || newTile.Climate != tile.Climate ||
-					    newTile.region != null) continue;
-
-					queue.Enqueue(newTile);
-					newTile.regionPending = true;
+					if (newTile != null && !(tiles.Contains(newTile) || queue.Contains(newTile)) && newTile.Climate == tile.Climate) {
+						queue.Enqueue(newTile);
+					}
 				}
 			}
 		}
 
-		return tiles;
+		OnRegionFound(firstTile.Climate, tiles);
+	}
+
+	private void OnRegionFound(Climate climate, HashSet<Tile> tiles) {
+		Region region = new Region(climate, tiles);
+		regions.Add(region);
 	}
 
 	private void GenerateCivs() {
 		while (civilizations.Count < settings.civilizations) {
-			Race race = GameController.RandomRace();
+			Race race = GameController.Races.RandomItem(random);
 			Civilization civ = new Civilization(this, race);
 			civilizations.Add(civ);
-			Tile tile = null;
+
+			Tile tile;
 			int attempts = 0;
-			while ((tile == null || !race.IsValidTile(tile)) && attempts < 100) {
+
+			do {
 				tile = RandomTile();
 				attempts++;
-			}
+			} while (tile.location != null || !race.IsValidTile(tile) && attempts < MaxAttempts);
 
-			if (attempts >= 100) {
+			if (attempts >= MaxAttempts) {
 				Debug.Log($"Could not find suitable tile for {race}");
 				continue;
 			}
 
 			int population = 5000 + (int) (race.GetTileCompatibility(tile) * 5000);
 			civ.capital = new Town(tile, civ, population);
+
 			towns.Add(civ.capital);
 		}
 	}

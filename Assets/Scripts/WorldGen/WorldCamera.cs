@@ -17,7 +17,7 @@ public class WorldCamera : MonoBehaviour {
 	private void Update() {
 		float mouseWheel = -Input.GetAxis("Mouse ScrollWheel");
 
-		targetPos.y = Mathf.Clamp(targetPos.y + mouseWheel * zoomSensitivity, (float) GameController.Map.size / 10, (float) GameController.Map.size / 2);
+		targetPos.y = Mathf.Clamp(targetPos.y + mouseWheel * zoomSensitivity, (float) GameController.World.size / 10, (float) GameController.World.size / 2);
 
 		if (Input.GetMouseButtonDown(MouseButtonPan)) {
 			initialMousePosition = Input.mousePosition;
@@ -31,8 +31,8 @@ public class WorldCamera : MonoBehaviour {
 			targetPos.z = initialPosition.z + cameraPosDiff.z;
 		}
 
-		targetPos.x = Mathf.Clamp(targetPos.x, 0, GameController.Map.size);
-		targetPos.z = Mathf.Clamp(targetPos.z, 0, GameController.Map.size);
+		targetPos.x = Mathf.Clamp(targetPos.x, 0, GameController.World.size);
+		targetPos.z = Mathf.Clamp(targetPos.z, 0, GameController.World.size);
 
 		transform.position = (transform.position - targetPos).magnitude > 0.01f
 			? Vector3.Lerp(transform.position, targetPos, 0.1f)

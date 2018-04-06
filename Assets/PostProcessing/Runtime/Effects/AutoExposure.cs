@@ -24,7 +24,7 @@ namespace UnityEngine.Rendering.PostProcessing
         [Range(LogHistogram.rangeMin, LogHistogram.rangeMax), DisplayName("Maximum (EV)"), Tooltip("Maximum average luminance to consider for auto exposure (in EV).")]
         public FloatParameter maxLuminance = new FloatParameter { value = 0f };
 
-        [Min(0f), Tooltip("Exposure bias. Use this to offset the global exposure of the scene.")]
+        [Min(0f), DisplayName("Exposure Compensation"), Tooltip("Use this to scale the global exposure of the scene.")]
         public FloatParameter keyValue = new FloatParameter { value = 1f };
 
         [DisplayName("Type"), Tooltip("Use \"Progressive\" if you want auto exposure to be animated. Use \"Fixed\" otherwise.")]
@@ -40,7 +40,10 @@ namespace UnityEngine.Rendering.PostProcessing
         {
             return enabled.value
                 && SystemInfo.supportsComputeShaders
-                && SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.RFloat);
+                && !RuntimeUtilities.isAndroidOpenGL
+                && RenderTextureFormat.RFloat.IsSupported()
+                && context.resources.computeShaders.autoExposure
+                && context.resources.computeShaders.exposureHistogram;
         }
     }
 
@@ -66,7 +69,7 @@ namespace UnityEngine.Rendering.PostProcessing
         {
             if (m_AutoExposurePool[eye][id] == null || !m_AutoExposurePool[eye][id].IsCreated())
             {
-                m_AutoExposurePool[eye][id] = new RenderTexture(1, 1, 0, RenderTextureFormat.RFloat);
+                m_AutoExposurePool[eye][id] = new RenderTexture(1, 1, 0, RenderTextureFormat.RFloat) { enableRandomWrite = true };
                 m_AutoExposurePool[eye][id].Create();
             }
         }
@@ -75,9 +78,6 @@ namespace UnityEngine.Rendering.PostProcessing
         {
             var cmd = context.command;
             cmd.BeginSample("AutoExposureLookup");
-
-            var sheet = context.propertySheets.Get(context.resources.shaders.autoExposure);
-            sheet.ClearKeywords();
 
             // Prepare autoExpo texture pool
             CheckTexture(context.xrActiveEye, 0);
@@ -96,23 +96,32 @@ namespace UnityEngine.Rendering.PostProcessing
             settings.minLuminance.value = Mathf.Min(minLum, maxLum);
             settings.maxLuminance.value = Mathf.Max(minLum, maxLum);
 
-            // Compute auto exposure
-            sheet.properties.SetBuffer(ShaderIDs.HistogramBuffer, context.logHistogram.data);
-            sheet.properties.SetVector(ShaderIDs.Params, new Vector4(lowPercent * 0.01f, highPercent * 0.01f, RuntimeUtilities.Exp2(settings.minLuminance.value), RuntimeUtilities.Exp2(settings.maxLuminance.value)));
-            sheet.properties.SetVector(ShaderIDs.Speed, new Vector2(settings.speedDown.value, settings.speedUp.value));
-            sheet.properties.SetVector(ShaderIDs.ScaleOffsetRes, context.logHistogram.GetHistogramScaleOffsetRes(context));
-            sheet.properties.SetFloat(ShaderIDs.ExposureCompensation, settings.keyValue.value);
+            // Compute average luminance & auto exposure
+            bool firstFrame = m_ResetHistory || !Application.isPlaying;
+            string adaptation = null;
 
-            if (m_ResetHistory || !Application.isPlaying)
+            if (firstFrame || settings.eyeAdaptation.value == EyeAdaptation.Fixed)
+                adaptation = "KAutoExposureAvgLuminance_fixed";
+            else
+                adaptation = "KAutoExposureAvgLuminance_progressive";
+
+            var compute = context.resources.computeShaders.autoExposure;
+            int kernel = compute.FindKernel(adaptation);
+            cmd.SetComputeBufferParam(compute, kernel, "_HistogramBuffer", context.logHistogram.data);
+            cmd.SetComputeVectorParam(compute, "_Params1", new Vector4(lowPercent * 0.01f, highPercent * 0.01f, RuntimeUtilities.Exp2(settings.minLuminance.value), RuntimeUtilities.Exp2(settings.maxLuminance.value)));
+            cmd.SetComputeVectorParam(compute, "_Params2", new Vector4(settings.speedDown.value, settings.speedUp.value, settings.keyValue.value, Time.deltaTime));
+            cmd.SetComputeVectorParam(compute, "_ScaleOffsetRes", context.logHistogram.GetHistogramScaleOffsetRes(context));
+
+            if (firstFrame)
             {
                 // We don't want eye adaptation when not in play mode because the GameView isn't
                 // animated, thus making it harder to tweak. Just use the final audo exposure value.
                 m_CurrentAutoExposure = m_AutoExposurePool[context.xrActiveEye][0];
-                cmd.BlitFullscreenTriangle(BuiltinRenderTextureType.None, m_CurrentAutoExposure, sheet, (int)EyeAdaptation.Fixed);
+                cmd.SetComputeTextureParam(compute, kernel, "_Destination", m_CurrentAutoExposure);
+                cmd.DispatchCompute(compute, kernel, 1, 1, 1);
 
                 // Copy current exposure to the other pingpong target to avoid adapting from black
                 RuntimeUtilities.CopyTexture(cmd, m_AutoExposurePool[context.xrActiveEye][0], m_AutoExposurePool[context.xrActiveEye][1]);
-
                 m_ResetHistory = false;
             }
             else
@@ -120,11 +129,15 @@ namespace UnityEngine.Rendering.PostProcessing
                 int pp = m_AutoExposurePingPong[context.xrActiveEye];
                 var src = m_AutoExposurePool[context.xrActiveEye][++pp % 2];
                 var dst = m_AutoExposurePool[context.xrActiveEye][++pp % 2];
-                cmd.BlitFullscreenTriangle(src, dst, sheet, (int)settings.eyeAdaptation.value);
+                
+                cmd.SetComputeTextureParam(compute, kernel, "_Source", src);
+                cmd.SetComputeTextureParam(compute, kernel, "_Destination", dst);
+                cmd.DispatchCompute(compute, kernel, 1, 1, 1);
+
                 m_AutoExposurePingPong[context.xrActiveEye] = ++pp % 2;
                 m_CurrentAutoExposure = dst;
             }
-            
+
             cmd.EndSample("AutoExposureLookup");
 
             context.autoExposureTexture = m_CurrentAutoExposure;

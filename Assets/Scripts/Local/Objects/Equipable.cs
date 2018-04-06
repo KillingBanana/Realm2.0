@@ -35,9 +35,7 @@ public class Equipable : Item {
 		modifiers = new[] {new StatModifier(Name, "Stat boost from " + Name, Utility.RandomValue<Stat>(), Random.Range(1, 10))};
 	}
 
-	protected override string InspectText() => base.InspectText() + "\nSlot: " + slot + (slotSize > 1 ? " (x" + slotSize + ")" : "") +
-	                                           modifiers.Aggregate("", (current, equipableModifier) => "\n" + current + equipableModifier);
-
+	protected override string InspectText() => $"{base.InspectText()}\nSlot: {slot}{(slotSize > 1 ? " (x" + slotSize + ")" : "")}{modifiers.Aggregate("", (current, equipableModifier) => "\n" + current + equipableModifier)}";
 
 	private void Equip(Character character) => character.equipment.TryAddItem(this);
 
