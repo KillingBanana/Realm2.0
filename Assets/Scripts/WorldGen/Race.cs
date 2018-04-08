@@ -1,8 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-// ReSharper disable UnassignedField.Global
-
 #pragma warning disable 0649
 
 [Serializable]

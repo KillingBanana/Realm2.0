@@ -1,7 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,37 +28,34 @@ public class GameController : MonoBehaviour {
 
 	public static Race[] Races {
 		get {
-			if (Instance.races == null || Instance.races.Length == 0) Instance.LoadDatabase();
+			if (DatabaseManager.races == null || DatabaseManager.races.Length == 0) DatabaseManager.LoadDatabase();
 
-			return Instance.races;
+			return DatabaseManager.races;
 		}
 	}
 
 	public static Climate[] Climates {
 		get {
-			if (Instance.climates == null || Instance.climates.Length == 0) Instance.LoadDatabase();
+			if (DatabaseManager.climates == null || DatabaseManager.climates.Length == 0) DatabaseManager.LoadDatabase();
 
-			return Instance.climates;
+			return DatabaseManager.climates;
 		}
 	}
 
-	[Header("Database"), SerializeField] private Race[] races;
-	[SerializeField] private Climate[] climates;
-
-	private static string RacesPath => Application.streamingAssetsPath + "/Database/Races/";
-	private static string ClimatesPath => Application.streamingAssetsPath + "/Database/Climates/";
-
+	private static MapDisplay mapDisplay;
 	private static MapDisplay MapDisplay => mapDisplay ?? (mapDisplay = Instance.GetComponent<MapDisplay>());
+
+	private static WorldGenUI worldGenUI;
 	private static WorldGenUI WorldGenUI => worldGenUI ?? (worldGenUI = Instance.GetComponent<WorldGenUI>());
 
+	private static WorldCamera worldCamera;
 	public static WorldCamera WorldCamera => worldCamera ?? (worldCamera = FindObjectOfType<WorldCamera>());
+
+	private static DialogueManager dialogueManager;
 	public static DialogueManager DialogueManager => dialogueManager ?? (dialogueManager = FindObjectOfType<DialogueManager>());
 
-	private static MapDisplay mapDisplay;
-	private static WorldGenUI worldGenUI;
-
-	private static WorldCamera worldCamera;
-	private static DialogueManager dialogueManager;
+	private static DatabaseManager databaseManager;
+	private static DatabaseManager DatabaseManager => databaseManager ?? (databaseManager = Instance.GetComponent<DatabaseManager>());
 
 	private static AsyncOperation loadingLevel;
 
@@ -82,7 +76,7 @@ public class GameController : MonoBehaviour {
 
 	public void GenerateWorld() {
 		random = new Random(Seed);
-		if (randomMapSeed) worldSettings.seed = Random.Next(0, 99999);
+		if (randomMapSeed) worldSettings.seed = Random.Next(0, 999999);
 		World = new World(worldSettings);
 		OnWorldUpdated();
 	}
@@ -98,30 +92,12 @@ public class GameController : MonoBehaviour {
 
 	public static IEnumerator LoadLocation(Location location) {
 		if (loadingLevel != null && !loadingLevel.isDone) yield break;
+
 		Location = location;
 		loadingLevel = SceneManager.LoadSceneAsync("Local", LoadSceneMode.Single);
 
 		while (!loadingLevel.isDone) {
 			yield return null;
-		}
-	}
-
-	public void LoadDatabase() {
-		races = LoadFromDirectory<Race>(RacesPath);
-		climates = LoadFromDirectory<Climate>(ClimatesPath);
-	}
-
-	public void SaveDatabase() {
-		SaveToDirectory(races, RacesPath);
-		SaveToDirectory(climates, ClimatesPath);
-	}
-
-	private static T[] LoadFromDirectory<T>(string path) => Directory.GetFiles(path, "*.json").Select(file => JsonUtility.FromJson<T>(File.ReadAllText(file))).ToArray();
-
-	private static void SaveToDirectory<T>(IEnumerable<T> database, string path) {
-		if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-		foreach (T o in database) {
-			File.WriteAllText(path + o + ".json", JsonUtility.ToJson(o, true));
 		}
 	}
 }

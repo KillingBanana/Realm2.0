@@ -5,6 +5,8 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable 0649
+
 public class WorldGenUI : MonoBehaviour {
 	[SerializeField] private Text tileInfo, mapInfo;
 
@@ -29,6 +31,11 @@ public class WorldGenUI : MonoBehaviour {
 	[UsedImplicitly]
 	public void OnDrawModeChanged(int value) {
 		DrawMode = value < mapDrawModesCount ? (MapDrawMode) value : 0;
+		mapDisplay.DrawTexture();
+	}
+
+	[UsedImplicitly]
+	public void OnTransparencyChanged(float f) {
 		mapDisplay.DrawTexture();
 	}
 

@@ -12,11 +12,10 @@ public class World {
 
 	public readonly WorldSettings settings;
 
-	public float[,] HeightMap { get; private set; }
 	private Tile[,] tileMap;
 
 	public readonly List<Region> regions = new List<Region>();
-	public readonly List<Civilization> civilizations = new List<Civilization>();
+	public readonly List<Faction> civilizations = new List<Faction>();
 	public readonly List<Town> towns = new List<Town>();
 
 	private readonly Random random;
@@ -40,25 +39,27 @@ public class World {
 		GenerateCivs();
 
 		stopwatch.Stop();
-		Debug.Log($"World generation finished in {stopwatch.ElapsedMilliseconds}ms");
+		if (settings.benchmark) Debug.Log($"World generation finished in {stopwatch.ElapsedMilliseconds}ms");
 	}
 
 	public Tile GetTile(int x, int y) => IsInMap(x, y) ? tileMap[x, y] : null;
 
 	private bool IsInMap(int x, int y) => x >= 0 && x < size && y >= 0 && y < size;
 
-	private Tile RandomTile() => GetTile(random.Next(0, size), random.Next(0, size));
+	private Tile RandomTile() {
+		return GetTile(random.Next(0, size), random.Next(0, size));
+	}
 
 	private void GenerateTileMap() {
 		tileMap = new Tile[size, size];
 
-		HeightMap = settings.GenerateHeightMap();
-		float[,] tempMap = settings.GenerateTempMap(HeightMap);
-		float[,] humidityMap = settings.GenerateHumidityMap();
+		float[,] heightMap = settings.GenerateHeightMap();
+		float[,] tempMap = settings.GenerateTempMap(heightMap);
+		float[,] humidityMap = settings.GenerateHumidityMap(heightMap);
 
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
-				tileMap[x, y] = new Tile(x, y, HeightMap[x, y], tempMap[x, y], humidityMap[x, y]);
+				tileMap[x, y] = new Tile(x, y, heightMap[x, y], tempMap[x, y], humidityMap[x, y]);
 			}
 		}
 	}
@@ -85,14 +86,14 @@ public class World {
 				for (int i = -1; i <= 1; i++) {
 					Tile newTile = GetTile(tile.x + i, tile.y + j);
 
-					if (newTile != null && !(tiles.Contains(newTile) || queue.Contains(newTile)) && newTile.Climate == tile.Climate) {
+					if (newTile != null && !(tiles.Contains(newTile) || queue.Contains(newTile)) && newTile.climate == tile.climate) {
 						queue.Enqueue(newTile);
 					}
 				}
 			}
 		}
 
-		OnRegionFound(firstTile.Climate, tiles);
+		OnRegionFound(firstTile.climate, tiles);
 	}
 
 	private void OnRegionFound(Climate climate, HashSet<Tile> tiles) {
@@ -101,9 +102,8 @@ public class World {
 	}
 
 	private void GenerateCivs() {
-		while (civilizations.Count < settings.civilizations) {
-			Race race = GameController.Races.RandomItem(random);
-			Civilization civ = new Civilization(this, race);
+		foreach (Race race in GameController.Races) {
+			Faction civ = new Faction(race);
 			civilizations.Add(civ);
 
 			Tile tile;
@@ -126,16 +126,28 @@ public class World {
 		}
 	}
 
-	public Texture2D GetTexture(MapDrawMode mapDrawMode) {
+	public Texture2D GetTexture(MapDrawMode mapDrawMode, float transparency) {
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
-				colors[x + size * y] = GetTile(x, y).GetColor(mapDrawMode);
+				colors[x + size * y] = GetTile(x, y).GetColor(mapDrawMode, transparency);
 			}
 		}
 
 		texture.SetPixels(colors);
 		texture.Apply();
 		return texture;
+	}
+
+	public float[,] HeightMap() {
+		float[,] heightMap = new float[size, size];
+
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				heightMap[x, y] = tileMap[x, y].height;
+			}
+		}
+
+		return heightMap;
 	}
 }
 

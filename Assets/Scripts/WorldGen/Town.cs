@@ -2,12 +2,12 @@
 
 public class Town : Location {
 	public string Name { get; }
-	public readonly Civilization civilization;
-	public Race Race => civilization.race;
+	public readonly Faction faction;
+	public Race Race => faction.race;
 	public int population;
 
-	public Town(Tile tile, Civilization civilization, int population) : base(tile) {
-		this.civilization = civilization;
+	public Town(Tile tile, Faction faction, int population) : base(tile) {
+		this.faction = faction;
 		this.population = population;
 
 		Name = Race.GetPlaceName();

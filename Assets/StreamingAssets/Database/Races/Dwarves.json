@@ -5,16 +5,16 @@
     "expansionism": 0.5,
     "hostility": 0.5,
     "height": {
-        "x": 0.0,
-        "y": 0.0
+        "x": 0.6600000262260437,
+        "y": 1.0
     },
     "temp": {
         "x": 0.0,
-        "y": 0.0
+        "y": 1.0
     },
     "humidity": {
         "x": 0.0,
-        "y": 0.0
+        "y": 1.0
     },
     "placeNames": [
         "bruk",

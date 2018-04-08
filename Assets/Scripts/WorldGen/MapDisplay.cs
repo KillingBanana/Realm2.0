@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MapDisplay : MonoBehaviour {
-
 	[SerializeField] private MeshFilter meshFilter;
 	[SerializeField] private MeshRenderer meshRenderer;
 	[SerializeField] private MeshCollider meshCollider;
 	[SerializeField] private AnimationCurve heightCurve;
+	[SerializeField] private Slider transparencySlider;
 	[SerializeField] private float heightMultiplier;
 
 	public static Texture2D mapTexture;
@@ -13,7 +14,7 @@ public class MapDisplay : MonoBehaviour {
 	private static World World => GameController.World;
 
 	public void DrawMap() {
-		Mesh mapMesh = MeshGenerator.GenerateTerrainMesh(World.HeightMap, World.settings.Lod, World.size, Mathf.Sqrt(World.size) * heightMultiplier, heightCurve);
+		Mesh mapMesh = MeshGenerator.GenerateTerrainMesh(World.HeightMap(), World.settings.Lod, World.size, Mathf.Sqrt(World.size) * heightMultiplier, heightCurve);
 		meshFilter.sharedMesh = mapMesh;
 		meshCollider.sharedMesh = mapMesh;
 		meshFilter.transform.position = new Vector3(World.size / 2, 0, World.size / 2);
@@ -21,7 +22,7 @@ public class MapDisplay : MonoBehaviour {
 	}
 
 	public void DrawTexture() {
-		mapTexture = GameController.World.GetTexture(WorldGenUI.DrawMode);
+		mapTexture = GameController.World.GetTexture(WorldGenUI.DrawMode, transparencySlider.value);
 		meshRenderer.sharedMaterial.mainTexture = mapTexture;
 	}
 }

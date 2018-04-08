@@ -1,0 +1,42 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEngine;
+
+public class DatabaseManager : MonoBehaviour {
+	private static string RacesPath => string.Concat(Application.streamingAssetsPath, "/Database/Races/");
+	private static string ClimatesPath => string.Concat(Application.streamingAssetsPath, "/Database/Climates/");
+
+	[Header("Database")] public Race[] races;
+	public Climate[] climates;
+
+	public void LoadDatabase() {
+		races = LoadFromDirectory<Race>(RacesPath);
+		climates = LoadFromDirectory<Climate>(ClimatesPath);
+	}
+
+	public void SaveDatabase() {
+		SaveToDirectory(races, RacesPath);
+		SaveToDirectory(climates, ClimatesPath);
+	}
+
+	private static T[] LoadFromDirectory<T>(string path) {
+		if (!Directory.Exists(path)) {
+			Debug.LogError($"Directory {path} does not exist");
+			return null;
+		}
+
+		return Directory.GetFiles(path, "*.json").Select(file => JsonUtility.FromJson<T>(File.ReadAllText(file))).ToArray();
+	}
+
+	private static void SaveToDirectory<T>(IEnumerable<T> database, string path) {
+		if (!Directory.Exists(path)) {
+			Directory.CreateDirectory(path);
+			Debug.Log($"Created Directory {path}");
+		}
+
+		foreach (T o in database) {
+			File.WriteAllText($"{path}{o}.json", JsonUtility.ToJson(o, true));
+		}
+	}
+}

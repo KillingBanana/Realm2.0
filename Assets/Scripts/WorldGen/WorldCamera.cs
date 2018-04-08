@@ -15,6 +15,8 @@ public class WorldCamera : MonoBehaviour {
 	[HideInInspector] public bool dragged;
 
 	private void Update() {
+		if (GameController.World == null) return;
+
 		float mouseWheel = -Input.GetAxis("Mouse ScrollWheel");
 
 		targetPos.y = Mathf.Clamp(targetPos.y + mouseWheel * zoomSensitivity, (float) GameController.World.size / 10, (float) GameController.World.size / 2);

@@ -4,15 +4,15 @@ using Random = System.Random;
 
 [Serializable]
 public class WorldSettings {
+	public bool benchmark;
+	public WorldSize worldSize;
 	private WorldSize lastWorldSize;
 
-	public WorldSize worldSize;
-
-	[SerializeField] [Range(1, 2)] private int lodMultiplier;
+	[SerializeField] [Range(0, 2)] private int lodMultiplier;
 
 	public int Size {
 		get {
-			if (lastWorldSize != worldSize) {
+			if (cachedSize == -1 || lastWorldSize != worldSize) {
 				cachedSize = GetSize(worldSize);
 				lastWorldSize = worldSize;
 			}
@@ -21,11 +21,11 @@ public class WorldSettings {
 		}
 	}
 
-	private int cachedSize;
+	private int cachedSize = -1;
 
 	public int Lod => Size / 256 * lodMultiplier;
 
-	[Range(0, 99999)] public int seed;
+	[Range(0, 999999)] public int seed;
 
 	[Header("Heightmap"), SerializeField] private NoiseSettings heightSettings;
 
@@ -33,14 +33,13 @@ public class WorldSettings {
 	[Range(1, 10)] public float falloffB;
 	[Range(0, 1)] public float falloffMultiplier;
 
-	[Header("Temperature World")] [Range(0, 10)]
-	public float tempA;
+	[Header("Temperature")] [Range(0, 10)] public float tempA;
 
 	[Range(0.5f, 1.5f)] public float tempB;
-	[Range(0, 1)] public float heightTempMultiplier;
+	[Range(0, 1)] public float maxTempHeight = .33f, heightTempMultiplier;
 
-	[Header("Humidity World"), SerializeField]
-	private NoiseSettings humiditySettings;
+	[Header("Humidity"), SerializeField] private NoiseSettings humiditySettings;
+	[Range(0, 1)] public float maxHumidityHeight = .33f, heightHumidityMultiplier;
 
 	[Header("Civilizations"), Range(1, 10)]
 	public int civilizations;
@@ -59,34 +58,29 @@ public class WorldSettings {
 		return heightMap;
 	}
 
-	public float[,] GenerateHumidityMap() => GenerateNoiseMap(Size, seed / 2, humiditySettings);
-
-	public float[,] GenerateTempMap(float[,] heightMap) {
-		float minTemp = float.MaxValue;
-		float maxTemp = float.MinValue;
-		float[,] tempMap = new float[Size, Size];
-		int maxTempLatitude = Size;
-		for (int j = 0; j < Size; j++) {
-			for (int i = 0; i < Size; i++) {
-				float height = heightMap[i, j];
-				float heightTemp = Mathf.Abs(height - 0.33f) * heightTempMultiplier;
-				float latitudeTemp = 1 - Mathf.Abs(maxTempLatitude - j) / (float) maxTempLatitude;
-				float temp = Mathf.Clamp01(latitudeTemp - heightTemp);
-				temp = Evaluate(temp, tempA, tempB);
-				tempMap[i, j] = temp;
-				if (temp < minTemp) {
-					minTemp = temp;
-				}
-
-				if (temp > maxTemp) {
-					maxTemp = temp;
-				}
-			}
-		}
+	public float[,] GenerateHumidityMap(float[,] heightMap) {
+		float[,] humidityMap = GenerateNoiseMap(Size, seed / 2, humiditySettings);
 
 		for (int y = 0; y < Size; y++) {
 			for (int x = 0; x < Size; x++) {
-				tempMap[x, y] = Mathf.InverseLerp(minTemp, maxTemp, tempMap[x, y]);
+				float humidity = (heightMap[x, y] - maxHumidityHeight) * heightHumidityMultiplier;
+
+				humidityMap[x, y] = Mathf.Clamp01(humidityMap[x, y] - humidity);
+			}
+		}
+
+		return humidityMap;
+	}
+
+	public float[,] GenerateTempMap(float[,] heightMap) {
+		float[,] tempMap = new float[Size, Size];
+		for (int y = 0; y < Size; y++) {
+			for (int x = 0; x < Size; x++) {
+				float heightTemp = Mathf.Abs(heightMap[x, y] - maxTempHeight) * heightTempMultiplier;
+				float latitudeTemp = 1 - Mathf.Abs(Size - y) / (float) Size;
+
+				float temp = Evaluate(Mathf.Clamp01(latitudeTemp - heightTemp), tempA, tempB);
+				tempMap[x, y] = temp;
 			}
 		}
 

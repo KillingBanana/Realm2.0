@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable 0649
+
 public class DialogueManager : MonoBehaviour {
 	[SerializeField] private GameObject textPanel;
 	[SerializeField] private Text textText, speakerText;
@@ -15,7 +17,7 @@ public class DialogueManager : MonoBehaviour {
 		}
 	}
 
-	public void DisplayNextSentence() {
+	private void DisplayNextSentence() {
 		if (textQueue.Count > 0) {
 			textPanel.SetActive(true);
 			Sentence sentence = textQueue.Dequeue();
