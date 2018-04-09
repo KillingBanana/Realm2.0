@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class World {
-	private readonly Texture2D texture;
-	private readonly Color[] colors;
-
 	public readonly int size;
 
 	public readonly WorldSettings settings;
@@ -15,12 +13,14 @@ public class World {
 	private Tile[,] tileMap;
 
 	public readonly List<Region> regions = new List<Region>();
-	public readonly List<Faction> civilizations = new List<Faction>();
+	public readonly List<Faction> factions = new List<Faction>();
 	public readonly List<Town> towns = new List<Town>();
 
 	private readonly Random random;
 
 	private const int MaxAttempts = 1000;
+
+	public int Year { get; private set; } = 0;
 
 	public World(WorldSettings settings) {
 		Stopwatch stopwatch = new Stopwatch();
@@ -31,9 +31,6 @@ public class World {
 
 		random = new Random(settings.seed);
 
-		texture = new Texture2D(size, size) {filterMode = FilterMode.Point};
-		colors = new Color[size * size];
-
 		GenerateTileMap();
 		GenerateRegions();
 		GenerateCivs();
@@ -41,6 +38,8 @@ public class World {
 		stopwatch.Stop();
 		if (settings.benchmark) Debug.Log($"World generation finished in {stopwatch.ElapsedMilliseconds}ms");
 	}
+
+	public Tile GetTile(Vector2Int v) => GetTile(v.x, v.y);
 
 	public Tile GetTile(int x, int y) => IsInMap(x, y) ? tileMap[x, y] : null;
 
@@ -102,9 +101,10 @@ public class World {
 	}
 
 	private void GenerateCivs() {
-		foreach (Race race in GameController.Races) {
-			Faction civ = new Faction(race);
-			civilizations.Add(civ);
+		while (factions.Count < settings.factions) {
+			Race race = GameController.Races.RandomItem();
+			Faction faction = new Faction(race);
+			factions.Add(faction);
 
 			Tile tile;
 			int attempts = 0;
@@ -119,28 +119,23 @@ public class World {
 				continue;
 			}
 
-			int population = 5000 + (int) (race.GetTileCompatibility(tile) * 5000);
-			civ.capital = new Town(tile, civ, population);
+			int population = (int) (race.GetTileCompatibility(tile) * 5000);
+			faction.capital = new Town(tile, faction, population);
 
-			towns.Add(civ.capital);
+			towns.Add(faction.capital);
 		}
 	}
 
-	public Texture2D GetTexture(MapDrawMode mapDrawMode, float transparency) {
-		for (int x = 0; x < size; x++) {
-			for (int y = 0; y < size; y++) {
-				colors[x + size * y] = GetTile(x, y).GetColor(mapDrawMode, transparency);
-			}
+	public void Update() {
+		Year++;
+		for (int i = 0; i < towns.Count; i++) {
+			Town town = towns[i];
+			town.Update();
 		}
-
-		texture.SetPixels(colors);
-		texture.Apply();
-		return texture;
 	}
 
 	public float[,] HeightMap() {
 		float[,] heightMap = new float[size, size];
-
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				heightMap[x, y] = tileMap[x, y].height;

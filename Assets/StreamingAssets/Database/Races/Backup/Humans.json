@@ -1,0 +1,71 @@
+{
+    "collectiveName": "humans",
+    "individualName": "human",
+    "adjective": "human",
+    "expansionism": 0.75,
+    "hostility": 0.5,
+    "height": {
+        "x": 0.0,
+        "y": 0.699999988079071
+    },
+    "temp": {
+        "x": 0.33000001311302187,
+        "y": 0.6600000262260437
+    },
+    "humidity": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "placeNames": [
+        "black",
+        "copper",
+        "dark",
+        "dawn",
+        "dusk",
+        "earth",
+        "field",
+        "fire",
+        "gulch",
+        "hills",
+        "hollow",
+        "land",
+        "long",
+        "shire",
+        "spoon",
+        "sun",
+        "valley",
+        "water",
+        "white",
+        "wind"
+    ],
+    "maleFirstNames": [
+        "arthur",
+        "bill",
+        "jack",
+        "john",
+        "george"
+    ],
+    "femaleFirstNames": [
+        "anne",
+        "jane",
+        "zoe"
+    ],
+    "lastNames": [
+        "black",
+        "copper",
+        "fair",
+        "son"
+    ],
+    "placeNameLength": {
+        "min": 1,
+        "max": 3
+    },
+    "firstNameLength": {
+        "min": 1,
+        "max": 1
+    },
+    "lastNameLength": {
+        "min": 1,
+        "max": 3
+    }
+}

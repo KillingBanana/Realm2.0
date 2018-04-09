@@ -247,6 +247,7 @@
             <e p="MeshGenerator.cs" t="Include" />
             <e p="Race.cs" t="Include" />
             <e p="Region.cs" t="Include" />
+            <e p="Settler.cs" t="Include" />
             <e p="TextureGenerator.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
             <e p="Town.cs" t="Include" />

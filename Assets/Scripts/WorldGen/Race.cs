@@ -16,7 +16,9 @@ public class Race {
 
 	public bool IsValidTile(Tile tile) => !tile.IsWater && height.Contains(tile.height) && temp.Contains(tile.temp) && humidity.Contains(tile.humidity);
 
-	public float GetTileCompatibility(Tile tile) => 1 - ((height.Average() - tile.height).Abs() + (temp.Average() - tile.temp).Abs() + (humidity.Average() - tile.humidity).Abs()) / 3;
+	public float GetTileCompatibility(Tile tile) => tile.IsWater
+		? 0
+		: 1 - ((height.Average() - tile.height).Abs() + (temp.Average() - tile.temp).Abs()) / 2;
 
 	public string GetPlaceName() {
 		string placeName = "";

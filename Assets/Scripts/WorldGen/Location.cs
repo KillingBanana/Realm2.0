@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public abstract class Location {
-	private readonly Tile tile;
+	public readonly Tile tile;
 	public Region Region => tile.region;
 	public Climate Climate => Region.climate;
 

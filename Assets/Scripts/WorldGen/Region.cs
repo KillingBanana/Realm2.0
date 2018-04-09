@@ -17,7 +17,7 @@ public sealed class Region {
 		this.climate = climate;
 
 		name = GameController.Races.RandomItem().GetPlaceName();
-		color = Random.ColorHSV(0, 1);
+		color = Random.ColorHSV(0, 1, 0.5f, 1, 0.5f, 1);
 
 		this.tiles = tiles;
 		foreach (Tile tile in tiles) {

@@ -30,11 +30,44 @@ public class DatabaseManager : MonoBehaviour {
 	}
 
 	private static void SaveToDirectory<T>(IEnumerable<T> database, string path) {
+		//Make sure target directory exists
 		if (!Directory.Exists(path)) {
 			Directory.CreateDirectory(path);
 			Debug.Log($"Created Directory {path}");
 		}
 
+		DirectoryInfo directory = new DirectoryInfo(path);
+
+		//Create backup directory of needed
+		string backupPath = path + "/Backup/";
+
+		if (!Directory.Exists(backupPath)) Directory.CreateDirectory(backupPath);
+
+		//Delete files in backup directory
+		foreach (string file in Directory.EnumerateFiles(backupPath, "*.json")) {
+			File.Delete(file);
+			File.Delete(file + ".meta");
+		}
+
+		//Backup files
+		foreach (FileInfo fileInfo in directory.GetFiles("*.json")) {
+			string targetPath = backupPath + fileInfo.Name;
+
+			if (File.Exists(targetPath)) {
+				File.Delete(targetPath);
+				File.Delete(targetPath + ".meta");
+			}
+
+			fileInfo.MoveTo(targetPath);
+		}
+
+		//Delete files in save directory
+		foreach (string file in Directory.EnumerateFiles(path, "*.json")) {
+			File.Delete(file);
+			File.Delete(file + ".meta");
+		}
+
+		//Save objects to files
 		foreach (T o in database) {
 			File.WriteAllText($"{path}{o}.json", JsonUtility.ToJson(o, true));
 		}

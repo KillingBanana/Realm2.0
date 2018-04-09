@@ -6,8 +6,8 @@ using UnityEngine;
 using Random = System.Random;
 
 public static class Utility {
-	public static string Capitalize(this string s) => string.Concat(s.First().ToString().ToUpper(), s.Substring(1));
-	public static string ToTitleCase(this string s) => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+	public static string Capitalize(this string s) => string.IsNullOrEmpty(s) ? s : string.Concat(s.First().ToString().ToUpper(), s.Substring(1));
+	public static string ToTitleCase(this string s) => string.IsNullOrEmpty(s) ? s : CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
 
 	public static T RandomItem<T>(this IList<T> list, Random random = null) => list[(random ?? GameController.Random).Next(list.Count)];
 
@@ -21,6 +21,17 @@ public static class Utility {
 
 	public static bool Contains(this Vector2 v2, float f) => v2.x <= f && f <= v2.y;
 	public static float Average(this Vector2 v2) => (v2.x + v2.y) / 2;
+
+	public static Vector2Int RandomDirection() {
+		int x, y;
+
+		do {
+			x = GameController.Random.Next(-1, 1);
+			y = GameController.Random.Next(-1, 1);
+		} while (x == 0 && y == 0);
+
+		return new Vector2Int(x, y);
+	}
 
 	public static bool RandomBool => GameController.Random.NextDouble() > 0.5f;
 }

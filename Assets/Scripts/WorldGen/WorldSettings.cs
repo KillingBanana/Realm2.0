@@ -41,10 +41,10 @@ public class WorldSettings {
 	[Header("Humidity"), SerializeField] private NoiseSettings humiditySettings;
 	[Range(0, 1)] public float maxHumidityHeight = .33f, heightHumidityMultiplier;
 
-	[Header("Civilizations"), Range(1, 10)]
-	public int civilizations;
-
-	[Range(1, 1000)] public int years;
+	[Header("Civilizations")] public bool drawRoads;
+	[Range(1, 10)] public int factions;
+	[Range(0, 1)] public float townDistanceFactor;
+	[Range(1, 100)] public int years;
 
 	public float[,] GenerateHeightMap() {
 		float[,] heightMap = GenerateNoiseMap(Size, seed, heightSettings);
@@ -63,7 +63,7 @@ public class WorldSettings {
 
 		for (int y = 0; y < Size; y++) {
 			for (int x = 0; x < Size; x++) {
-				float humidity = (heightMap[x, y] - maxHumidityHeight) * heightHumidityMultiplier;
+				float humidity = (heightMap[x, y] * heightMap[x, y] - maxHumidityHeight * maxHumidityHeight) * heightHumidityMultiplier;
 
 				humidityMap[x, y] = Mathf.Clamp01(humidityMap[x, y] - humidity);
 			}
@@ -76,7 +76,7 @@ public class WorldSettings {
 		float[,] tempMap = new float[Size, Size];
 		for (int y = 0; y < Size; y++) {
 			for (int x = 0; x < Size; x++) {
-				float heightTemp = Mathf.Abs(heightMap[x, y] - maxTempHeight) * heightTempMultiplier;
+				float heightTemp = Mathf.Abs(heightMap[x, y] * heightMap[x, y] - maxTempHeight * maxTempHeight) * heightTempMultiplier;
 				float latitudeTemp = 1 - Mathf.Abs(Size - y) / (float) Size;
 
 				float temp = Evaluate(Mathf.Clamp01(latitudeTemp - heightTemp), tempA, tempB);

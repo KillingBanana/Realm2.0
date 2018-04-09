@@ -9,8 +9,6 @@ public class MapDisplay : MonoBehaviour {
 	[SerializeField] private Slider transparencySlider;
 	[SerializeField] private float heightMultiplier;
 
-	public static Texture2D mapTexture;
-
 	private static World World => GameController.World;
 
 	public void DrawMap() {
@@ -22,7 +20,24 @@ public class MapDisplay : MonoBehaviour {
 	}
 
 	public void DrawTexture() {
-		mapTexture = GameController.World.GetTexture(WorldGenUI.DrawMode, transparencySlider.value);
+		Texture2D mapTexture = GetTexture(WorldGenUI.drawMode, transparencySlider.value);
 		meshRenderer.sharedMaterial.mainTexture = mapTexture;
+	}
+
+
+	private static Texture2D GetTexture(MapDrawMode mapDrawMode, float transparency) {
+		Color[] colors = new Color[World.size * World.size];
+
+		Texture2D texture = new Texture2D(World.size, World.size) {filterMode = FilterMode.Point};
+
+		for (int x = 0; x < World.size; x++) {
+			for (int y = 0; y < World.size; y++) {
+				colors[x + World.size * y] = World.GetTile(x, y).GetColor(mapDrawMode, transparency);
+			}
+		}
+
+		texture.SetPixels(colors);
+		texture.Apply();
+		return texture;
 	}
 }

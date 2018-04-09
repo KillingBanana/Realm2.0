@@ -1,0 +1,68 @@
+{
+    "collectiveName": "dwarves",
+    "individualName": "dwarf",
+    "adjective": "dwarven",
+    "expansionism": 0.5,
+    "hostility": 0.5,
+    "height": {
+        "x": 0.6600000262260437,
+        "y": 1.0
+    },
+    "temp": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "humidity": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "placeNames": [
+        "bruk",
+        "buk",
+        "du",
+        "dun",
+        "fyr",
+        "gen",
+        "nin",
+        "nir",
+        "nun",
+        "ska",
+        "sva",
+        "svøn",
+        "tøn",
+        "tyr",
+        "øg"
+    ],
+    "maleFirstNames": [
+        "bruk",
+        "dun",
+        "fyr",
+        "svøn",
+        "øg"
+    ],
+    "femaleFirstNames": [
+        "dun",
+        "gen",
+        "nun",
+        "sva"
+    ],
+    "lastNames": [
+        "buk",
+        "du",
+        "dun",
+        "nin",
+        "tyr"
+    ],
+    "placeNameLength": {
+        "min": 2,
+        "max": 4
+    },
+    "firstNameLength": {
+        "min": 1,
+        "max": 3
+    },
+    "lastNameLength": {
+        "min": 1,
+        "max": 3
+    }
+}

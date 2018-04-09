@@ -10,13 +10,14 @@ using UnityEngine.UI;
 public class WorldGenUI : MonoBehaviour {
 	[SerializeField] private Text tileInfo, mapInfo;
 
-	private World world;
+	private static World World => GameController.World;
+
 	private MapDisplay mapDisplay;
 	private WorldGenUtility worldGenUtility;
 
 	private Tile tile;
 
-	public static MapDrawMode DrawMode { get; private set; }
+	public static MapDrawMode drawMode;
 	private int mapDrawModesCount;
 
 	private new Camera camera;
@@ -30,7 +31,7 @@ public class WorldGenUI : MonoBehaviour {
 
 	[UsedImplicitly]
 	public void OnDrawModeChanged(int value) {
-		DrawMode = value < mapDrawModesCount ? (MapDrawMode) value : 0;
+		drawMode = value < mapDrawModesCount ? (MapDrawMode) value : 0;
 		mapDisplay.DrawTexture();
 	}
 
@@ -40,12 +41,10 @@ public class WorldGenUI : MonoBehaviour {
 	}
 
 	public void OnMapChanged() {
-		world = GameController.World;
-
-		string mapText = $"Seed: {world.settings.seed}\nPopulation: {world.towns.Sum(t => t.population)}";
+		string mapText = $"Seed: {World.settings.seed}\nPopulation: {World.towns.Sum(t => t.population)}\nYear: {World.Year}";
 
 		foreach (Climate climate in GameController.Climates) {
-			List<Region> validRegions = world.regions.Where(region => region.climate == climate).ToList();
+			List<Region> validRegions = World.regions.Where(region => region.climate == climate).ToList();
 			int regionsCount = validRegions.Count;
 			if (regionsCount == 0) continue;
 			int tilesCount = validRegions.Sum(region => region.Size);
@@ -57,14 +56,14 @@ public class WorldGenUI : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (GameController.Location != null || world == null || GameController.WorldCamera.dragged) return;
+		if (GameController.Location != null || World == null || GameController.WorldCamera.dragged) return;
 
 		RaycastHit hit;
 		if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit)) {
 			int x = Mathf.FloorToInt(hit.point.x);
 			int y = GameController.World.size - Mathf.CeilToInt(hit.point.z) - 1;
 
-			Tile newTile = world.GetTile(x, y);
+			Tile newTile = World.GetTile(x, y);
 
 			if (newTile == null) return;
 

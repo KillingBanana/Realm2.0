@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Tile {
 	public readonly int x, y;
+
+	public readonly Vector2Int position;
+
 	public readonly float height, temp, humidity;
 
 	public Region region;
 	public Location location;
+	public Town Town => location as Town;
 
 	public readonly Climate climate;
 
@@ -27,13 +31,17 @@ public class Tile {
 	public Tile(int x, int y, float height, float temp, float humidity) {
 		this.x = x;
 		this.y = y;
+		position = new Vector2Int(x, y);
 		this.height = height;
 		this.temp = temp;
 		this.humidity = humidity;
-		climate = GameController.Climates.FirstOrDefault(climate => climate.CorrectTile(this));
 
-		if (climate == null) {
+		try {
+			climate = GameController.Climates.First(climate => climate.CorrectTile(this));
+		}
+		catch (Exception) {
 			Debug.LogError($"Can't find matching climate for tile (height: {height:F3}, temp: {temp:F3}, humidity: {humidity:F3})");
+			throw;
 		}
 
 		color = climate.GetColor(height);
@@ -75,4 +83,8 @@ public class Tile {
 	}
 
 	public override string ToString() => $"{climate} tile ({x}, {y})";
+
+	public static int DistanceSquared(Tile tile1, Tile tile2) {
+		return (tile1.x - tile2.x) * (tile1.x - tile2.x) + (tile1.y - tile2.y) * (tile1.y - tile2.y);
+	}
 }
