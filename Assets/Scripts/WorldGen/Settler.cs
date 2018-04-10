@@ -24,6 +24,7 @@ public class Settler {
 		Vector2Int startDirection = Utility.RandomDirection();
 
 		tiles = new List<Tile> {World.GetTile(town.tile.position + startDirection), town.tile};
+		if (World.settings.drawRoads) Tile.customColor = Faction.color;
 	}
 
 	public void Update() {
@@ -35,6 +36,7 @@ public class Settler {
 
 		if (nextTile == null) {
 			CreateTown();
+			active = false;
 			return;
 		}
 
@@ -47,7 +49,6 @@ public class Settler {
 		float compatibility = GetTownCompatibility(Tile);
 
 		if (compatibility > standards) {
-			Debug.Log($"Creating town with {compatibility:F3} ");
 			CreateTown();
 		} else {
 			standards *= .98f;
@@ -119,10 +120,12 @@ public class Settler {
 		return bestTile;
 	}
 
-	private float GetTownCompatibility(Tile tile) => Mathf.Lerp(
-		Faction.race.GetTileCompatibility(tile),
-		DistanceToTown(tile) / World.size,
-		World.settings.townDistanceFactor);
+	private float GetTownCompatibility(Tile tile) {
+		float raceCompatibility = Faction.race.GetTileCompatibility(tile);
+		float townCompatiblity = 0.005f * Mathf.Pow(DistanceToTown(tile), 2.32f);
+
+		return (raceCompatibility + townCompatiblity) / 2;
+	}
 
 	private static float DistanceToTown(Tile tile) {
 		if (tile.Town != null) return 0;

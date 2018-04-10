@@ -9,7 +9,7 @@ public class Town : Location {
 
 	private readonly List<Settler> settlers = new List<Settler>();
 
-	private int yearsSinceLastSettlers = 0;
+	private int yearsSinceLastSettlers;
 
 	public Town(Tile tile, Faction faction, int population) : base(tile) {
 		this.faction = faction;
@@ -17,13 +17,13 @@ public class Town : Location {
 
 		Name = Race.GetPlaceName();
 
-		tile.customColor = Color.black;
+		tile.customColor = faction.color;
 	}
 
 	public void Update() {
 		yearsSinceLastSettlers++;
 
-		if (population > 500 && yearsSinceLastSettlers >= 1250 * Mathf.Pow(population, -.5f)) {
+		if (population > 500 && Race.expansionism * yearsSinceLastSettlers >= 1250 * Mathf.Pow(population, -.5f)) {
 			yearsSinceLastSettlers = 0;
 			CreateSettlers();
 		}

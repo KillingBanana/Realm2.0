@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Diagnostics;
-using System.Management.Instrumentation;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
@@ -13,7 +11,7 @@ public class GameController : MonoBehaviour {
 
 	private static GameController instance;
 
-	private static readonly Stopwatch stopwatch = new Stopwatch();
+	private static readonly Stopwatch Stopwatch = new Stopwatch();
 
 	private static int Seed => Instance.randomSeed ? Instance.seed = UnityEngine.Random.Range(0, 9999) : Instance.seed;
 	[SerializeField] private bool randomSeed;
@@ -22,9 +20,11 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private bool screenshots;
 
 	[Header("World Settings"), SerializeField]
+	private bool startAutoUpdate;
+
 	private bool randomMapSeed;
 
-	public bool autoUpdate;
+	public bool generateOnEdit;
 
 	[SerializeField] private float secondsPerYear;
 	[HideInInspector] public bool autoUpdateRunning;
@@ -52,10 +52,13 @@ public class GameController : MonoBehaviour {
 	}
 
 	private static MapDisplay mapDisplay;
-	private static MapDisplay MapDisplay => mapDisplay ?? (mapDisplay = Instance.GetComponent<MapDisplay>());
+	public static MapDisplay MapDisplay => mapDisplay ?? (mapDisplay = Instance.GetComponent<MapDisplay>());
 
 	private static WorldGenUI worldGenUI;
-	private static WorldGenUI WorldGenUI => worldGenUI ?? (worldGenUI = Instance.GetComponent<WorldGenUI>());
+	public static WorldGenUI WorldGenUI => worldGenUI ?? (worldGenUI = Instance.GetComponent<WorldGenUI>());
+
+	private static WorldGenUtility worldGenUtility;
+	public static WorldGenUtility WorldGenUtility => worldGenUtility ?? (worldGenUtility = Instance.GetComponent<WorldGenUtility>());
 
 	private static WorldCamera worldCamera;
 	public static WorldCamera WorldCamera => worldCamera ?? (worldCamera = FindObjectOfType<WorldCamera>());
@@ -66,10 +69,10 @@ public class GameController : MonoBehaviour {
 	private static DatabaseManager databaseManager;
 	private static DatabaseManager DatabaseManager => databaseManager ?? (databaseManager = Instance.GetComponent<DatabaseManager>());
 
-	private static AsyncOperation loadingLevel;
-
-	public static Random Random => random ?? (random = new Random(Seed));
 	private static Random random;
+	public static Random Random => random ?? (random = new Random(Seed));
+
+	private static AsyncOperation loadingLevel;
 
 	private void Awake() {
 		DontDestroyOnLoad(this);
@@ -85,38 +88,39 @@ public class GameController : MonoBehaviour {
 
 	public void GenerateWorld() {
 		StopAutoUpdate();
+
 		random = new Random(Seed);
 		if (randomMapSeed) worldSettings.seed = Random.Next(0, 999999);
 
 		World = new World(worldSettings);
+		World.Generate();
 
-		for (int i = 0; i < worldSettings.years; i++) {
-			UpdateWorld(false);
-		}
+		if (startAutoUpdate) StartAutoUpdate();
 
 		OnWorldUpdated(true);
 	}
 
+	[UsedImplicitly]
 	public void UpdateWorld(bool updateDisplay) {
 		World.Update();
 		if (updateDisplay) OnWorldUpdated(false);
 	}
 
-	private static void OnWorldUpdated(bool resetCamera) {
-		stopwatch.Start();
+	private static void OnWorldUpdated(bool reset) {
+		Stopwatch.Start();
 
-		MapDisplay.DrawMap();
+		MapDisplay.DrawMap(reset);
 		WorldGenUI.OnMapChanged();
 
-		if (resetCamera) WorldCamera.targetPos = new Vector3(World.size / 2, World.size / 2, World.size / 2);
+		if (reset) WorldCamera.targetPos = new Vector3(World.size / 2, World.size / 2, World.size / 2);
 
 		if (Instance.screenshots) {
 			ScreenCapture.CaptureScreenshot("Screenshots/" + World.settings.seed + ".png");
 		}
 
-		stopwatch.Stop();
-		if (Instance.worldSettings.benchmark) Debug.Log($"Display time: {stopwatch.ElapsedMilliseconds}ms");
-		stopwatch.Reset();
+		Stopwatch.Stop();
+		if (Instance.worldSettings.benchmark) Debug.Log($"Display time: {Stopwatch.ElapsedMilliseconds}ms");
+		Stopwatch.Reset();
 	}
 
 	public void StartAutoUpdate() {

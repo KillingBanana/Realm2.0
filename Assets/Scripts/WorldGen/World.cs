@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
@@ -10,7 +9,8 @@ public class World {
 
 	public readonly WorldSettings settings;
 
-	private Tile[,] tileMap;
+	private readonly Tile[,] tileMap;
+	public readonly float[,] heightMap;
 
 	public readonly List<Region> regions = new List<Region>();
 	public readonly List<Faction> factions = new List<Faction>();
@@ -20,16 +20,20 @@ public class World {
 
 	private const int MaxAttempts = 1000;
 
-	public int Year { get; private set; } = 0;
+	public int Days { get; private set; } = 0;
 
 	public World(WorldSettings settings) {
-		Stopwatch stopwatch = new Stopwatch();
-		stopwatch.Start();
-
 		this.settings = settings;
 		size = settings.Size;
+		tileMap = new Tile[size, size];
+		heightMap = new float[size, size];
 
 		random = new Random(settings.seed);
+	}
+
+	public void Generate() {
+		Stopwatch stopwatch = new Stopwatch();
+		stopwatch.Start();
 
 		GenerateTileMap();
 		GenerateRegions();
@@ -50,9 +54,7 @@ public class World {
 	}
 
 	private void GenerateTileMap() {
-		tileMap = new Tile[size, size];
-
-		float[,] heightMap = settings.GenerateHeightMap();
+		settings.GenerateHeightMap(heightMap);
 		float[,] tempMap = settings.GenerateTempMap(heightMap);
 		float[,] humidityMap = settings.GenerateHumidityMap(heightMap);
 
@@ -127,22 +129,11 @@ public class World {
 	}
 
 	public void Update() {
-		Year++;
+		Days++;
 		for (int i = 0; i < towns.Count; i++) {
 			Town town = towns[i];
 			town.Update();
 		}
-	}
-
-	public float[,] HeightMap() {
-		float[,] heightMap = new float[size, size];
-		for (int x = 0; x < size; x++) {
-			for (int y = 0; y < size; y++) {
-				heightMap[x, y] = tileMap[x, y].height;
-			}
-		}
-
-		return heightMap;
 	}
 }
 

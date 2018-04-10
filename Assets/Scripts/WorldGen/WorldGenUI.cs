@@ -13,7 +13,6 @@ public class WorldGenUI : MonoBehaviour {
 	private static World World => GameController.World;
 
 	private MapDisplay mapDisplay;
-	private WorldGenUtility worldGenUtility;
 
 	private Tile tile;
 
@@ -25,7 +24,6 @@ public class WorldGenUI : MonoBehaviour {
 	private void Awake() {
 		camera = Camera.main;
 		mapDisplay = GetComponent<MapDisplay>();
-		worldGenUtility = GetComponent<WorldGenUtility>();
 		mapDrawModesCount = Enum.GetValues(typeof(MapDrawMode)).Length;
 	}
 
@@ -41,7 +39,7 @@ public class WorldGenUI : MonoBehaviour {
 	}
 
 	public void OnMapChanged() {
-		string mapText = $"Seed: {World.settings.seed}\nPopulation: {World.towns.Sum(t => t.population)}\nYear: {World.Year}";
+		string mapText = $"Seed: {World.settings.seed}\nPopulation: {World.towns.Sum(t => t.population)}\nDay: {World.Days}";
 
 		foreach (Climate climate in GameController.Climates) {
 			List<Region> validRegions = World.regions.Where(region => region.climate == climate).ToList();
@@ -60,19 +58,20 @@ public class WorldGenUI : MonoBehaviour {
 
 		RaycastHit hit;
 		if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit)) {
-			int x = Mathf.FloorToInt(hit.point.x);
-			int y = GameController.World.size - Mathf.CeilToInt(hit.point.z) - 1;
+			Vector2Int pos = WorldGenUtility.MeshToWorldPoint(hit.point);
 
-			Tile newTile = World.GetTile(x, y);
+			Tile newTile = World.GetTile(pos);
 
 			if (newTile == null) return;
 
 			if (newTile != tile) {
 				tile = newTile;
-				string text = $"x: {x} y: {y}" +
-				              $"\nHeight: {worldGenUtility.WorldHeightToMeters(tile.height)}m ({tile.height:F2})" +
-				              $"\nTemp: {worldGenUtility.TemperatureToCelsius(tile.temp)}°C ({tile.temp:F2})" +
+
+				string text = $"Position: {pos}" +
+				              $"\nHeight: {GameController.WorldGenUtility.WorldHeightToMeters(tile.height)}m ({tile.height:F2})" +
+				              $"\nTemp: {GameController.WorldGenUtility.TemperatureToCelsius(tile.temp)}°C ({tile.temp:F2})" +
 				              $"\nRegion: {tile.region}";
+
 				if (tile.location != null) text += $"\n{tile.location}";
 				Town town = tile.location as Town;
 				if (town != null) text += $"\nPopulation: {town.population}";

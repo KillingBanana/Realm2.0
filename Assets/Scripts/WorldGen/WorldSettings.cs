@@ -44,18 +44,15 @@ public class WorldSettings {
 	[Header("Civilizations")] public bool drawRoads;
 	[Range(1, 10)] public int factions;
 	[Range(0, 1)] public float townDistanceFactor;
-	[Range(1, 100)] public int years;
 
-	public float[,] GenerateHeightMap() {
+	public void GenerateHeightMap(float[,] map) {
 		float[,] heightMap = GenerateNoiseMap(Size, seed, heightSettings);
 		float[,] falloffMap = GenerateFalloffMap(Size, falloffA, falloffB);
 		for (int y = 0; y < Size; y++) {
 			for (int x = 0; x < Size; x++) {
-				heightMap[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y] * falloffMultiplier);
+				map[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y] * falloffMultiplier);
 			}
 		}
-
-		return heightMap;
 	}
 
 	public float[,] GenerateHumidityMap(float[,] heightMap) {
