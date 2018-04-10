@@ -7,23 +7,28 @@ public class Town : Location {
 	public Race Race => faction.race;
 	public int population;
 
-	private readonly List<Settler> settlers = new List<Settler>();
+	public readonly List<Settler> settlers = new List<Settler>();
+	private readonly Town parent;
+	private readonly List<Town> childTowns = new List<Town>();
 
 	private int yearsSinceLastSettlers;
 
-	public Town(Tile tile, Faction faction, int population) : base(tile) {
+	public Town(Tile tile, Faction faction, int population, Town parent) : base(tile) {
 		this.faction = faction;
 		this.population = population;
 
 		Name = Race.GetPlaceName();
 
-		tile.customColor = faction.color;
+		this.parent = parent;
+		parent?.childTowns.Add(this);
 	}
 
 	public void Update() {
 		yearsSinceLastSettlers++;
 
-		if (population > 500 && Race.expansionism * yearsSinceLastSettlers >= 1250 * Mathf.Pow(population, -.5f)) {
+		int desiredTowns = population / 1000;
+
+		if (childTowns.Count < desiredTowns && Race.expansionism * yearsSinceLastSettlers >= 1500 * Mathf.Pow(population, -.5f)) {
 			yearsSinceLastSettlers = 0;
 			CreateSettlers();
 		}
@@ -36,8 +41,9 @@ public class Town : Location {
 	}
 
 	private void CreateSettlers() {
-		Settler settler = new Settler(this, population / 10);
-		population -= population / 10;
+		int settlerCount = population / 4;
+		Settler settler = new Settler(this, settlerCount);
+		population -= settlerCount;
 		settlers.Add(settler);
 	}
 

@@ -17,6 +17,7 @@ public class MapDisplay : MonoBehaviour {
 	private static World World => GameController.World;
 
 	private readonly Dictionary<Town, GameObject> townObjects = new Dictionary<Town, GameObject>();
+	private readonly Dictionary<Settler, GameObject> settlerObjects = new Dictionary<Settler, GameObject>();
 
 	public void DrawMap(bool reset) {
 		if (reset) {
@@ -24,9 +25,10 @@ public class MapDisplay : MonoBehaviour {
 			meshFilter.sharedMesh = mapMesh;
 			meshCollider.sharedMesh = mapMesh;
 			meshFilter.transform.position = new Vector3(World.size / 2, 0, World.size / 2);
+
+			DrawTexture();
 		}
 
-		DrawTexture();
 		DisplayObjects(reset);
 	}
 
@@ -43,16 +45,17 @@ public class MapDisplay : MonoBehaviour {
 
 			foreach (Transform transform1 in transforms) {
 				Debug.Log(transform1.name);
-				Destroy(transform1.gameObject);
+				SafeDestroy(transform1.gameObject);
 			}
 		}
 
 		DisplayTowns(reset);
+		DisplaySettlers(reset);
 	}
 
-	private static void Destroy(GameObject o) {
+	private static void SafeDestroy(Object o) {
 		if (Application.isPlaying) {
-			Object.Destroy(o);
+			Destroy(o);
 		} else {
 			DestroyImmediate(o);
 		}
@@ -66,12 +69,40 @@ public class MapDisplay : MonoBehaviour {
 			if (townObjects.ContainsKey(town)) {
 				o = townObjects[town];
 			} else {
-				o = InstantiateOnMap(PrefabManager.Cube, town.tile.position);
+				o = InstantiateOnMap(PrefabManager.Town, town.tile.position);
 				o.name = town.Name;
 				townObjects.Add(town, o);
 			}
 
 			o.transform.localScale = Mathf.Sqrt((float) town.population / 4000) * Vector3.one;
+		}
+	}
+
+	private void DisplaySettlers(bool reset) {
+		if (reset) settlerObjects.Clear();
+
+		foreach (Town town in GameController.World.towns) {
+			foreach (Settler settler in town.settlers) {
+				if (!settler.active) {
+					if (settlerObjects.ContainsKey(settler)) {
+						SafeDestroy(settlerObjects[settler]);
+						settlerObjects.Remove(settler);
+					}
+
+					continue;
+				}
+
+				GameObject o;
+
+				if (settlerObjects.ContainsKey(settler)) {
+					o = settlerObjects[settler];
+					o.transform.position = WorldGenUtility.WorldToMeshPoint(settler.Tile.position);
+				} else {
+					o = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
+					o.name = settler.ToString();
+					settlerObjects.Add(settler, o);
+				}
+			}
 		}
 	}
 

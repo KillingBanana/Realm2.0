@@ -19,7 +19,10 @@ public class WorldGenUtility : MonoBehaviour {
 
 	public static Vector3 WorldToMeshPoint(Vector2Int pos) {
 		float x = pos.x + .5f;
-		float y = GameController.MapDisplay.GetHeight(pos.x, pos.y);
+		float y = (GameController.MapDisplay.GetHeight(pos.x, pos.y) +
+		           GameController.MapDisplay.GetHeight(pos.x + 1, pos.y) +
+		           GameController.MapDisplay.GetHeight(pos.x, pos.y + 1) +
+		           GameController.MapDisplay.GetHeight(pos.x + 1, pos.y + 1)) / 4;
 		float z = GameController.World.size - pos.y - 1.5f;
 
 		return new Vector3(x, y, z);

@@ -4029,7 +4029,7 @@ MonoBehaviour:
   screenshots: 0
   startAutoUpdate: 1
   generateOnEdit: 0
-  secondsPerYear: 0.25
+  secondsPerYear: 0.1
   autoUpdateRunning: 0
   worldSettings:
     benchmark: 0
@@ -4683,7 +4683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2b7916cdb3e614b8a64cb0dc66bd4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 1207783693533942, guid: e4d58395cedbba54aa5b9b0b66ffb0c8, type: 2}
+  town: {fileID: 1207783693533942, guid: e4d58395cedbba54aa5b9b0b66ffb0c8, type: 2}
+  settler: {fileID: 1207783693533942, guid: 3a098e9d7fc7af44792c9122793a692f, type: 2}
 --- !u!114 &2035694079
 MonoBehaviour:
   m_ObjectHideFlags: 0

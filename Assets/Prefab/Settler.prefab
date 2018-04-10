@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23813256830674088}
   - component: {fileID: 65208237934349664}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Settler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1207783693533942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 6417491b87bbb7e4c81d74b828d530ae, type: 2}
+  - {fileID: 2100000, guid: 8fbf781abac3a8c44a8bf3fc3051516a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

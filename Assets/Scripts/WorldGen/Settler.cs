@@ -9,10 +9,10 @@ public class Settler {
 	private readonly int population;
 
 	private static World World => GameController.World;
-	private Tile Tile => tiles[0];
+	public Tile Tile => tiles[0];
 	private Faction Faction => startingTown.faction;
 
-	private bool active = true;
+	public bool active = true;
 
 	private int steps;
 	private float standards = 1;
@@ -24,7 +24,6 @@ public class Settler {
 		Vector2Int startDirection = Utility.RandomDirection();
 
 		tiles = new List<Tile> {World.GetTile(town.tile.position + startDirection), town.tile};
-		if (World.settings.drawRoads) Tile.customColor = Faction.color;
 	}
 
 	public void Update() {
@@ -36,15 +35,10 @@ public class Settler {
 
 		if (nextTile == null) {
 			CreateTown();
-			active = false;
 			return;
 		}
 
-		if (World.settings.drawRoads && tiles.Count > 1) Tile.customColor = Color.clear;
-
 		tiles.Insert(0, nextTile);
-
-		if (World.settings.drawRoads) Tile.customColor = Faction.color;
 
 		float compatibility = GetTownCompatibility(Tile);
 
@@ -64,7 +58,7 @@ public class Settler {
 			return;
 		}
 
-		Town town = new Town(tile, Faction, population);
+		Town town = new Town(tile, Faction, population, startingTown);
 		World.towns.Add(town);
 		active = false;
 	}
@@ -139,4 +133,6 @@ public class Settler {
 
 		return Mathf.Sqrt(minDistance);
 	}
+
+	public override string ToString() => $"Settlers from {startingTown.Name}";
 }

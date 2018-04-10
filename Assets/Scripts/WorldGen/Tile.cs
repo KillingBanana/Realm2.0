@@ -15,7 +15,6 @@ public class Tile {
 
 	public readonly Climate climate;
 
-	public Color customColor = Color.clear;
 	private readonly Color color, heightColor, tempColor, humidityColor;
 
 	private static readonly Color
@@ -68,7 +67,7 @@ public class Tile {
 	private Color GetColor(MapDrawMode mapDrawMode) {
 		switch (mapDrawMode) {
 			case MapDrawMode.Normal:
-				return customColor != Color.clear ? customColor : color;
+				return color;
 			case MapDrawMode.Height:
 				return heightColor;
 			case MapDrawMode.Temperature:
