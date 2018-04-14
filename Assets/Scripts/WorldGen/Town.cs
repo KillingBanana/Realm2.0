@@ -13,7 +13,7 @@ public class Town : Location {
 
 	private int yearsSinceLastSettlers;
 
-	public Town(Tile tile, Faction faction, int population, Town parent) : base(tile) {
+	public Town(World world, Tile tile, Faction faction, int population, Town parent) : base(world, tile) {
 		this.faction = faction;
 		this.population = population;
 
@@ -21,6 +21,8 @@ public class Town : Location {
 
 		this.parent = parent;
 		parent?.childTowns.Add(this);
+
+		Debug.Log($"{this} compatibility: {tile.GetRaceCompatibility(Race)}");
 	}
 
 	public void Update() {
@@ -33,7 +35,9 @@ public class Town : Location {
 			CreateSettlers();
 		}
 
-		population += (int) (Race.GetTileCompatibility(tile) / 1000 * population);
+		float compatibility = tile.GetRaceCompatibility(Race);
+
+		population += (int) (compatibility * population / 300);
 
 		foreach (Settler settler in settlers) {
 			settler.Update();

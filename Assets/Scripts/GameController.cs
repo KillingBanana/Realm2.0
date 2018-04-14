@@ -22,11 +22,11 @@ public class GameController : MonoBehaviour {
 	[Header("World Settings"), SerializeField]
 	private bool startAutoUpdate;
 
-	private bool randomMapSeed;
+	[SerializeField] private bool randomMapSeed;
 
 	public bool generateOnEdit;
 
-	[SerializeField] private float secondsPerYear;
+	[SerializeField, Range(0.01f, 1)] private float secondsPerStep;
 	[HideInInspector] public bool autoUpdateRunning;
 
 	[SerializeField] private WorldSettings worldSettings;
@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour {
 		World = new World(worldSettings);
 		World.Generate();
 
-		if (startAutoUpdate) StartAutoUpdate();
+		if (startAutoUpdate && Application.isPlaying) StartAutoUpdate();
 
 		OnWorldUpdated(true);
 	}
@@ -136,7 +136,7 @@ public class GameController : MonoBehaviour {
 
 	private IEnumerator AutoUpdate() {
 		while (World != null) {
-			yield return new WaitForSeconds(secondsPerYear);
+			yield return new WaitForSeconds(secondsPerStep);
 			UpdateWorld(true);
 		}
 	}

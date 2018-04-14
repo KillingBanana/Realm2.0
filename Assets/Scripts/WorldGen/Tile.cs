@@ -9,9 +9,10 @@ public class Tile {
 
 	public readonly float height, temp, humidity;
 
+	private readonly World world;
 	public Region region;
 	public Location location;
-	public Town Town => location as Town;
+	private Town Town => location as Town;
 
 	public readonly Climate climate;
 
@@ -27,7 +28,8 @@ public class Tile {
 
 	public bool IsWater => climate.isWater;
 
-	public Tile(int x, int y, float height, float temp, float humidity) {
+	public Tile(World world, int x, int y, float height, float temp, float humidity) {
+		this.world = world;
 		this.x = x;
 		this.y = y;
 		position = new Vector2Int(x, y);
@@ -58,6 +60,37 @@ public class Tile {
 		region = newRegion;
 	}
 
+	public float GetRaceCompatibility(Race race) => IsWater || !race.height.Contains(height) || !race.temp.Contains(temp)
+		? 0
+		: 2 * (race.HeightWeight * Mathf.Min(height - race.height.x, race.height.y - height) / race.height.Range() +
+		       race.TempWeight * Mathf.Min(temp - race.temp.x, race.temp.y - temp) / race.temp.Range() +
+		       race.HumidityWeight * Mathf.Min(humidity - race.humidity.x, race.humidity.y - humidity) / race.humidity.Range());
+
+	public float GetTownCompatibility(Race race) {
+		float raceCompatibility = GetRaceCompatibility(race);
+
+		if (raceCompatibility < .001f) return 0;
+
+		float townCompatiblity = world.settings.townDistanceFactor.Evaluate(DistanceToTown());
+
+		return (raceCompatibility + townCompatiblity) / 2;
+	}
+
+	private float DistanceToTown() {
+		if (Town != null) return 0;
+
+		int minDist = int.MaxValue;
+
+		foreach (Town town in world.towns) {
+			int dist = DistanceSquared(this, town.tile);
+			if (dist < minDist) {
+				minDist = dist;
+			}
+		}
+
+		return Mathf.Sqrt(minDist);
+	}
+
 	public Color GetColor(MapDrawMode mapDrawMode, float transparency) {
 		return mapDrawMode == MapDrawMode.Normal
 			? GetColor(MapDrawMode.Normal)
@@ -83,7 +116,7 @@ public class Tile {
 
 	public override string ToString() => $"{climate} tile ({x}, {y})";
 
-	public static int DistanceSquared(Tile tile1, Tile tile2) {
+	private static int DistanceSquared(Tile tile1, Tile tile2) {
 		return (tile1.x - tile2.x) * (tile1.x - tile2.x) + (tile1.y - tile2.y) * (tile1.y - tile2.y);
 	}
 }

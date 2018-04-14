@@ -40,17 +40,18 @@ public class MapDisplay : MonoBehaviour {
 	}
 
 	private void DisplayObjects(bool reset) {
-		if (reset) {
-			List<Transform> transforms = parent.Cast<Transform>().ToList();
-
-			foreach (Transform transform1 in transforms) {
-				Debug.Log(transform1.name);
-				SafeDestroy(transform1.gameObject);
-			}
-		}
+		if (reset) DestroyChildren();
 
 		DisplayTowns(reset);
 		DisplaySettlers(reset);
+	}
+
+	private void DestroyChildren() {
+		Transform[] children = parent.Cast<Transform>().ToArray();
+
+		foreach (Transform child in children) {
+			SafeDestroy(child.gameObject);
+		}
 	}
 
 	private static void SafeDestroy(Object o) {

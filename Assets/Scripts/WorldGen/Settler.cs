@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Settler {
@@ -8,9 +7,10 @@ public class Settler {
 	private readonly List<Tile> tiles;
 	private readonly int population;
 
-	private static World World => GameController.World;
+	private readonly World world;
 	public Tile Tile => tiles[0];
 	private Faction Faction => startingTown.faction;
+	private Race Race => startingTown.Race;
 
 	public bool active = true;
 
@@ -20,10 +20,11 @@ public class Settler {
 	public Settler(Town town, int population) {
 		startingTown = town;
 		this.population = population;
+		world = town.world;
 
 		Vector2Int startDirection = Utility.RandomDirection();
 
-		tiles = new List<Tile> {World.GetTile(town.tile.position + startDirection), town.tile};
+		tiles = new List<Tile> {world.GetTile(town.tile.position + startDirection), town.tile};
 	}
 
 	public void Update() {
@@ -31,7 +32,7 @@ public class Settler {
 
 		steps++;
 
-		Tile nextTile = FindBestTile();
+		Tile nextTile = FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile, Tile);
 
 		if (nextTile == null) {
 			CreateTown();
@@ -40,32 +41,29 @@ public class Settler {
 
 		tiles.Insert(0, nextTile);
 
-		float compatibility = GetTownCompatibility(Tile);
-
-		if (compatibility > standards) {
+		if (Tile.GetTownCompatibility(Race) >= standards) {
 			CreateTown();
-		} else {
-			standards *= .98f;
+			return;
 		}
+
+		standards -= .015f;
 	}
 
 	private void CreateTown() {
-		Tile tile = tiles.FirstOrDefault(t => !t.IsWater && t.location == null);
-
-		if (tile == null) {
-			Debug.Log($"Can't find valid town location for settlers from {startingTown}");
+		if (Tile.location != null) {
+			Debug.LogError("Location not null");
 			active = false;
 			return;
 		}
 
-		Town town = new Town(tile, Faction, population, startingTown);
-		World.towns.Add(town);
+		Town town = new Town(world, Tile, Faction, population, startingTown);
+		world.towns.Add(town);
 		active = false;
 	}
 
-	private Tile FindBestTile() {
-		int dx = tiles.Count == 1 ? 0 : Tile.x - tiles[1].x;
-		int dy = tiles.Count == 1 ? 0 : Tile.y - tiles[1].y;
+	private Tile FindBestTile(Tile currentTile, Tile previousTile) {
+		int dx = currentTile.x - previousTile?.x ?? 0;
+		int dy = currentTile.y - previousTile?.y ?? 0;
 
 		int minX = dx == 0
 			? -1
@@ -98,40 +96,20 @@ public class Settler {
 			for (int y = minY; y <= maxY; y++) {
 				if (x == 0 && y == 0) continue;
 
-				Tile newTile = GameController.World.GetTile(Tile.x + x, Tile.y + y);
+				Tile tile = GameController.World.GetTile(currentTile.x + x, currentTile.y + y);
 
-				if (newTile == null || newTile.location != null || newTile.IsWater) continue;
+				if (tile == null || tile.location != null || tile.IsWater) continue;
 
-				float compatibility = GetTownCompatibility(newTile);
+				float compatibility = tile.GetTownCompatibility(Race);
 
-				if (bestTile == null || compatibility > bestCompatibility) {
-					bestTile = newTile;
+				if (compatibility > bestCompatibility) {
+					bestTile = tile;
 					bestCompatibility = compatibility;
 				}
 			}
 		}
 
 		return bestTile;
-	}
-
-	private float GetTownCompatibility(Tile tile) {
-		float raceCompatibility = Faction.race.GetTileCompatibility(tile);
-		float townCompatiblity = 0.005f * Mathf.Pow(DistanceToTown(tile), 2.32f);
-
-		return (raceCompatibility + townCompatiblity) / 2;
-	}
-
-	private static float DistanceToTown(Tile tile) {
-		if (tile.Town != null) return 0;
-		int minDistance = int.MaxValue;
-		foreach (Town town in World.towns) {
-			int dist = Tile.DistanceSquared(tile, town.tile);
-			if (dist < minDistance) {
-				minDistance = dist;
-			}
-		}
-
-		return Mathf.Sqrt(minDistance);
 	}
 
 	public override string ToString() => $"Settlers from {startingTown.Name}";

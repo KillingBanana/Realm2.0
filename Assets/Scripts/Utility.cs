@@ -21,6 +21,7 @@ public static class Utility {
 
 	public static bool Contains(this Vector2 v2, float f) => v2.x <= f && f <= v2.y;
 	public static float Average(this Vector2 v2) => (v2.x + v2.y) / 2;
+	public static float Range(this Vector2 v2) => v2.y - v2.x;
 
 	public static Vector2Int RandomDirection() {
 		int x, y;

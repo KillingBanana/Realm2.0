@@ -20,7 +20,7 @@ public class World {
 
 	private const int MaxAttempts = 1000;
 
-	public int Days { get; private set; } = 0;
+	public int Days { get; private set; }
 
 	public World(WorldSettings settings) {
 		this.settings = settings;
@@ -39,8 +39,13 @@ public class World {
 		GenerateRegions();
 		GenerateCivs();
 
-		stopwatch.Stop();
 		if (settings.benchmark) Debug.Log($"World generation finished in {stopwatch.ElapsedMilliseconds}ms");
+
+		while (Days < settings.days) Update();
+
+		if (settings.benchmark && Days > 0) Debug.Log($"Simulated {Days} days in {stopwatch.ElapsedMilliseconds}ms");
+
+		stopwatch.Stop();
 	}
 
 	public Tile GetTile(Vector2Int v) => GetTile(v.x, v.y);
@@ -60,7 +65,7 @@ public class World {
 
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
-				tileMap[x, y] = new Tile(x, y, heightMap[x, y], tempMap[x, y], humidityMap[x, y]);
+				tileMap[x, y] = new Tile(this, x, y, heightMap[x, y], tempMap[x, y], humidityMap[x, y]);
 			}
 		}
 	}
@@ -108,24 +113,44 @@ public class World {
 			Faction faction = new Faction(race);
 			factions.Add(faction);
 
-			Tile tile;
-			int attempts = 0;
+			Tile tile = GetBestTile(race, 3);
 
-			do {
-				tile = RandomTile();
-				attempts++;
-			} while (tile.location != null || !race.IsValidTile(tile) && attempts < MaxAttempts);
-
-			if (attempts >= MaxAttempts) {
+			if (tile == null) {
 				Debug.Log($"Could not find suitable tile for {race}");
 				continue;
 			}
 
-			int population = (int) (race.GetTileCompatibility(tile) * 5000);
-			faction.capital = new Town(tile, faction, population, null);
+			int population = (int) (tile.GetRaceCompatibility(race) * 5000);
+			faction.capital = new Town(this, tile, faction, population, null);
 
 			towns.Add(faction.capital);
 		}
+	}
+
+	private Tile GetBestTile(Race race, int tries) {
+		int attempts = 0;
+		Tile bestTile = null;
+
+		do {
+			Tile tile = GetRandomTile(race);
+			if (bestTile == null || tile.GetTownCompatibility(race) > bestTile.GetTownCompatibility(race)) bestTile = tile;
+
+			attempts++;
+		} while (attempts < tries && attempts < MaxAttempts);
+
+		return bestTile;
+	}
+
+	private Tile GetRandomTile(Race race) {
+		int attempts = 0;
+		Tile tile;
+
+		do {
+			tile = RandomTile();
+			attempts++;
+		} while (tile.location != null || !race.IsValidTile(tile) && attempts < MaxAttempts);
+
+		return tile;
 	}
 
 	public void Update() {
