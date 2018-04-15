@@ -4,7 +4,7 @@ using UnityEngine;
 public class Settler {
 	private readonly Town startingTown;
 
-	private readonly List<Tile> tiles;
+	public readonly List<Tile> tiles;
 	private readonly int population;
 
 	private readonly World world;
@@ -22,9 +22,7 @@ public class Settler {
 		this.population = population;
 		world = town.world;
 
-		Vector2Int startDirection = Utility.RandomDirection();
-
-		tiles = new List<Tile> {world.GetTile(town.tile.position + startDirection), town.tile};
+		tiles = new List<Tile> {town.tile};
 	}
 
 	public void Update() {
@@ -32,7 +30,9 @@ public class Settler {
 
 		steps++;
 
-		Tile nextTile = FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile, Tile);
+		Tile nextTile = tiles.Count > 1
+			? FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile, Tile)
+			: FindBestTile(Tile, Tile);
 
 		if (nextTile == null) {
 			CreateTown();

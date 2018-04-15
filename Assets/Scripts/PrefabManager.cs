@@ -7,6 +7,6 @@ public class PrefabManager : MonoBehaviour {
 	[SerializeField] private GameObject town;
 	public static GameObject Town => Instance.town;
 
-	[SerializeField] private GameObject settler;
-	public static GameObject Settler => Instance.settler;
+	[SerializeField] private SettlerObject settler;
+	public static SettlerObject Settler => Instance.settler;
 }

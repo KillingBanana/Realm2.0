@@ -17,8 +17,6 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private bool randomSeed;
 	[SerializeField] private int seed;
 
-	[SerializeField] private bool screenshots;
-
 	[Header("World Settings"), SerializeField]
 	private bool startAutoUpdate;
 
@@ -95,15 +93,15 @@ public class GameController : MonoBehaviour {
 		World = new World(worldSettings);
 		World.Generate();
 
-		if (startAutoUpdate && Application.isPlaying) StartAutoUpdate();
+		if (startAutoUpdate) StartAutoUpdate();
 
 		OnWorldUpdated(true);
 	}
 
 	[UsedImplicitly]
-	public void UpdateWorld(bool updateDisplay) {
+	public void UpdateWorld() {
 		World.Update();
-		if (updateDisplay) OnWorldUpdated(false);
+		OnWorldUpdated(false);
 	}
 
 	private static void OnWorldUpdated(bool reset) {
@@ -114,22 +112,20 @@ public class GameController : MonoBehaviour {
 
 		if (reset) WorldCamera.targetPos = new Vector3(World.size / 2, World.size / 2, World.size / 2);
 
-		if (Instance.screenshots) {
-			ScreenCapture.CaptureScreenshot("Screenshots/" + World.settings.seed + ".png");
-		}
-
 		Stopwatch.Stop();
 		if (Instance.worldSettings.benchmark) Debug.Log($"Display time: {Stopwatch.ElapsedMilliseconds}ms");
 		Stopwatch.Reset();
 	}
 
-	public void StartAutoUpdate() {
+	private void StartAutoUpdate() {
+		if (!Application.isPlaying) return;
+
 		StopAutoUpdate();
 		StartCoroutine(nameof(AutoUpdate));
 		autoUpdateRunning = true;
 	}
 
-	public void StopAutoUpdate() {
+	private void StopAutoUpdate() {
 		StopCoroutine(nameof(AutoUpdate));
 		autoUpdateRunning = false;
 	}
@@ -137,7 +133,7 @@ public class GameController : MonoBehaviour {
 	private IEnumerator AutoUpdate() {
 		while (World != null) {
 			yield return new WaitForSeconds(secondsPerStep);
-			UpdateWorld(true);
+			UpdateWorld();
 		}
 	}
 

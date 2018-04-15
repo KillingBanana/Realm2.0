@@ -17,7 +17,7 @@ public class MapDisplay : MonoBehaviour {
 	private static World World => GameController.World;
 
 	private readonly Dictionary<Town, GameObject> townObjects = new Dictionary<Town, GameObject>();
-	private readonly Dictionary<Settler, GameObject> settlerObjects = new Dictionary<Settler, GameObject>();
+	private readonly Dictionary<Settler, SettlerObject> settlerObjects = new Dictionary<Settler, SettlerObject>();
 
 	public void DrawMap(bool reset) {
 		if (reset) {
@@ -54,7 +54,7 @@ public class MapDisplay : MonoBehaviour {
 		}
 	}
 
-	private static void SafeDestroy(Object o) {
+	private static void SafeDestroy(GameObject o) {
 		if (Application.isPlaying) {
 			Destroy(o);
 		} else {
@@ -86,21 +86,20 @@ public class MapDisplay : MonoBehaviour {
 			foreach (Settler settler in town.settlers) {
 				if (!settler.active) {
 					if (settlerObjects.ContainsKey(settler)) {
-						SafeDestroy(settlerObjects[settler]);
+						settlerObjects[settler].UpdatePosition();
+						//SafeDestroy(settlerObjects[settler].gameObject);
 						settlerObjects.Remove(settler);
 					}
 
 					continue;
 				}
 
-				GameObject o;
-
 				if (settlerObjects.ContainsKey(settler)) {
-					o = settlerObjects[settler];
-					o.transform.position = WorldGenUtility.WorldToMeshPoint(settler.Tile.position);
+					settlerObjects[settler].UpdatePosition();
 				} else {
-					o = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
-					o.name = settler.ToString();
+					SettlerObject o = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
+					o.Init(settler);
+
 					settlerObjects.Add(settler, o);
 				}
 			}

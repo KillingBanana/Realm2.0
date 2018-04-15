@@ -243,15 +243,18 @@
           <e p="WorldGen" t="Include">
             <e p="Climate.cs" t="Include" />
             <e p="Faction.cs" t="Include" />
-            <e p="Location.cs" t="Include" />
             <e p="MapDisplay.cs" t="Include" />
             <e p="MeshGenerator.cs" t="Include" />
+            <e p="Objects" t="Include">
+              <e p="Location.cs" t="Include" />
+              <e p="Settler.cs" t="Include" />
+              <e p="SettlerObject.cs" t="Include" />
+              <e p="Town.cs" t="Include" />
+            </e>
             <e p="Race.cs" t="Include" />
             <e p="Region.cs" t="Include" />
-            <e p="Settler.cs" t="Include" />
             <e p="TextureGenerator.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
-            <e p="Town.cs" t="Include" />
             <e p="World.cs" t="Include" />
             <e p="WorldCamera.cs" t="Include" />
             <e p="WorldGenUI.cs" t="Include" />

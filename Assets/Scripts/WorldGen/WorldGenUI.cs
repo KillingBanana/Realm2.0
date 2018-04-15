@@ -80,7 +80,7 @@ public class WorldGenUI : MonoBehaviour {
 			}
 
 			if (Input.GetMouseButtonDown(0) && tile.location != null) {
-				StartCoroutine(GameController.LoadLocation(tile.location));
+				//StartCoroutine(GameController.LoadLocation(tile.location));
 			}
 
 			if (Input.GetMouseButtonDown(1)) {

@@ -21,8 +21,6 @@ public class Town : Location {
 
 		this.parent = parent;
 		parent?.childTowns.Add(this);
-
-		Debug.Log($"{this} compatibility: {tile.GetRaceCompatibility(Race)}");
 	}
 
 	public void Update() {

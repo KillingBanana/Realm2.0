@@ -11,13 +11,12 @@ public abstract class Location {
 
 	protected Location(World world, Tile tile) {
 		this.world = world;
-
-		if (tile.location != null) {
-			Debug.LogError($"Adding location to non-empty tile ({tile})");
-			return;
-		}
-
 		this.tile = tile;
-		tile.location = this;
+
+		if (tile.location == null) {
+			tile.location = this;
+		} else {
+			Debug.LogError($"Adding location to non-empty tile ({tile})");
+		}
 	}
 }

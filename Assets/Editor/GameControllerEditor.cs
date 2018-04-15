@@ -12,8 +12,6 @@ public class GameControllerEditor : Editor {
 
 		if (refreshed && gameController.generateOnEdit || GUILayout.Button("Generate World")) gameController.GenerateWorld();
 
-		if (GameController.World != null && GUILayout.Button("Step")) gameController.UpdateWorld(true);
-		if (GameController.World != null && !gameController.autoUpdateRunning && GUILayout.Button("Start")) gameController.StartAutoUpdate();
-		if (GameController.World != null && gameController.autoUpdateRunning && GUILayout.Button("Stop")) gameController.StopAutoUpdate();
+		if (GameController.World != null && GUILayout.Button("Step")) gameController.UpdateWorld();
 	}
 }
