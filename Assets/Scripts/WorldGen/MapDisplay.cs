@@ -66,16 +66,16 @@ public class MapDisplay : MonoBehaviour {
 		if (reset) townObjects.Clear();
 
 		foreach (Town town in GameController.World.towns) {
-			GameObject o;
+			GameObject townObject;
 			if (townObjects.ContainsKey(town)) {
-				o = townObjects[town];
+				townObject = townObjects[town];
 			} else {
-				o = InstantiateOnMap(PrefabManager.Town, town.tile.position);
-				o.name = town.Name;
-				townObjects.Add(town, o);
+				townObject = InstantiateOnMap(PrefabManager.Town, town.tile.position);
+				townObject.name = town.Name;
+				townObjects.Add(town, townObject);
 			}
 
-			o.transform.localScale = Mathf.Sqrt((float) town.population / 4000) * Vector3.one;
+			townObject.transform.localScale = Mathf.Sqrt((float) town.population / 4000) * Vector3.one;
 		}
 	}
 

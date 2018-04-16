@@ -2,10 +2,10 @@
 using UnityEngine;
 
 public class Settler {
-	private readonly Town startingTown;
+	public readonly Town startingTown;
 
 	public readonly List<Tile> tiles;
-	private readonly int population;
+	public readonly int population;
 
 	private readonly World world;
 	public Tile Tile => tiles[0];
@@ -46,7 +46,7 @@ public class Settler {
 			return;
 		}
 
-		standards -= .015f;
+		standards -= .02f;
 	}
 
 	private void CreateTown() {

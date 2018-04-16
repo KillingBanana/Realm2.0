@@ -19,6 +19,12 @@ public class SettlerObject : MonoBehaviour {
 		if (lineRenderer != null) {
 			lineRenderer.positionCount = settler.tiles.Count;
 			lineRenderer.SetPositions(settler.tiles.Select(tile => RoadPosition(tile.position)).ToArray());
+
+			Keyframe[] keys = {
+				new Keyframe(0, Mathf.Sqrt((float) settler.population / 4000)) //, new Keyframe(1, Mathf.Sqrt((float) settler.startingTown.population / 4000))
+			};
+
+			lineRenderer.widthCurve = new AnimationCurve(keys);
 		}
 
 		if (!settler.active && meshRenderer != null) meshRenderer.enabled = false;
