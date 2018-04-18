@@ -171,7 +171,7 @@ namespace UnityEngine.Rendering.PostProcessing
             }
 
             this.x0 = paramsCopy.x0;
-            this.x1 = paramsCopy.x1;
+            x1 = paramsCopy.x1;
 
             // Toe section
             {

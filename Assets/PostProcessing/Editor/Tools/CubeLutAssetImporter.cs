@@ -7,8 +7,7 @@ namespace UnityEditor.Rendering.PostProcessing
 {
     sealed class CubeLutAssetImporter : AssetPostprocessor
     {
-        static List<string> s_Excluded = new List<string>()
-        {
+        static List<string> s_Excluded = new List<string> {
             "Linear to sRGB r1",
             "Linear to Unity Log r1",
             "sRGB to Linear r1",
@@ -154,7 +153,7 @@ namespace UnityEditor.Rendering.PostProcessing
                 {
                     anisoLevel = 0,
                     filterMode = FilterMode.Bilinear,
-                    wrapMode = TextureWrapMode.Clamp,
+                    wrapMode = TextureWrapMode.Clamp
                 };
 
                 tex.SetPixels(table.ToArray(), 0);

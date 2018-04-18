@@ -77,7 +77,7 @@ namespace UnityEngine.Rendering.PostProcessing
             uberSheet.EnableKeyword("GRAIN");
             uberSheet.properties.SetTexture(ShaderIDs.GrainTex, m_GrainLookupRT);
             uberSheet.properties.SetVector(ShaderIDs.Grain_Params1, new Vector2(settings.lumContrib.value, settings.intensity.value * 20f));
-            uberSheet.properties.SetVector(ShaderIDs.Grain_Params2, new Vector4((float)context.width / (float)m_GrainLookupRT.width / settings.size.value, (float)context.height / (float)m_GrainLookupRT.height / settings.size.value, rndOffsetX, rndOffsetY));
+            uberSheet.properties.SetVector(ShaderIDs.Grain_Params2, new Vector4(context.width / (float)m_GrainLookupRT.width / settings.size.value, context.height / (float)m_GrainLookupRT.height / settings.size.value, rndOffsetX, rndOffsetY));
         }
 
         RenderTextureFormat GetLookupFormat()

@@ -1,6 +1,5 @@
 using System;
 
-
 namespace UnityEngine.Rendering.PostProcessing
 {
     // This asset is used to store references to shaders and other resources we might need at

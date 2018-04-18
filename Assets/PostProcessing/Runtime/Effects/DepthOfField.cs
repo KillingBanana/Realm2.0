@@ -134,7 +134,7 @@ namespace UnityEngine.Rendering.PostProcessing
             // Material setup
             var f = settings.focalLength.value / 1000f;
             var s1 = Mathf.Max(settings.focusDistance.value, f);
-            var aspect = (float)context.screenWidth / (float)context.screenHeight;
+            var aspect = context.screenWidth / (float)context.screenHeight;
             var coeff = f * f / (settings.aperture.value * (s1 - f) * k_FilmHeight * 2);
             var maxCoC = CalculateMaxCoCRadius(context.screenHeight);
 

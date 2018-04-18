@@ -16,8 +16,8 @@
         "x": 0.0,
         "y": 1.0
     },
-    "heightWeight": 0.30000001192092898,
-    "tempWeight": 0.699999988079071,
+    "heightWeight": 0.20000000298023225,
+    "tempWeight": 0.800000011920929,
     "humidityWeight": 0.0,
     "placeNames": [
         "a",
@@ -67,15 +67,15 @@
         "to"
     ],
     "placeNameLength": {
-        "min": 2,
-        "max": 4
+        "x": 2,
+        "y": 4
     },
     "firstNameLength": {
-        "min": 1,
-        "max": 4
+        "x": 1,
+        "y": 3
     },
     "lastNameLength": {
-        "min": 1,
-        "max": 4
+        "x": 2,
+        "y": 4
     }
 }

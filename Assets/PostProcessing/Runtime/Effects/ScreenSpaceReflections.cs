@@ -80,7 +80,7 @@ namespace UnityEngine.Rendering.PostProcessing
             new QualityPreset { maximumIterationCount = 48, thickness =  8, downsampling = ScreenSpaceReflectionResolution.Downsampled  }, // High
             new QualityPreset { maximumIterationCount = 16, thickness = 32, downsampling = ScreenSpaceReflectionResolution.FullSize }, // Higher
             new QualityPreset { maximumIterationCount = 48, thickness = 16, downsampling = ScreenSpaceReflectionResolution.FullSize }, // Ultra
-            new QualityPreset { maximumIterationCount = 128, thickness = 12, downsampling = ScreenSpaceReflectionResolution.Supersampled }, // Overkill
+            new QualityPreset { maximumIterationCount = 128, thickness = 12, downsampling = ScreenSpaceReflectionResolution.Supersampled } // Overkill
         };
 
         enum Pass
@@ -164,8 +164,8 @@ namespace UnityEngine.Rendering.PostProcessing
             sheet.properties.SetMatrix(ShaderIDs.InverseViewMatrix, context.camera.worldToCameraMatrix.inverse);
             sheet.properties.SetMatrix(ShaderIDs.InverseProjectionMatrix, projectionMatrix.inverse);
             sheet.properties.SetMatrix(ShaderIDs.ScreenSpaceProjectionMatrix, screenSpaceProjectionMatrix);
-            sheet.properties.SetVector(ShaderIDs.Params, new Vector4((float)settings.vignette.value, settings.distanceFade.value, settings.maximumMarchDistance.value, lodCount));
-            sheet.properties.SetVector(ShaderIDs.Params2, new Vector4((float)context.width / (float)context.height, (float)size / (float)noiseTex.width, settings.thickness.value, settings.maximumIterationCount.value));
+            sheet.properties.SetVector(ShaderIDs.Params, new Vector4(settings.vignette.value, settings.distanceFade.value, settings.maximumMarchDistance.value, lodCount));
+            sheet.properties.SetVector(ShaderIDs.Params2, new Vector4(context.width / (float)context.height, size / (float)noiseTex.width, settings.thickness.value, settings.maximumIterationCount.value));
 
             cmd.GetTemporaryRT(ShaderIDs.Test, size, size, 0, FilterMode.Point, context.sourceFormat);
             cmd.BlitFullscreenTriangle(context.source, ShaderIDs.Test, sheet, (int)Pass.Test);

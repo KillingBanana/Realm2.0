@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using UnityEngine.XR;
 
 namespace UnityEngine.Rendering.PostProcessing
 {
 #if UNITY_2017_2_OR_NEWER
-    using XRSettings = UnityEngine.XR.XRSettings;
 #elif UNITY_5_6_OR_NEWER
     using XRSettings = UnityEngine.VR.VRSettings;
 #endif

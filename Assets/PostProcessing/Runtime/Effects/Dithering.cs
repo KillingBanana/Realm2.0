@@ -6,7 +6,7 @@ namespace UnityEngine.Rendering.PostProcessing
     [Serializable]
     public sealed class Dithering
     {
-        int m_NoiseTextureIndex = 0;
+        int m_NoiseTextureIndex;
 
         internal void Render(PostProcessRenderContext context)
         {
@@ -30,8 +30,8 @@ namespace UnityEngine.Rendering.PostProcessing
 
             uberSheet.properties.SetTexture(ShaderIDs.DitheringTex, noiseTex);
             uberSheet.properties.SetVector(ShaderIDs.Dithering_Coords, new Vector4(
-                (float)context.screenWidth / (float)noiseTex.width,
-                (float)context.screenHeight / (float)noiseTex.height,
+                context.screenWidth / (float)noiseTex.width,
+                context.screenHeight / (float)noiseTex.height,
                 rndOffsetX,
                 rndOffsetY
             ));

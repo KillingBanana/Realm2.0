@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
-using UnityEditorInternal;
-using System.IO;
+using Object = UnityEngine.Object;
 
 namespace UnityEditor.Rendering.PostProcessing
 {
-    using SerializedBundleRef = PostProcessLayer.SerializedBundleRef;
-    using EXRFlags = Texture2D.EXRFlags;
-
     [CanEditMultipleObjects, CustomEditor(typeof(PostProcessLayer))]
     public sealed class PostProcessLayerEditor : BaseEditor<PostProcessLayer>
     {
@@ -227,7 +225,7 @@ namespace UnityEditor.Rendering.PostProcessing
                     var volumes = RuntimeUtilities.GetAllSceneObjects<PostProcessVolume>()
                         .Where(x => (m_VolumeLayer.intValue & (1 << x.gameObject.layer)) != 0)
                         .Select(x => x.gameObject)
-                        .Cast<UnityEngine.Object>()
+                        .Cast<Object>()
                         .ToArray();
 
                     if (volumes.Length > 0)
@@ -243,7 +241,7 @@ namespace UnityEditor.Rendering.PostProcessing
                     {
                         Selection.objects = volumes
                             .Select(x => x.gameObject)
-                            .Cast<UnityEngine.Object>()
+                            .Cast<Object>()
                             .ToArray();
                     }
                 }
@@ -287,20 +285,20 @@ namespace UnityEditor.Rendering.PostProcessing
                             var bundles = m_Target.sortedBundles[evt];
                             var listName = ObjectNames.NicifyVariableName(evt.ToString());
 
-                            var list = new ReorderableList(bundles, typeof(SerializedBundleRef), true, true, false, false);
+                            var list = new ReorderableList(bundles, typeof(PostProcessLayer.SerializedBundleRef), true, true, false, false);
 
-                            list.drawHeaderCallback = (rect) =>
+                            list.drawHeaderCallback = rect =>
                             {
                                 EditorGUI.LabelField(rect, listName);
                             };
 
                             list.drawElementCallback = (rect, index, isActive, isFocused) =>
                             {
-                                var sbr = (SerializedBundleRef)list.list[index];
+                                var sbr = (PostProcessLayer.SerializedBundleRef)list.list[index];
                                 EditorGUI.LabelField(rect, sbr.bundle.attribute.menuItem);
                             };
 
-                            list.onReorderCallback = (l) =>
+                            list.onReorderCallback = l =>
                             {
                                 EditorUtility.SetDirty(m_Target);
                             };
@@ -396,7 +394,7 @@ namespace UnityEditor.Rendering.PostProcessing
 
             EditorUtility.DisplayProgressBar("Export EXR", "Encoding...", 0.5f);
 
-            var bytes = texOut.EncodeToEXR(EXRFlags.OutputAsFloat | EXRFlags.CompressZIP);
+            var bytes = texOut.EncodeToEXR(Texture2D.EXRFlags.OutputAsFloat | Texture2D.EXRFlags.CompressZIP);
 
             EditorUtility.DisplayProgressBar("Export EXR", "Saving...", 0.75f);
 

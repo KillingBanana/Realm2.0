@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace UnityEditor.Rendering.PostProcessing
 {
@@ -26,12 +27,12 @@ namespace UnityEditor.Rendering.PostProcessing
         }
     }
 
-    [Decorator(typeof(UnityEngine.Rendering.PostProcessing.MinAttribute))]
+    [Decorator(typeof(MinAttribute))]
     public sealed class MinDecorator : AttributeDecorator
     {
         public override bool OnGUI(SerializedProperty property, SerializedProperty overrideState, GUIContent title, Attribute attribute)
         {
-            var attr = (UnityEngine.Rendering.PostProcessing.MinAttribute)attribute;
+            var attr = (MinAttribute)attribute;
 
             if (property.propertyType == SerializedPropertyType.Float)
             {
@@ -51,12 +52,12 @@ namespace UnityEditor.Rendering.PostProcessing
         }
     }
 
-    [Decorator(typeof(UnityEngine.Rendering.PostProcessing.MaxAttribute))]
+    [Decorator(typeof(MaxAttribute))]
     public sealed class MaxDecorator : AttributeDecorator
     {
         public override bool OnGUI(SerializedProperty property, SerializedProperty overrideState, GUIContent title, Attribute attribute)
         {
-            var attr = (UnityEngine.Rendering.PostProcessing.MaxAttribute)attribute;
+            var attr = (MaxAttribute)attribute;
 
             if (property.propertyType == SerializedPropertyType.Float)
             {
@@ -76,12 +77,12 @@ namespace UnityEditor.Rendering.PostProcessing
         }
     }
 
-    [Decorator(typeof(UnityEngine.Rendering.PostProcessing.MinMaxAttribute))]
+    [Decorator(typeof(MinMaxAttribute))]
     public sealed class MinMaxDecorator : AttributeDecorator
     {
         public override bool OnGUI(SerializedProperty property, SerializedProperty overrideState, GUIContent title, Attribute attribute)
         {
-            var attr = (UnityEngine.Rendering.PostProcessing.MinMaxAttribute)attribute;
+            var attr = (MinMaxAttribute)attribute;
 
             if (property.propertyType == SerializedPropertyType.Float)
             {

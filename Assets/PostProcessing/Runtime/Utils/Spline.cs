@@ -65,7 +65,7 @@ namespace UnityEngine.Rendering.PostProcessing
             }
 
             for (int i = 0; i < k_Precision; i++)
-                cachedData[i] = Evaluate((float)i * k_Step, length);
+                cachedData[i] = Evaluate(i * k_Step, length);
 
             frameCount = Time.renderedFrameCount;
         }

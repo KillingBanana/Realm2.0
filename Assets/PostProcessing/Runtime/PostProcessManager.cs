@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Callbacks;
 using UnityEngine.Assertions;
 
 namespace UnityEngine.Rendering.PostProcessing
@@ -46,7 +47,7 @@ namespace UnityEngine.Rendering.PostProcessing
 #if UNITY_EDITOR
         // Called every time Unity recompile scripts in the editor. We need this to keep track of
         // any new custom effect the user might add to the project
-        [UnityEditor.Callbacks.DidReloadScripts]
+        [DidReloadScripts]
         static void OnEditorReload()
         {
             instance.ReloadBaseTypes();
@@ -180,8 +181,7 @@ namespace UnityEngine.Rendering.PostProcessing
 
         public PostProcessVolume QuickVolume(int layer, float priority, params PostProcessEffectSettings[] settings)
         {
-            var gameObject = new GameObject()
-            {
+            var gameObject = new GameObject {
                 name = "Quick Volume",
                 layer = layer,
                 hideFlags = HideFlags.HideAndDontSave

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class DatabaseManager : MonoBehaviour {
@@ -10,11 +11,13 @@ public class DatabaseManager : MonoBehaviour {
 	[Header("Database")] public Race[] races;
 	public Climate[] climates;
 
+	[Button]
 	public void LoadDatabase() {
 		races = LoadFromDirectory<Race>(RacesPath);
 		climates = LoadFromDirectory<Climate>(ClimatesPath);
 	}
 
+	[Button]
 	public void SaveDatabase() {
 		SaveToDirectory(races, RacesPath);
 		SaveToDirectory(climates, ClimatesPath);

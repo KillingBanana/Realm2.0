@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering.PostProcessing;
@@ -51,7 +52,7 @@ namespace UnityEditor.Rendering.PostProcessing
             ReloadDecoratorTypes();
         }
 
-        [Callbacks.DidReloadScripts]
+        [DidReloadScripts]
         static void OnEditorReload()
         {
             ReloadDecoratorTypes();

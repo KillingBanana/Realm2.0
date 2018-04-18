@@ -106,21 +106,21 @@ namespace UnityEditor.Rendering.PostProcessing
             internal MenuAction(SerializedProperty curve)
             {
                 this.curve = curve;
-                this.index = -1;
-                this.position = Vector3.zero;
+                index = -1;
+                position = Vector3.zero;
             }
 
             internal MenuAction(SerializedProperty curve, int index)
             {
                 this.curve = curve;
                 this.index = index;
-                this.position = Vector3.zero;
+                position = Vector3.zero;
             }
 
             internal MenuAction(SerializedProperty curve, Vector3 position)
             {
                 this.curve = curve;
-                this.index = -1;
+                index = -1;
                 this.position = position;
             }
         }
@@ -448,7 +448,7 @@ namespace UnityEditor.Rendering.PostProcessing
                             {
                                 // Keyframe context menu
                                 var menu = new GenericMenu();
-                                menu.AddItem(new GUIContent("Delete Key"), false, (x) =>
+                                menu.AddItem(new GUIContent("Delete Key"), false, x =>
                                 {
                                     var action = (MenuAction)x;
                                     var curveValue = action.curve.animationCurveValue;
@@ -550,7 +550,7 @@ namespace UnityEditor.Rendering.PostProcessing
                         {
                             // Curve context menu
                             var menu = new GenericMenu();
-                            menu.AddItem(new GUIContent("Add Key"), false, (x) =>
+                            menu.AddItem(new GUIContent("Add Key"), false, x =>
                             {
                                 var action = (MenuAction)x;
                                 var curveValue = action.curve.animationCurveValue;

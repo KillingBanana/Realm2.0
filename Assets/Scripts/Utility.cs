@@ -23,6 +23,8 @@ public static class Utility {
 	public static float Average(this Vector2 v2) => (v2.x + v2.y) / 2;
 	public static float Range(this Vector2 v2) => v2.y - v2.x;
 
+	public static int Random(this Vector2Int v2) => GameController.Random.Next(v2.x, v2.y + 1);
+
 	public static Vector2Int RandomDirection() {
 		int x, y;
 

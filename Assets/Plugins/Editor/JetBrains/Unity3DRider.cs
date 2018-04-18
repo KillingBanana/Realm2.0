@@ -7,8 +7,8 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using Application = UnityEngine.Application;
-using Debug = UnityEngine.Debug;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -17,12 +17,13 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using System;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Plugins.Editor.JetBrains
 {
@@ -757,7 +758,7 @@ namespace Plugins.Editor.JetBrains
     /// <remarks>
     /// Called when Unity is about to open an asset.
     /// </remarks>
-    [UnityEditor.Callbacks.OnOpenAssetAttribute()]
+    [OnOpenAsset()]
     static bool OnOpenedAsset(int instanceID, int line)
     {
       if (Enabled)
@@ -964,9 +965,9 @@ namespace Plugins.Editor.JetBrains
     /// </summary>
     private static void SyncSolution()
     {
-      System.Type T = System.Type.GetType("UnityEditor.SyncVS,UnityEditor");
-      System.Reflection.MethodInfo SyncSolution = T.GetMethod("SyncSolution",
-        System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+      Type T = Type.GetType("UnityEditor.SyncVS,UnityEditor");
+      MethodInfo SyncSolution = T.GetMethod("SyncSolution",
+        BindingFlags.Public | BindingFlags.Static);
       SyncSolution.Invoke(null, null);
     }
 

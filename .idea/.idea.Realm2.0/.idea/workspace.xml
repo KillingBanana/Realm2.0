@@ -14,118 +14,109 @@
       <file leaf-file-name="GameController.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="81" column="43" lean-forward="false" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
+            <state relative-caret-position="315">
+              <caret line="21" column="46" lean-forward="false" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
               <folding>
-                <marker date="1523797942805" expanded="false" signature="6:197" ph="..." />
-                <marker date="1523797942805" expanded="true" signature="243:4247" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="1113:1270" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="1121:1267" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="1306:1472" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="1314:1469" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="2624:2675" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="2734:2800" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="2831:3076" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="3123:3170" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="3220:3548" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="3582:3711" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="3744:3814" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="3850:3954" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="3876:3951" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="4015:4245" ph="{...}" />
-                <marker date="1523797942805" expanded="true" signature="4215:4242" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="6:226" ph="..." />
+                <marker date="1524057267095" expanded="true" signature="272:4261" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="1113:1270" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="1121:1267" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="1306:1472" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="1314:1469" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="2624:2675" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="2734:2800" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="2845:3090" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="3137:3184" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="3234:3562" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="3596:3725" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="3758:3828" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="3864:3968" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="3890:3965" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="4029:4259" ph="{...}" />
+                <marker date="1524057267095" expanded="true" signature="4229:4256" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettlerObject.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/SettlerObject.cs">
+      <file leaf-file-name="DatabaseManager.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+            <state relative-caret-position="180">
+              <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
               <folding>
-                <marker date="1523899022701" expanded="false" signature="6:37" ph="..." />
-                <marker date="1523899022701" expanded="true" signature="82:1073" ph="{...}" />
-                <marker date="1523899022701" expanded="true" signature="251:331" ph="{...}" />
-                <marker date="1523899022701" expanded="true" signature="363:945" ph="{...}" />
-                <marker date="1523899022701" expanded="true" signature="474:864" ph="{...}" />
-                <marker date="1523899022701" expanded="true" signature="650:803" ph="{...}" />
+                <marker date="1524053501786" expanded="false" signature="6:117" ph="..." />
+                <marker date="1524053501786" expanded="true" signature="164:2204" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="491:596" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="636:720" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="776:1008" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="809:885" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="1088:2202" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="1159:1243" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="1567:1626" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="1707:1904" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="1793:1867" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="2009:2068" ph="{...}" />
+                <marker date="1524053501786" expanded="true" signature="2124:2199" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Town.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/Town.cs">
+      <file leaf-file-name="Climate.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="51" column="138" lean-forward="false" selection-start-line="51" selection-start-column="138" selection-end-line="51" selection-end-column="138" />
+            <state relative-caret-position="120">
+              <caret line="10" column="52" lean-forward="false" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
               <folding>
-                <marker date="1523897215082" expanded="false" signature="6:52" ph="..." />
-                <marker date="1523897215082" expanded="true" signature="83:1519" ph="{...}" />
-                <marker date="1523897215082" expanded="true" signature="504:654" ph="{...}" />
-                <marker date="1523897215082" expanded="true" signature="678:1118" ph="{...}" />
-                <marker date="1523897215082" expanded="true" signature="873:930" ph="{...}" />
-                <marker date="1523897215082" expanded="true" signature="1089:1115" ph="{...}" />
-                <marker date="1523897215082" expanded="true" signature="1151:1300" ph="{...}" />
+                <marker date="1524057025394" expanded="false" signature="6:61" ph="..." />
+                <marker date="1524057025394" expanded="true" signature="129:630" ph="{...}" />
+                <marker date="1524057025394" expanded="true" signature="338:449" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Settler.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/Settler.cs">
+      <file leaf-file-name="Race.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="495">
+              <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
               <folding>
-                <marker date="1523897253957" expanded="false" signature="6:52" ph="..." />
-                <marker date="1523897253957" expanded="true" signature="75:2306" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="460:580" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="604:969" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="794:827" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="911:944" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="998:1223" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="1029:1104" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="1289:2227" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="1785:2204" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="1825:2200" ph="{...}" />
-                <marker date="1523897253957" expanded="true" signature="2126:2195" ph="{...}" />
+                <marker date="1524057454794" expanded="false" signature="6:97" ph="..." />
+                <marker date="1524057454794" expanded="true" signature="162:1915" ph="{...}" />
+                <marker date="1524057454794" expanded="true" signature="1119:1342" ph="{...}" />
+                <marker date="1524057454794" expanded="true" signature="1222:1305" ph="{...}" />
+                <marker date="1524057454794" expanded="true" signature="1387:1633" ph="{...}" />
+                <marker date="1524057454794" expanded="true" signature="1555:1596" ph="{...}" />
+                <marker date="1524057454794" expanded="true" signature="1664:1845" ph="{...}" />
+                <marker date="1524057454794" expanded="true" signature="1765:1809" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapDisplay.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs">
+      <file leaf-file-name="Utility.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Utility.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="77" column="88" lean-forward="false" selection-start-line="77" selection-start-column="46" selection-end-line="77" selection-end-column="88" />
+            <state relative-caret-position="180">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
-                <marker date="1523897222072" expanded="false" signature="6:93" ph="..." />
-                <marker date="1523897222072" expanded="true" signature="135:3851" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="870:1208" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="885:1179" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1363:1507" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1550:1636" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1670:1816" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1774:1813" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1865:1954" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1896:1916" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="1995:2454" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2084:2451" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2150:2192" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2498:3159" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2590:3156" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2638:3152" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2665:2886" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2713:2864" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="2933:2987" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="3235:3362" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="3446:3849" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="3637:3779" ph="{...}" />
-                <marker date="1523897222072" expanded="true" signature="3679:3775" ph="{...}" />
+                <marker date="1524056690478" expanded="false" signature="6:143" ph="..." />
+                <marker date="1524056690478" expanded="true" signature="173:1576" ph="{...}" />
+                <marker date="1524056690478" expanded="true" signature="1326:1496" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrefabManager.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/PrefabManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1524054034421" expanded="true" signature="63:409" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -142,25 +133,21 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Local/Objects/Equipable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/DatabaseManagerEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/SettlerObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/Town.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/MinMaxDrawer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MinMaxAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PostProcessing/Runtime/Effects/Dithering.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldCamera.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MeshGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Tile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/World.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PostProcessing/Editor/Tools/ProfileFactory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Range.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUtility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Faction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldSettings.cs" root0="FORCE_HIGHLIGHTING" />
@@ -186,33 +173,36 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Local/Character.cs" />
         <option value="$PROJECT_DIR$/Assets/Editor/MinMaxDrawer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MinMaxAttribute.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Range.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Local/DialogueManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Editor/DatabaseManagerEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Region.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Faction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Settlers.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/MeshGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUtility.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Utility.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Town.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Tile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/World.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Location.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Settler.cs" />
         <option value="$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PrefabManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/Settler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/Town.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/SettlerObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/NaughtyAttributes/Scripts/Core/DrawerAttributes/SliderAttribute.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/NaughtyAttributes/Scripts/Editor/PropertyDrawers/SliderPropertyDrawer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/NaughtyAttributes/Scripts/Editor/Editors/InspectorEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PrefabManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Range.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utility.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs" />
       </list>
     </option>
   </component>
@@ -236,7 +226,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -250,11 +239,12 @@
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="SearchEverywhereHistoryKey" value="MAPDIS&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/MapDisplay.cs&#10;worldgen&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/WorldGenUI.cs&#10;gamecontroller&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Editor/GameControllerEditor.cs&#10;settle&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Settler.cs&#10;worldgenui&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/WorldGenUI.cs&#10;minmax&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Editor/MinMaxDrawer.cs&#10;range&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/Range.cs&#10;race&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Race.cs&#10;mapdispl&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/MapDisplay.cs&#10;mapdisplay&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/MapDisplay.cs&#10;TILE.CS&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Tile.cs&#10;settler&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Settler.cs" />
+    <property name="SearchEverywhereHistoryKey" value="INTRAG&#9;null&#9;null&#10;ut&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/Utility.cs&#10;prefab&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/PrefabManager.cs&#10;MAPDIS&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/MapDisplay.cs&#10;worldgen&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/WorldGenUI.cs&#10;gamecontroller&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Editor/GameControllerEditor.cs&#10;settle&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Settler.cs&#10;worldgenui&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/WorldGenUI.cs&#10;minmax&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Editor/MinMaxDrawer.cs&#10;range&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/Range.cs&#10;race&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Race.cs&#10;mapdispl&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/MapDisplay.cs&#10;mapdisplay&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/MapDisplay.cs&#10;TILE.CS&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Tile.cs&#10;settler&#9;FILE&#9;file://D:/Documents/Unity Projects/Realm2.0/Assets/Scripts/WorldGen/Settler.cs" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -298,11 +288,14 @@
       <workItem from="1523794218302" duration="5166000" />
       <workItem from="1523876741854" duration="1718000" />
       <workItem from="1523897143602" duration="1711000" />
+      <workItem from="1524048074478" duration="3067000" />
+      <workItem from="1524051190372" duration="1257000" />
+      <workItem from="1524053134610" duration="2979000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102334000" />
+    <option name="totallyTimeSpent" value="109637000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -318,7 +311,7 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -348,41 +341,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldSettings.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="61" column="82" lean-forward="true" selection-start-line="61" selection-start-column="82" selection-end-line="61" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/World.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="128" column="28" lean-forward="false" selection-start-line="128" selection-start-column="28" selection-end-line="128" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/World.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -488,13 +446,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/MinMaxAttribute.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/MinMaxAttribute.cs" />
     <entry file="file://$PROJECT_DIR$/../Realm/Assets/StreamingAssets/Database/Climates/Tundra.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -523,13 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Editor/DatabaseManagerEditor.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldCamera.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -537,24 +482,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Region.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -572,38 +503,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Editor/MinMaxDrawer.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="38" column="32" lean-forward="false" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Range.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Utility.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="18" column="69" lean-forward="false" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Editor/MinMaxDrawer.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldSettings.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="705">
           <caret line="49" column="49" lean-forward="false" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -616,25 +520,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Town.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Location.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="97" lean-forward="false" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Settler.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/WorldGenUI.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
           <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/PrefabManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -652,45 +542,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="81" column="43" lean-forward="false" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
-          <folding>
-            <marker date="1523797942805" expanded="false" signature="6:197" ph="..." />
-            <marker date="1523797942805" expanded="true" signature="243:4247" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="1113:1270" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="1121:1267" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="1306:1472" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="1314:1469" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="2624:2675" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="2734:2800" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="2831:3076" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="3123:3170" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="3220:3548" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="3582:3711" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="3744:3814" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="3850:3954" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="3876:3951" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="4015:4245" ph="{...}" />
-            <marker date="1523797942805" expanded="true" signature="4215:4242" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/Town.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="51" column="138" lean-forward="false" selection-start-line="51" selection-start-column="138" selection-end-line="51" selection-end-column="138" />
-          <folding>
-            <marker date="1523897215082" expanded="false" signature="6:52" ph="..." />
-            <marker date="1523897215082" expanded="true" signature="83:1519" ph="{...}" />
-            <marker date="1523897215082" expanded="true" signature="504:654" ph="{...}" />
-            <marker date="1523897215082" expanded="true" signature="678:1118" ph="{...}" />
-            <marker date="1523897215082" expanded="true" signature="873:930" ph="{...}" />
-            <marker date="1523897215082" expanded="true" signature="1089:1115" ph="{...}" />
-            <marker date="1523897215082" expanded="true" signature="1151:1300" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -698,66 +553,160 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <marker date="1523897253957" expanded="false" signature="6:52" ph="..." />
-            <marker date="1523897253957" expanded="true" signature="75:2306" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="460:580" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="604:969" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="794:827" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="911:944" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="998:1223" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="1029:1104" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="1289:2227" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="1785:2204" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="1825:2200" ph="{...}" />
-            <marker date="1523897253957" expanded="true" signature="2126:2195" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/MapDisplay.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="1110">
           <caret line="77" column="88" lean-forward="false" selection-start-line="77" selection-start-column="46" selection-end-line="77" selection-end-column="88" />
-          <folding>
-            <marker date="1523897222072" expanded="false" signature="6:93" ph="..." />
-            <marker date="1523897222072" expanded="true" signature="135:3851" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="870:1208" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="885:1179" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1363:1507" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1550:1636" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1670:1816" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1774:1813" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1865:1954" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1896:1916" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="1995:2454" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2084:2451" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2150:2192" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2498:3159" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2590:3156" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2638:3152" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2665:2886" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2713:2864" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="2933:2987" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="3235:3362" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="3446:3849" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="3637:3779" ph="{...}" />
-            <marker date="1523897222072" expanded="true" signature="3679:3775" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Objects/SettlerObject.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/PostProcessing/Editor/Tools/ProfileFactory.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/NaughtyAttributes/Scripts/Editor/PropertyDrawers/SliderPropertyDrawer.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/NaughtyAttributes/Scripts/Editor/Editors/InspectorEditor.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/NaughtyAttributes/Scripts/Core/DrawerAttributes/SliderAttribute.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Editor/DatabaseManagerEditor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Editor/GameControllerEditor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
           <folding>
-            <marker date="1523899022701" expanded="false" signature="6:37" ph="..." />
-            <marker date="1523899022701" expanded="true" signature="82:1073" ph="{...}" />
-            <marker date="1523899022701" expanded="true" signature="251:331" ph="{...}" />
-            <marker date="1523899022701" expanded="true" signature="363:945" ph="{...}" />
-            <marker date="1523899022701" expanded="true" signature="474:864" ph="{...}" />
-            <marker date="1523899022701" expanded="true" signature="650:803" ph="{...}" />
+            <marker date="1524053501786" expanded="false" signature="6:117" ph="..." />
+            <marker date="1524053501786" expanded="true" signature="164:2204" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="491:596" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="636:720" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="776:1008" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="809:885" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="1088:2202" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="1159:1243" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="1567:1626" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="1707:1904" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="1793:1867" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="2009:2068" ph="{...}" />
+            <marker date="1524053501786" expanded="true" signature="2124:2199" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/PrefabManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1524054034421" expanded="true" signature="63:409" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Range.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="40" lean-forward="true" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Utility.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <marker date="1524056690478" expanded="false" signature="6:143" ph="..." />
+            <marker date="1524056690478" expanded="true" signature="173:1576" ph="{...}" />
+            <marker date="1524056690478" expanded="true" signature="1326:1496" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Climate.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="52" lean-forward="false" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+          <folding>
+            <marker date="1524057025394" expanded="false" signature="6:61" ph="..." />
+            <marker date="1524057025394" expanded="true" signature="129:630" ph="{...}" />
+            <marker date="1524057025394" expanded="true" signature="338:449" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="46" lean-forward="false" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding>
+            <marker date="1524057267095" expanded="true" signature="6:226" ph="..." />
+            <marker date="1524057267095" expanded="true" signature="272:4261" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="1113:1270" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="1121:1267" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="1306:1472" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="1314:1469" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="2624:2675" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="2734:2800" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="2845:3090" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="3137:3184" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="3234:3562" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="3596:3725" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="3758:3828" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="3864:3968" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="3890:3965" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="4029:4259" ph="{...}" />
+            <marker date="1524057267095" expanded="true" signature="4229:4256" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/StreamingAssets/Database/Races/Dwarves.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/WorldGen/Race.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+          <folding>
+            <marker date="1524057454794" expanded="false" signature="6:97" ph="..." />
+            <marker date="1524057454794" expanded="true" signature="162:1915" ph="{...}" />
+            <marker date="1524057454794" expanded="true" signature="1119:1342" ph="{...}" />
+            <marker date="1524057454794" expanded="true" signature="1222:1305" ph="{...}" />
+            <marker date="1524057454794" expanded="true" signature="1387:1633" ph="{...}" />
+            <marker date="1524057454794" expanded="true" signature="1555:1596" ph="{...}" />
+            <marker date="1524057454794" expanded="true" signature="1664:1845" ph="{...}" />
+            <marker date="1524057454794" expanded="true" signature="1765:1809" ph="{...}" />
           </folding>
         </state>
       </provider>

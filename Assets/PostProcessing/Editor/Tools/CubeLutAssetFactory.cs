@@ -42,9 +42,9 @@ namespace UnityEditor.Rendering.PostProcessing
             for (int y = 0; y < kSize; y++)
             for (int z = 0; z < kSize; z++)
             {
-                float ox = eval((float)x / kSizeMinusOne);
-                float oy = eval((float)y / kSizeMinusOne);
-                float oz = eval((float)z / kSizeMinusOne);
+                float ox = eval(x / kSizeMinusOne);
+                float oy = eval(y / kSizeMinusOne);
+                float oz = eval(z / kSizeMinusOne);
 
                 // Resolve & Photoshop use BGR as default, let's make it easier for users
                 sb.AppendFormat("{0} {1} {2}\n", oz, oy, ox);

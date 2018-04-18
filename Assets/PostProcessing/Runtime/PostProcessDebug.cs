@@ -1,3 +1,5 @@
+using UnityEditor;
+
 namespace UnityEngine.Rendering.PostProcessing
 {
     [ExecuteInEditMode]
@@ -25,14 +27,14 @@ namespace UnityEngine.Rendering.PostProcessing
             // Update is only called on object change when ExecuteInEditMode is set, but we need it
             // to execute on every frame no matter what when not in play mode, so we'll use the
             // editor update loop instead...
-            UnityEditor.EditorApplication.update += UpdateStates;
+            EditorApplication.update += UpdateStates;
 #endif
         }
 
         void OnDisable()
         {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.update -= UpdateStates;
+            EditorApplication.update -= UpdateStates;
 #endif
 
             if (m_CurrentCamera != null)

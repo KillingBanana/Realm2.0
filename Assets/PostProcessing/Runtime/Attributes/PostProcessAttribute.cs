@@ -2,7 +2,7 @@ using System;
 
 namespace UnityEngine.Rendering.PostProcessing
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class PostProcessAttribute : Attribute
     {
         public readonly Type renderer;

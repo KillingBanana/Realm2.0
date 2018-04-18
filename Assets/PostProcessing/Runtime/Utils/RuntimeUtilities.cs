@@ -5,15 +5,14 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using UnityEngine.Assertions;
-
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 namespace UnityEngine.Rendering.PostProcessing
 {
-    using SceneManagement;
-    using UnityObject = UnityEngine.Object;
+    using UnityObject = Object;
 
     public static class RuntimeUtilities
     {
@@ -294,8 +293,8 @@ namespace UnityEngine.Rendering.PostProcessing
         {
             get
             {
-                return UnityEditor.PlayerSettings.virtualRealitySupported
-                    && UnityEditor.PlayerSettings.stereoRenderingPath == UnityEditor.StereoRenderingPath.SinglePass;
+                return PlayerSettings.virtualRealitySupported
+                    && PlayerSettings.stereoRenderingPath == StereoRenderingPath.SinglePass;
             }
         }
 #endif
@@ -320,7 +319,7 @@ namespace UnityEngine.Rendering.PostProcessing
             get
             {
 #if UNITY_EDITOR
-                return UnityEditor.PlayerSettings.virtualRealitySupported;
+                return PlayerSettings.virtualRealitySupported;
 #elif UNITY_XBOXONE
                 return false;
 #elif UNITY_2017_2_OR_NEWER

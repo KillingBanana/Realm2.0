@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering.PostProcessing;
@@ -133,7 +134,7 @@ namespace UnityEditor.Rendering.PostProcessing
                 m_Asset.isDirty = false;
             }
 
-            bool isEditable = !VersionControl.Provider.isActive
+            bool isEditable = !Provider.isActive
                 || AssetDatabase.IsOpenForEdit(m_Asset, StatusQueryOptions.UseCachedIfPossible);
 
             using (new EditorGUI.DisabledScope(!isEditable))

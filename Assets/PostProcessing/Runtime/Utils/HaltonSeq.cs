@@ -5,14 +5,14 @@ namespace UnityEngine.Rendering.PostProcessing
         public static float Get(int index, int radix)
         {
             float result = 0f;
-            float fraction = 1f / (float)radix;
+            float fraction = 1f / radix;
 
             while (index > 0)
             {
-                result += (float)(index % radix) * fraction;
+                result += index % radix * fraction;
 
                 index /= radix;
-                fraction /= (float)radix;
+                fraction /= radix;
             }
 
             return result;

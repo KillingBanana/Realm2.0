@@ -4455,10 +4455,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomSeed: 1
-  seed: 2972
+  seed: 2834
   startAutoUpdate: 1
   randomMapSeed: 1
-  generateOnEdit: 0
   secondsPerStep: 0.1
   autoUpdateRunning: 0
   worldSettings:
@@ -4567,9 +4566,9 @@ MonoBehaviour:
     height: {x: 0.66, y: 1}
     temp: {x: 0, y: 1}
     humidity: {x: 0, y: 1}
-    heightWeight: 0.9
-    tempWeight: 0.05
-    humidityWeight: 0.05
+    heightWeight: 0.7
+    tempWeight: 0.3
+    humidityWeight: 0
     placeNames:
     - bruk
     - buk
@@ -4603,15 +4602,9 @@ MonoBehaviour:
     - dun
     - nin
     - tyr
-    placeNameLength:
-      min: 2
-      max: 4
-    firstNameLength:
-      min: 1
-      max: 3
-    lastNameLength:
-      min: 1
-      max: 3
+    placeNameLength: {x: 1, y: 3}
+    firstNameLength: {x: 1, y: 3}
+    lastNameLength: {x: 2, y: 4}
   - collectiveName: elves
     individualName: elf
     adjective: elven
@@ -4620,8 +4613,8 @@ MonoBehaviour:
     height: {x: 0.33, y: 0.66}
     temp: {x: 0, y: 0.33}
     humidity: {x: 0, y: 1}
-    heightWeight: 0.3
-    tempWeight: 0.7
+    heightWeight: 0.2
+    tempWeight: 0.8
     humidityWeight: 0
     placeNames:
     - a
@@ -4666,15 +4659,9 @@ MonoBehaviour:
     - shin
     - ta
     - to
-    placeNameLength:
-      min: 2
-      max: 4
-    firstNameLength:
-      min: 1
-      max: 4
-    lastNameLength:
-      min: 1
-      max: 4
+    placeNameLength: {x: 2, y: 4}
+    firstNameLength: {x: 1, y: 3}
+    lastNameLength: {x: 2, y: 4}
   - collectiveName: humans
     individualName: human
     adjective: human
@@ -4722,15 +4709,9 @@ MonoBehaviour:
     - copper
     - fair
     - son
-    placeNameLength:
-      min: 2
-      max: 3
-    firstNameLength:
-      min: 1
-      max: 1
-    lastNameLength:
-      min: 1
-      max: 3
+    placeNameLength: {x: 1, y: 3}
+    firstNameLength: {x: 1, y: 1}
+    lastNameLength: {x: 1, y: 2}
   - collectiveName: orcs
     individualName: orc
     adjective: orcish
@@ -4797,21 +4778,11 @@ MonoBehaviour:
     - von
     - vun
     - wal
-    placeNameLength:
-      min: 1
-      max: 3
-    firstNameLength:
-      min: 1
-      max: 3
-    lastNameLength:
-      min: 4
-      max: 5
+    placeNameLength: {x: 1, y: 2}
+    firstNameLength: {x: 1, y: 2}
+    lastNameLength: {x: 1, y: 2}
   climates:
   - name: Bushland
-    height: {x: 0.33, y: 0.66}
-    temp: {x: 0.33, y: 0.66}
-    humidity: {x: 0.33, y: 0.66}
-    isWater: 0
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.29636884, g: 0.5660378, b: 0.30022126, a: 1}
@@ -4841,11 +4812,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Desert
     height: {x: 0.33, y: 0.66}
-    temp: {x: 0.66, y: 1}
-    humidity: {x: 0, y: 0.33}
+    temp: {x: 0.33, y: 0.66}
+    humidity: {x: 0.33, y: 0.66}
     isWater: 0
+  - name: Desert
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.81960785, g: 0.8235294, b: 0.5686275, a: 1}
@@ -4875,11 +4846,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Forest
     height: {x: 0.33, y: 0.66}
-    temp: {x: 0.33, y: 0.66}
-    humidity: {x: 0.66, y: 1}
+    temp: {x: 0.66, y: 1}
+    humidity: {x: 0, y: 0.33}
     isWater: 0
+  - name: Forest
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.36862746, g: 0.5137255, b: 0.32156864, a: 1}
@@ -4909,11 +4880,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Jungle
     height: {x: 0.33, y: 0.66}
-    temp: {x: 0.66, y: 1}
+    temp: {x: 0.33, y: 0.66}
     humidity: {x: 0.66, y: 1}
     isWater: 0
+  - name: Jungle
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.27450982, g: 0.4117647, b: 0.27450982, a: 1}
@@ -4943,11 +4914,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Mountain
-    height: {x: 0.66, y: 1}
-    temp: {x: 0, y: 1}
-    humidity: {x: 0, y: 1}
+    height: {x: 0.33, y: 0.66}
+    temp: {x: 0.66, y: 1}
+    humidity: {x: 0.66, y: 1}
     isWater: 0
+  - name: Mountain
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.39215687, g: 0.32941177, b: 0.32941177, a: 1}
@@ -4977,11 +4948,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Plain
-    height: {x: 0.33, y: 0.66}
-    temp: {x: 0.33, y: 0.66}
-    humidity: {x: 0, y: 0.33}
+    height: {x: 0.66, y: 1}
+    temp: {x: 0, y: 1}
+    humidity: {x: 0, y: 1}
     isWater: 0
+  - name: Plain
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.3372549, g: 0.6117647, b: 0.34117648, a: 1}
@@ -5011,11 +4982,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Savanna
     height: {x: 0.33, y: 0.66}
-    temp: {x: 0.66, y: 1}
-    humidity: {x: 0.33, y: 0.66}
+    temp: {x: 0.33, y: 0.66}
+    humidity: {x: 0, y: 0.33}
     isWater: 0
+  - name: Savanna
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.78039217, g: 0.7533903, b: 0.44705883, a: 1}
@@ -5045,11 +5016,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
+    height: {x: 0.33, y: 0.66}
+    temp: {x: 0.66, y: 1}
+    humidity: {x: 0.33, y: 0.66}
+    isWater: 0
   - name: Sea
-    height: {x: 0, y: 0.33}
-    temp: {x: 0, y: 1}
-    humidity: {x: 0, y: 1}
-    isWater: 1
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.19607843, g: 0.19607843, b: 0.3372549, a: 1}
@@ -5079,11 +5050,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Taiga
-    height: {x: 0.33, y: 0.66}
-    temp: {x: 0.16, y: 0.33}
+    height: {x: 0, y: 0.33}
+    temp: {x: 0, y: 1}
     humidity: {x: 0, y: 1}
-    isWater: 0
+    isWater: 1
+  - name: Taiga
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.47708258, g: 0.6698113, b: 0.5011737, a: 1}
@@ -5113,11 +5084,11 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-  - name: Tundra
     height: {x: 0.33, y: 0.66}
-    temp: {x: 0, y: 0.16}
+    temp: {x: 0.16, y: 0.33}
     humidity: {x: 0, y: 1}
     isWater: 0
+  - name: Tundra
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.85490197, g: 0.8745098, b: 0.8745098, a: 1}
@@ -5147,6 +5118,10 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
+    height: {x: 0.33, y: 0.66}
+    temp: {x: 0, y: 0.16}
+    humidity: {x: 0, y: 1}
+    isWater: 0
 --- !u!114 &2035694078
 MonoBehaviour:
   m_ObjectHideFlags: 0

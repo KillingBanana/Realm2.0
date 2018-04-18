@@ -63,5 +63,5 @@ public enum BodyPartAttribute {
 	Seeing,
 	Thinking,
 	Vital,
-	Walking,
+	Walking
 }

@@ -129,7 +129,7 @@ namespace UnityEngine.Rendering.PostProcessing
                 m_Methods = new IAmbientOcclusionMethod[]
                 {
                     new ScalableAO(settings),
-                    new MultiScaleVO(settings),
+                    new MultiScaleVO(settings)
                 };
             }
         }

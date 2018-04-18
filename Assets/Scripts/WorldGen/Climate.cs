@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 #pragma warning disable 0649
@@ -7,11 +8,11 @@ using UnityEngine;
 public class Climate {
 	public string name;
 
-	[SerializeField, MinMax(0, 1)] private Vector2 height, temp, humidity;
+	[SerializeField] private Gradient colorGradient;
+
+	[MinMaxSlider(0f, 1f, true)] public Vector2 height, temp, humidity;
 
 	public bool isWater;
-
-	[SerializeField] private Gradient colorGradient;
 
 	public Color GetColor(float tileHeight) {
 		Color color = colorGradient.Evaluate(Mathf.InverseLerp(height.x, height.y, tileHeight));

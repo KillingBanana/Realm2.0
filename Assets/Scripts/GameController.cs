@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Diagnostics;
 using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
@@ -15,14 +16,13 @@ public class GameController : MonoBehaviour {
 
 	private static int Seed => Instance.randomSeed ? Instance.seed = UnityEngine.Random.Range(0, 9999) : Instance.seed;
 	[SerializeField] private bool randomSeed;
+
 	[SerializeField] private int seed;
 
 	[Header("World Settings"), SerializeField]
 	private bool startAutoUpdate;
 
 	[SerializeField] private bool randomMapSeed;
-
-	public bool generateOnEdit;
 
 	[SerializeField, Range(0.01f, 1)] private float secondsPerStep;
 	[HideInInspector] public bool autoUpdateRunning;
@@ -84,6 +84,7 @@ public class GameController : MonoBehaviour {
 		GenerateWorld();
 	}
 
+	[Button(20)]
 	public void GenerateWorld() {
 		StopAutoUpdate();
 

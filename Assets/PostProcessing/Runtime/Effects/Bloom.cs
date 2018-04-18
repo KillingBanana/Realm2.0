@@ -177,8 +177,8 @@ namespace UnityEngine.Rendering.PostProcessing
                 ? RuntimeUtilities.blackTexture
                 : settings.dirtTexture.value;
 
-            var dirtRatio = (float)dirtTexture.width / (float)dirtTexture.height;
-            var screenRatio = (float)context.screenWidth / (float)context.screenHeight;
+            var dirtRatio = dirtTexture.width / (float)dirtTexture.height;
+            var screenRatio = context.screenWidth / (float)context.screenHeight;
             var dirtTileOffset = new Vector4(1f, 1f, 0f, 0f);
 
             if (dirtRatio > screenRatio)

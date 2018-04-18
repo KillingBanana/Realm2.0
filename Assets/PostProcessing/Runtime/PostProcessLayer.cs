@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Assertions;
+using UnityEngine.XR;
 
 namespace UnityEngine.Rendering.PostProcessing
 {
 #if UNITY_2017_2_OR_NEWER
-    using XRSettings = UnityEngine.XR.XRSettings;
 #elif UNITY_5_6_OR_NEWER
     using XRSettings = UnityEngine.VR.VRSettings;
 #endif
@@ -49,7 +49,7 @@ namespace UnityEngine.Rendering.PostProcessing
 
         // Will stop applying post-processing effects just before color grading is applied
         // Currently used to export to exr without color grading
-        public bool breakBeforeColorGrading = false;
+        public bool breakBeforeColorGrading;
 
         // Pre-ordered custom user effects
         // These are automatically populated and made to work properly with the serialization
@@ -95,11 +95,11 @@ namespace UnityEngine.Rendering.PostProcessing
         LogHistogram m_LogHistogram;
 
         bool m_SettingsUpdateNeeded = true;
-        bool m_IsRenderingInSceneView = false;
+        bool m_IsRenderingInSceneView;
 
         TargetPool m_TargetPool;
 
-        bool m_NaNKilled = false;
+        bool m_NaNKilled;
 
         // Recycled list - used to reduce GC stress when gathering active effects in a bundle list
         // on each frame
