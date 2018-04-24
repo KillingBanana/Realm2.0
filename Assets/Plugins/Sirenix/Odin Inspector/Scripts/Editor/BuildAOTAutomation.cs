@@ -14,7 +14,7 @@ namespace Sirenix.Serialization.Internal
 
 #endif
 
-    public class PreBuildAOTAutomation : IPreprocessBuild
+    public class PreBuildAOTAutomation : IPreprocessBuildWithReport
     {
         public int callbackOrder
         {
@@ -45,7 +45,7 @@ namespace Sirenix.Serialization.Internal
 #endif
     }
 
-    public class PostBuildAOTAutomation : IPostprocessBuild
+    public class PostBuildAOTAutomation : IPostprocessBuildWithReport
     {
         public int callbackOrder
         {

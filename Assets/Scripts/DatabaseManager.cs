@@ -8,7 +8,7 @@ public class DatabaseManager : MonoBehaviour {
 	private static string RacesPath => string.Concat(Application.streamingAssetsPath, "/Database/Races/");
 	private static string ClimatesPath => string.Concat(Application.streamingAssetsPath, "/Database/Climates/");
 
-	[Header("Database")] public Race[] races;
+	public Race[] races;
 	public Climate[] climates;
 
 	[Button]

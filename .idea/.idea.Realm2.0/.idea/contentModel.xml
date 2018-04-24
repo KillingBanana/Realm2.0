@@ -4,7 +4,6 @@
     <e p="C:\Users\killi\.Rider2017.3\system\resharper-host\Local\Transient\ReSharperHost\v11\SolutionCaches\_Realm2.0.947556771.00" t="ExcludeRecursive" />
     <e p="D:\Documents\Unity Projects\Realm2.0" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
-      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Plugins" t="Include">
@@ -14,15 +13,6 @@
             </e>
           </e>
           <e p="Sirenix" t="Include">
-            <e p="Assemblies" t="Include">
-              <e p="link.xml" t="Include" />
-              <e p="Sirenix.OdinInspector.Attributes.xml" t="Include" />
-              <e p="Sirenix.OdinInspector.Editor.xml" t="Include" />
-              <e p="Sirenix.Serialization.Config.xml" t="Include" />
-              <e p="Sirenix.Serialization.xml" t="Include" />
-              <e p="Sirenix.Utilities.Editor.xml" t="Include" />
-              <e p="Sirenix.Utilities.xml" t="Include" />
-            </e>
             <e p="Odin Inspector" t="Include">
               <e p="Scripts" t="Include">
                 <e p="Editor" t="Include">
@@ -30,8 +20,8 @@
                   <e p="EnsureOdinInspectorDefine.cs" t="Include" />
                   <e p="OdinGettingStartedWizard.cs" t="Include" />
                   <e p="VectorIntDrawers.cs" t="Include" />
+                  <e p="VectorIntFormatters.cs" t="Include" />
                 </e>
-                <e p="VectorIntFormatters.cs" t="Include" />
               </e>
             </e>
           </e>
@@ -279,7 +269,9 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Realm2.0.sln" t="IncludeFlat" />
-      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
     </e>
   </component>
 </project>
