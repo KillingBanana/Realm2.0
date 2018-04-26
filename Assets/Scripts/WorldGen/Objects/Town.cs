@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Town : Location {
@@ -8,8 +9,9 @@ public class Town : Location {
 	public int population;
 
 	public readonly List<Settler> settlers = new List<Settler>();
-	private readonly Town parent;
+	public readonly Town parent;
 	private readonly List<Town> childTowns = new List<Town>();
+	public readonly List<Road> roads = new List<Road>();
 
 	private int yearsSinceLastSettlers;
 
@@ -33,13 +35,15 @@ public class Town : Location {
 			CreateSettlers();
 		}
 
-		float compatibility = tile.GetRaceCompatibility(Race);
+		float compatibility = tile.GetTownCompatibility(Race);
 
 		population += (int) (compatibility * population / 300);
 
 		foreach (Settler settler in settlers) {
 			settler.Update();
 		}
+
+		settlers.RemoveAll(settler => !settler.Active);
 	}
 
 	private void CreateSettlers() {

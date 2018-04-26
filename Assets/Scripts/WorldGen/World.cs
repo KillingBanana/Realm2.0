@@ -120,7 +120,7 @@ public class World {
 				continue;
 			}
 
-			int population = (int) (tile.GetRaceCompatibility(race) * 5000);
+			int population = (int) (tile.GetTownCompatibility(race) * 5000);
 			faction.capital = new Town(this, tile, faction, population, null);
 
 			towns.Add(faction.capital);

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4732337171239912}
   - component: {fileID: 33097913167524536}
   - component: {fileID: 23813256830674088}
-  - component: {fileID: 65208237934349664}
+  - component: {fileID: 114379711091953894}
   m_Layer: 0
   m_Name: Town
   m_TagString: Untagged
@@ -84,15 +84,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1207783693533942}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65208237934349664
-BoxCollider:
+--- !u!114 &114379711091953894
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1207783693533942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cede68ac628190745885c0fc8b8ba02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

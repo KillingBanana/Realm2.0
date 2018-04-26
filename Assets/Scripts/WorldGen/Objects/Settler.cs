@@ -2,17 +2,18 @@
 using UnityEngine;
 
 public class Settler {
+	private readonly World world;
 	public readonly Town startingTown;
+	private readonly Road road;
 
 	public readonly List<Tile> tiles;
 	public readonly int population;
 
-	private readonly World world;
 	public Tile Tile => tiles[0];
 	private Faction Faction => startingTown.faction;
 	private Race Race => startingTown.Race;
 
-	public bool active = true;
+	public bool Active { get; private set; } = true;
 
 	private int steps;
 	private float standards = 1;
@@ -22,48 +23,57 @@ public class Settler {
 		this.population = population;
 		world = town.world;
 
+		road = new Road(world, startingTown, population);
+
 		tiles = new List<Tile> {town.tile};
 	}
 
 	public void Update() {
-		if (!active) return;
+		if (!Active) {
+			Debug.LogError("This shouldn't be happening");
+			return;
+		}
 
 		steps++;
 
-		Tile nextTile = tiles.Count > 1
-			? FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile, Tile)
-			: FindBestTile(Tile, Tile);
+		Tile nextTile = tiles.Count == 1
+			? FindBestTile(Tile, startingTown.parent?.tile)
+			: FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile);
 
 		if (nextTile == null) {
-			CreateTown();
+			CreateTown(Tile);
+			return;
+		}
+
+		if (nextTile.GetTownCompatibility(Race) >= standards) {
+			CreateTown(nextTile);
 			return;
 		}
 
 		tiles.Insert(0, nextTile);
-
-		if (Tile.GetTownCompatibility(Race) >= standards) {
-			CreateTown();
-			return;
-		}
-
 		standards -= .02f;
+
+		road.AddTile(Tile);
 	}
 
-	private void CreateTown() {
-		if (Tile.location != null) {
-			Debug.LogError("Location not null");
-			active = false;
-			return;
-		}
-
-		Town town = new Town(world, Tile, Faction, population, startingTown);
+	private void CreateTown(Tile tile) {
+		Town town = new Town(world, tile, Faction, population, startingTown);
 		world.towns.Add(town);
-		active = false;
+
+		town.roads.Add(road);
+
+		road.AddTile(tile);
+
+		Active = false;
 	}
 
-	private Tile FindBestTile(Tile currentTile, Tile previousTile) {
-		int dx = currentTile.x - previousTile?.x ?? 0;
-		int dy = currentTile.y - previousTile?.y ?? 0;
+	private Tile FindBestTile(Tile currentTile, Tile previousTile = null) {
+		int dx = 0, dy = 0;
+
+		if (previousTile != null) {
+			dx = (currentTile.x - previousTile.x).Sign();
+			dy = (currentTile.y - previousTile.y).Sign();
+		}
 
 		int minX = dx == 0
 			? -1

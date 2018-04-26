@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +17,9 @@ public class MapDisplay : MonoBehaviour {
 
 	private static World World => GameController.World;
 
-	private readonly Dictionary<Town, GameObject> townObjects = new Dictionary<Town, GameObject>();
+	private readonly Dictionary<Town, TownObject> townObjects = new Dictionary<Town, TownObject>();
 	private readonly Dictionary<Settler, SettlerObject> settlerObjects = new Dictionary<Settler, SettlerObject>();
+	private readonly Dictionary<Road, RoadObject> roadObjects = new Dictionary<Road, RoadObject>();
 
 	public void DrawMap(bool reset) {
 		if (reset) {
@@ -44,6 +46,50 @@ public class MapDisplay : MonoBehaviour {
 
 		DisplayTowns(reset);
 		DisplaySettlers(reset);
+		DisplayRoads(reset);
+	}
+
+	private void DisplayTowns(bool reset) {
+		if (reset) townObjects.Clear();
+
+		foreach (Town town in GameController.World.towns) {
+			if (!townObjects.ContainsKey(town)) {
+				TownObject townObject = InstantiateOnMap(PrefabManager.Town, town.tile.position);
+				townObject.Init(town);
+
+				townObjects.Add(town, townObject);
+			}
+		}
+	}
+
+	private void DisplaySettlers(bool reset) {
+		if (reset) settlerObjects.Clear();
+
+		foreach (Town town in GameController.World.towns) {
+			foreach (Settler settler in town.settlers) {
+				if (!settlerObjects.ContainsKey(settler)) {
+					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
+					settlerObject.Init(settler);
+
+					settlerObjects.Add(settler, settlerObject);
+				}
+			}
+		}
+	}
+
+	private void DisplayRoads(bool reset) {
+		if (reset) roadObjects.Clear();
+
+		foreach (Town town in GameController.World.towns) {
+			foreach (Road road in town.roads) {
+				if (!roadObjects.ContainsKey(road)) {
+					RoadObject roadObject = InstantiateOnMap(PrefabManager.Road, town.tile.position);
+					roadObject.Init(road);
+
+					roadObjects.Add(road, roadObject);
+				}
+			}
+		}
 	}
 
 	private void DestroyChildren() {
@@ -59,50 +105,6 @@ public class MapDisplay : MonoBehaviour {
 			Destroy(o);
 		} else {
 			DestroyImmediate(o);
-		}
-	}
-
-	private void DisplayTowns(bool reset) {
-		if (reset) townObjects.Clear();
-
-		foreach (Town town in GameController.World.towns) {
-			GameObject townObject;
-			if (townObjects.ContainsKey(town)) {
-				townObject = townObjects[town];
-			} else {
-				townObject = InstantiateOnMap(PrefabManager.Town, town.tile.position);
-				townObject.name = town.Name;
-				townObjects.Add(town, townObject);
-			}
-
-			townObject.transform.localScale = Mathf.Sqrt((float) town.population / 4000) * Vector3.one;
-		}
-	}
-
-	private void DisplaySettlers(bool reset) {
-		if (reset) settlerObjects.Clear();
-
-		foreach (Town town in GameController.World.towns) {
-			foreach (Settler settler in town.settlers) {
-				if (!settler.active) {
-					if (settlerObjects.ContainsKey(settler)) {
-						settlerObjects[settler].UpdatePosition();
-						//SafeDestroy(settlerObjects[settler].gameObject);
-						settlerObjects.Remove(settler);
-					}
-
-					continue;
-				}
-
-				if (settlerObjects.ContainsKey(settler)) {
-					settlerObjects[settler].UpdatePosition();
-				} else {
-					SettlerObject o = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
-					o.Init(settler);
-
-					settlerObjects.Add(settler, o);
-				}
-			}
 		}
 	}
 

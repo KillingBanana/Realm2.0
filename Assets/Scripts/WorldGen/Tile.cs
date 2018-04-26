@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,10 +12,12 @@ public class Tile {
 
 	private readonly World world;
 	public Region region;
+	public readonly Climate climate;
+
 	public Location location;
 	private Town Town => location as Town;
 
-	public readonly Climate climate;
+	public readonly List<Road> roads = new List<Road>();
 
 	private readonly Color color, heightColor, tempColor, humidityColor;
 
@@ -60,7 +63,7 @@ public class Tile {
 		region = newRegion;
 	}
 
-	public float GetRaceCompatibility(Race race) => IsWater || !race.height.Contains(height) || !race.temp.Contains(temp)
+	private float GetRaceCompatibility(Race race) => IsWater || !race.height.Contains(height) || !race.temp.Contains(temp)
 		? 0
 		: 2 * (race.HeightWeight * Mathf.Min(height - race.height.x, race.height.y - height) / race.height.Range() +
 		       race.TempWeight * Mathf.Min(temp - race.temp.x, race.temp.y - temp) / race.temp.Range() +
@@ -73,7 +76,9 @@ public class Tile {
 
 		float townCompatiblity = world.settings.townDistanceFactor.Evaluate(DistanceToTown());
 
-		return (raceCompatibility + townCompatiblity) / 2;
+		float totalCompatibility = (raceCompatibility + townCompatiblity) / 2;
+
+		return totalCompatibility;
 	}
 
 	private float DistanceToTown() {

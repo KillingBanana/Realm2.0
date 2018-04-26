@@ -247,9 +247,12 @@
             <e p="MeshGenerator.cs" t="Include" />
             <e p="Objects" t="Include">
               <e p="Location.cs" t="Include" />
+              <e p="Road.cs" t="Include" />
+              <e p="RoadObject.cs" t="Include" />
               <e p="Settler.cs" t="Include" />
               <e p="SettlerObject.cs" t="Include" />
               <e p="Town.cs" t="Include" />
+              <e p="TownObject.cs" t="Include" />
             </e>
             <e p="Race.cs" t="Include" />
             <e p="Region.cs" t="Include" />
