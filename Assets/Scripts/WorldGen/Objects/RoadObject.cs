@@ -1,20 +1,15 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class RoadObject : MonoBehaviour {
+[ExecuteInEditMode]
+public class RoadObject : DisplayObject<Road> {
 	[SerializeField] private LineRenderer lineRenderer;
-	private Road road;
 
-	public void Init(Road road) {
-		this.road = road;
-		name = road.ToString();
-	}
+	protected override void UpdateDisplay() {
+		lineRenderer.positionCount = Target.Tiles.Count;
+		lineRenderer.SetPositions(Target.Tiles.Select(tile => RoadPosition(tile.position)).ToArray());
 
-	public void Update() {
-		lineRenderer.positionCount = road.Tiles.Count;
-		lineRenderer.SetPositions(road.Tiles.Select(tile => RoadPosition(tile.position)).ToArray());
-
-		lineRenderer.widthCurve = new AnimationCurve(new Keyframe(0, Mathf.Sqrt((float) road.Population / 4000)));
+		lineRenderer.widthCurve = new AnimationCurve(new Keyframe(0, Mathf.Sqrt((float) Target.Population / 4000)));
 	}
 
 	private static Vector3 RoadPosition(Vector2Int position) => WorldGenUtility.WorldToMeshPoint(position) + Vector3.up * 0.2f;

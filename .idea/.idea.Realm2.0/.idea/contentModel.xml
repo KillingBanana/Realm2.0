@@ -246,6 +246,7 @@
             <e p="MapDisplay.cs" t="Include" />
             <e p="MeshGenerator.cs" t="Include" />
             <e p="Objects" t="Include">
+              <e p="DisplayObject.cs" t="Include" />
               <e p="Location.cs" t="Include" />
               <e p="Road.cs" t="Include" />
               <e p="RoadObject.cs" t="Include" />

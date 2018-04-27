@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour {
 		GenerateWorld();
 	}
 
-	[Button(20)]
+	[Button(ButtonSizes.Medium)]
 	public void GenerateWorld() {
 		StopAutoUpdate();
 
@@ -99,7 +99,11 @@ public class GameController : MonoBehaviour {
 		OnWorldUpdated(true);
 	}
 
-	[UsedImplicitly]
+	private static bool WorldReady() {
+		return World != null;
+	}
+
+	[Button(ButtonSizes.Medium), ShowIf(nameof(WorldReady))]
 	public void UpdateWorld() {
 		World.Update();
 		OnWorldUpdated(false);

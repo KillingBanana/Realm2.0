@@ -100,7 +100,7 @@ public class MapDisplay : MonoBehaviour {
 		}
 	}
 
-	private static void SafeDestroy(GameObject o) {
+	public static void SafeDestroy(GameObject o) {
 		if (Application.isPlaying) {
 			Destroy(o);
 		} else {

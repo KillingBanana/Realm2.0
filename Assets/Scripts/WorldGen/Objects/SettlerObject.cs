@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
 
-public class SettlerObject : MonoBehaviour {
-	public Settler settler;
+[ExecuteInEditMode]
+public class SettlerObject : DisplayObject<Settler> {
+	protected override void UpdateDisplay() {
+		if (!Target.Active) MapDisplay.SafeDestroy(gameObject);
 
-	public void Init(Settler settler) {
-		this.settler = settler;
-		name = settler.ToString();
-	}
-
-	public void Update() {
-		transform.position = WorldGenUtility.WorldToMeshPoint(settler.Tile.position);
-
-		if (!settler.Active) Destroy(gameObject);
+		transform.position = WorldGenUtility.WorldToMeshPoint(Target.Tile.position);
 	}
 }
