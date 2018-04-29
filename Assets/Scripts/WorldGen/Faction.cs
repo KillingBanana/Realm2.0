@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 public class Faction {
 	public string Name { get; }
@@ -7,7 +8,7 @@ public class Faction {
 
 	public readonly Color color;
 
-	public Faction(Race race) {
+	public Faction([NotNull] Race race) {
 		this.race = race;
 		Name = race.GetPlaceName();
 		color = Random.ColorHSV(0, 1, 1, 1, 1, 1);

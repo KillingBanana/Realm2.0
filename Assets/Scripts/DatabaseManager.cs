@@ -11,13 +11,13 @@ public class DatabaseManager : MonoBehaviour {
 	public Race[] races;
 	public Climate[] climates;
 
-	[Button]
+	[Button, ButtonGroup]
 	public void LoadDatabase() {
 		races = LoadFromDirectory<Race>(RacesPath);
 		climates = LoadFromDirectory<Climate>(ClimatesPath);
 	}
 
-	[Button]
+	[Button, ButtonGroup]
 	public void SaveDatabase() {
 		SaveToDirectory(races, RacesPath);
 		SaveToDirectory(climates, ClimatesPath);

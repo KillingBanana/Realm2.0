@@ -23,7 +23,7 @@ public class Settler {
 		this.population = population;
 		world = town.world;
 
-		road = new Road(world, startingTown, population);
+		road = new Road(startingTown, population);
 
 		tiles = new List<Tile> {town.tile};
 	}
@@ -35,6 +35,8 @@ public class Settler {
 		}
 
 		steps++;
+
+		road.AddTile(Tile);
 
 		Tile nextTile = tiles.Count == 1
 			? FindBestTile(Tile, startingTown.parent?.tile)
@@ -51,12 +53,16 @@ public class Settler {
 		}
 
 		tiles.Insert(0, nextTile);
-		standards -= .02f;
-
-		road.AddTile(Tile);
+		standards -= .025f;
 	}
 
 	private void CreateTown(Tile tile) {
+		if (tile.location != null) {
+			Debug.LogError($"{tile} already contains location, removing settlers");
+			Active = false;
+			return;
+		}
+
 		Town town = new Town(world, tile, Faction, population, startingTown);
 		world.towns.Add(town);
 

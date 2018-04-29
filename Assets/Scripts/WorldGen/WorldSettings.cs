@@ -43,7 +43,6 @@ public class WorldSettings {
 
 	[Header("Civilizations")] public AnimationCurve townDistanceFactor;
 	public bool drawRoads;
-	[Range(1, 10)] public int factions;
 	[Range(0, 1000)] public int days;
 
 	public void GenerateHeightMap(float[,] map) {

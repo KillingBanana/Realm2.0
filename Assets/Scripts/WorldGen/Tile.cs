@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Tile {
@@ -27,7 +28,7 @@ public class Tile {
 		ColdColor = Color.cyan,
 		HotColor = Color.red,
 		DryColor = Color.yellow,
-		MoistColor = Color.blue;
+		HumidColor = Color.blue;
 
 	public bool IsWater => climate.isWater;
 
@@ -51,7 +52,7 @@ public class Tile {
 		color = climate.GetColor(height);
 		heightColor = IsWater ? Color.black : Color.Lerp(LowColor, HighColor, height);
 		tempColor = Color.Lerp(ColdColor, HotColor, temp);
-		humidityColor = Color.Lerp(DryColor, MoistColor, humidity);
+		humidityColor = Color.Lerp(DryColor, HumidColor, humidity);
 	}
 
 	public void SetRegion(Region newRegion) {
@@ -63,16 +64,26 @@ public class Tile {
 		region = newRegion;
 	}
 
-	private float GetRaceCompatibility(Race race) => IsWater || !race.height.Contains(height) || !race.temp.Contains(temp)
+	private static float GetCompatibility(float param, Vector2 range, float preferred) {
+		//if (!range.Contains(param)) return 0;
+
+		if (param <= preferred) {
+			return (param - range.x) / (preferred - range.x);
+		} else {
+			return 1 - (param - preferred) / (range.y - preferred);
+		}
+	}
+
+	public float GetRaceCompatibility(Race race) => IsWater
 		? 0
-		: 2 * (race.HeightWeight * Mathf.Min(height - race.height.x, race.height.y - height) / race.height.Range() +
-		       race.TempWeight * Mathf.Min(temp - race.temp.x, race.temp.y - temp) / race.temp.Range() +
-		       race.HumidityWeight * Mathf.Min(humidity - race.humidity.x, race.humidity.y - humidity) / race.humidity.Range());
+		: race.HeightWeight * GetCompatibility(height, race.heightRange, race.heightPreferred) +
+		  race.TempWeight * GetCompatibility(temp, race.tempRange, race.tempPreferred) +
+		  race.HumidityWeight * GetCompatibility(humidity, race.humidityRange, race.humidityPreferred);
 
 	public float GetTownCompatibility(Race race) {
 		float raceCompatibility = GetRaceCompatibility(race);
 
-		if (raceCompatibility < .001f) return 0;
+		if (raceCompatibility < .01f) return 0;
 
 		float townCompatiblity = world.settings.townDistanceFactor.Evaluate(DistanceToTown());
 
@@ -96,13 +107,12 @@ public class Tile {
 		return Mathf.Sqrt(minDist);
 	}
 
-	public Color GetColor(MapDrawMode mapDrawMode, float transparency) {
-		return mapDrawMode == MapDrawMode.Normal
-			? GetColor(MapDrawMode.Normal)
-			: Color.Lerp(GetColor(MapDrawMode.Normal), GetColor(mapDrawMode), transparency);
-	}
+	public Color GetColor(MapDrawMode mapDrawMode, float transparency, [CanBeNull] Race race) =>
+		mapDrawMode == MapDrawMode.Normal
+			? GetColor(MapDrawMode.Normal, race)
+			: Color.Lerp(GetColor(MapDrawMode.Normal, race), GetColor(mapDrawMode, race), transparency);
 
-	private Color GetColor(MapDrawMode mapDrawMode) {
+	private Color GetColor(MapDrawMode mapDrawMode, Race race) {
 		switch (mapDrawMode) {
 			case MapDrawMode.Normal:
 				return color;
@@ -114,6 +124,8 @@ public class Tile {
 				return humidityColor;
 			case MapDrawMode.Region:
 				return IsWater ? color : region.color;
+			case MapDrawMode.Race:
+				return Color.Lerp(LowColor, HighColor, GetRaceCompatibility(race));
 			default:
 				throw new ArgumentOutOfRangeException(nameof(mapDrawMode), mapDrawMode, null);
 		}

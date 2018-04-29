@@ -4,21 +4,24 @@
     "adjective": "orcish",
     "expansionism": 0.75,
     "hostility": 1.0,
-    "height": {
-        "x": 0.33000001311302187,
-        "y": 0.75
-    },
-    "temp": {
-        "x": 0.6600000262260437,
-        "y": 1.0
-    },
-    "humidity": {
+    "heightRange": {
         "x": 0.0,
         "y": 0.75
     },
-    "heightWeight": 0.10000000149011612,
-    "tempWeight": 0.699999988079071,
-    "humidityWeight": 0.20000000298023225,
+    "tempRange": {
+        "x": 0.6000000238418579,
+        "y": 1.0
+    },
+    "humidityRange": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "heightPreferred": 0.3499999940395355,
+    "tempPreferred": 0.8500000238418579,
+    "humidityPreferred": 0.5,
+    "heightWeight": 0.20000000298023225,
+    "tempWeight": 0.800000011920929,
+    "humidityWeight": 0.0,
     "placeNames": [
         "ar",
         "für",

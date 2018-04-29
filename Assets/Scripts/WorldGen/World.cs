@@ -108,8 +108,7 @@ public class World {
 	}
 
 	private void GenerateCivs() {
-		while (factions.Count < settings.factions) {
-			Race race = GameController.Races.RandomItem();
+		foreach (Race race in GameController.Races) {
 			Faction faction = new Faction(race);
 			factions.Add(faction);
 
@@ -133,7 +132,7 @@ public class World {
 
 		do {
 			Tile tile = GetRandomTile(race);
-			if (bestTile == null || tile.GetTownCompatibility(race) > bestTile.GetTownCompatibility(race)) bestTile = tile;
+			if (bestTile == null || tile.GetRaceCompatibility(race) > bestTile.GetRaceCompatibility(race)) bestTile = tile;
 
 			attempts++;
 		} while (attempts < tries && attempts < MaxAttempts);
@@ -167,5 +166,6 @@ public enum MapDrawMode {
 	Height,
 	Temperature,
 	Humidity,
-	Region
+	Region,
+	Race
 }

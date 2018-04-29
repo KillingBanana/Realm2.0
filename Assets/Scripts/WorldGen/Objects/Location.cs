@@ -16,7 +16,7 @@ public abstract class Location {
 		if (tile.location == null) {
 			tile.location = this;
 		} else {
-			Debug.LogError($"Adding {this} to non-empty tile ({tile} already contains {tile.location})");
+			Debug.LogError($"Adding location to non-empty tile ({tile} already contains {tile.location})");
 		}
 	}
 }

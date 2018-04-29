@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Town : Location {
 	public string Name { get; }
+
 	public readonly Faction faction;
 	public Race Race => faction.race;
+
 	public int population;
 
 	public readonly List<Settler> settlers = new List<Settler>();
@@ -16,6 +18,10 @@ public class Town : Location {
 	private int yearsSinceLastSettlers;
 
 	public Town(World world, Tile tile, Faction faction, int population, Town parent) : base(world, tile) {
+		if (faction == null) {
+			Debug.LogError($"Faction Null ({parent})");
+		}
+
 		this.faction = faction;
 		this.population = population;
 
@@ -50,6 +56,7 @@ public class Town : Location {
 		int settlerCount = population / 4;
 		Settler settler = new Settler(this, settlerCount);
 		population -= settlerCount;
+
 		settlers.Add(settler);
 	}
 

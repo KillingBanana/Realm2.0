@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 #pragma warning disable 0649
 
 public class WorldGenUI : MonoBehaviour {
-	[SerializeField] private Text tileInfo, mapInfo;
+	[SerializeField, Required] private Text tileInfo, mapInfo;
+	[SerializeField, Required] private Dropdown mapDrawModeDropdown, raceDropdown;
 
 	private static World World => GameController.World;
 
@@ -16,25 +18,42 @@ public class WorldGenUI : MonoBehaviour {
 
 	private Tile tile;
 
-	public static MapDrawMode drawMode;
-	private int mapDrawModesCount;
-
 	private new Camera camera;
 
 	private void Awake() {
 		camera = Camera.main;
 		mapDisplay = GetComponent<MapDisplay>();
-		mapDrawModesCount = Enum.GetValues(typeof(MapDrawMode)).Length;
+
+		mapDrawModeDropdown.options = Enum.GetNames(typeof(MapDrawMode)).Select(drawModeName => new Dropdown.OptionData(drawModeName)).ToList();
+
+		OnDrawModeChanged();
+
+		raceDropdown.options = GameController.Races.Select(race => new Dropdown.OptionData(race.collectiveName.Capitalize())).ToList();
+
+		OnRaceChanged();
 	}
 
 	[UsedImplicitly]
-	public void OnDrawModeChanged(int value) {
-		drawMode = value < mapDrawModesCount ? (MapDrawMode) value : 0;
+	public void OnDrawModeChanged() {
+		MapDrawMode mapDrawMode = (MapDrawMode) mapDrawModeDropdown.value;
+
+		raceDropdown.gameObject.SetActive(mapDrawMode == MapDrawMode.Race);
+
+		mapDisplay.drawMode = mapDrawMode;
+
 		mapDisplay.DrawTexture();
 	}
 
 	[UsedImplicitly]
 	public void OnTransparencyChanged(float f) {
+		mapDisplay.DrawTexture();
+	}
+
+	public void OnRaceChanged() {
+		Race race = GameController.Races[raceDropdown.value];
+
+		mapDisplay.race = race;
+
 		mapDisplay.DrawTexture();
 	}
 
@@ -79,8 +98,8 @@ public class WorldGenUI : MonoBehaviour {
 				tileInfo.text = text;
 			}
 
-			if (Input.GetMouseButtonDown(0) && tile.location != null) {
-				//StartCoroutine(GameController.LoadLocation(tile.location));
+			if (Input.GetMouseButtonDown(0)) {
+				Debug.Log(newTile.GetRaceCompatibility(mapDisplay.race));
 			}
 
 			if (Input.GetMouseButtonDown(1)) {

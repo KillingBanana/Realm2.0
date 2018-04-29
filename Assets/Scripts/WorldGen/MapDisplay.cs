@@ -13,6 +13,9 @@ public class MapDisplay : MonoBehaviour {
 	[SerializeField] private Slider transparencySlider;
 	[SerializeField] private float heightMultiplier;
 
+	[HideInInspector] public MapDrawMode drawMode;
+	[HideInInspector] public Race race;
+
 	private float HeightMultiplier => Mathf.Sqrt(World.size) * heightMultiplier;
 
 	private static World World => GameController.World;
@@ -37,7 +40,7 @@ public class MapDisplay : MonoBehaviour {
 	public float GetHeight(int x, int y) => heightCurve.Evaluate(GameController.World.GetTile(x, y).height) * HeightMultiplier;
 
 	public void DrawTexture() {
-		Texture2D mapTexture = GetTexture(WorldGenUI.drawMode, transparencySlider.value);
+		Texture2D mapTexture = GetTexture();
 		meshRenderer.sharedMaterial.mainTexture = mapTexture;
 	}
 
@@ -113,14 +116,14 @@ public class MapDisplay : MonoBehaviour {
 		return instance;
 	}
 
-	private static Texture2D GetTexture(MapDrawMode mapDrawMode, float transparency) {
+	private Texture2D GetTexture() {
 		Color[] colors = new Color[World.size * World.size];
 
 		Texture2D texture = new Texture2D(World.size, World.size) {filterMode = FilterMode.Point};
 
 		for (int x = 0; x < World.size; x++) {
 			for (int y = 0; y < World.size; y++) {
-				colors[x + World.size * y] = World.GetTile(x, y).GetColor(mapDrawMode, transparency);
+				colors[x + World.size * y] = World.GetTile(x, y).GetColor(drawMode, transparencySlider.value, race);
 			}
 		}
 
