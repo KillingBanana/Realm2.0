@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class WorldCamera : MonoBehaviour {
 	[SerializeField] private float zoomSensitivity = 10;
@@ -13,6 +14,8 @@ public class WorldCamera : MonoBehaviour {
 	public Vector3 targetPos;
 
 	[HideInInspector] public bool dragged;
+
+	[Required] public new Camera camera;
 
 	private void Update() {
 		if (GameController.World == null) return;

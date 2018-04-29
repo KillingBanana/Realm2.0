@@ -16,7 +16,7 @@ public class Tile {
 	public readonly Climate climate;
 
 	public Location location;
-	private Town Town => location as Town;
+	public Town Town => location as Town;
 
 	public readonly List<Road> roads = new List<Road>();
 

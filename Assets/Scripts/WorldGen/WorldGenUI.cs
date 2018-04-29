@@ -16,12 +16,7 @@ public class WorldGenUI : MonoBehaviour {
 
 	private MapDisplay mapDisplay;
 
-	private Tile tile;
-
-	private new Camera camera;
-
 	private void Awake() {
-		camera = Camera.main;
 		mapDisplay = GetComponent<MapDisplay>();
 
 		mapDrawModeDropdown.options = Enum.GetNames(typeof(MapDrawMode)).Select(drawModeName => new Dropdown.OptionData(drawModeName)).ToList();
@@ -76,30 +71,29 @@ public class WorldGenUI : MonoBehaviour {
 		if (GameController.Location != null || World == null || GameController.WorldCamera.dragged) return;
 
 		RaycastHit hit;
-		if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit)) {
+		if (Physics.Raycast(GameController.WorldCamera.camera.ScreenPointToRay(Input.mousePosition), out hit)) {
 			Vector2Int pos = WorldGenUtility.MeshToWorldPoint(hit.point);
 
-			Tile newTile = World.GetTile(pos);
+			Tile tile = World.GetTile(pos);
 
-			if (newTile == null) return;
+			if (tile == null) return;
 
-			if (newTile != tile) {
-				tile = newTile;
+			string text = $"Position: {pos}" +
+			              $"\nHeight: {GameController.WorldGenUtility.WorldHeightToMeters(tile.height)}m ({tile.height:F2})" +
+			              $"\nTemp: {GameController.WorldGenUtility.TemperatureToCelsius(tile.temp)}°C ({tile.temp:F2})" +
+			              $"\nRegion: {tile.region}";
 
-				string text = $"Position: {pos}" +
-				              $"\nHeight: {GameController.WorldGenUtility.WorldHeightToMeters(tile.height)}m ({tile.height:F2})" +
-				              $"\nTemp: {GameController.WorldGenUtility.TemperatureToCelsius(tile.temp)}°C ({tile.temp:F2})" +
-				              $"\nRegion: {tile.region}";
+			if (tile.location != null) text += $"\n{tile.location}";
 
-				if (tile.location != null) text += $"\n{tile.location}";
-				Town town = tile.location as Town;
-				if (town != null) text += $"\nPopulation: {town.population}";
+			Town town = tile.Town;
 
-				tileInfo.text = text;
-			}
+			if (town != null) text += $"\nPopulation: {town.population}";
+
+			tileInfo.text = text;
+
 
 			if (Input.GetMouseButtonDown(0)) {
-				Debug.Log(newTile.GetRaceCompatibility(mapDisplay.race));
+				Debug.Log(tile.GetRaceCompatibility(mapDisplay.race));
 			}
 
 			if (Input.GetMouseButtonDown(1)) {
