@@ -167,5 +167,6 @@ public enum MapDrawMode {
 	Temperature,
 	Humidity,
 	Region,
-	Race
+	Race,
+	Town
 }

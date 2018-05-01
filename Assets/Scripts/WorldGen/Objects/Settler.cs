@@ -118,7 +118,7 @@ public class Settler {
 
 				float compatibility = tile.GetTownCompatibility(Race);
 
-				if (compatibility > bestCompatibility) {
+				if (bestTile == null || compatibility > bestCompatibility) {
 					bestTile = tile;
 					bestCompatibility = compatibility;
 				}

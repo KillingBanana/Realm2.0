@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[ExecuteInEditMode]
 public abstract class DisplayObject<T> : MonoBehaviour where T : class {
 	public T Target { get; private set; }
 

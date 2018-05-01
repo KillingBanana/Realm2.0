@@ -65,8 +65,6 @@ public class Tile {
 	}
 
 	private static float GetCompatibility(float param, Vector2 range, float preferred) {
-		//if (!range.Contains(param)) return 0;
-
 		if (param <= preferred) {
 			return (param - range.x) / (preferred - range.x);
 		} else {
@@ -83,28 +81,30 @@ public class Tile {
 	public float GetTownCompatibility(Race race) {
 		float raceCompatibility = GetRaceCompatibility(race);
 
-		if (raceCompatibility < .01f) return 0;
+		if (raceCompatibility <= 0) return 0;
 
-		float townCompatiblity = world.settings.townDistanceFactor.Evaluate(DistanceToTown());
-
-		float totalCompatibility = (raceCompatibility + townCompatiblity) / 2;
-
-		return totalCompatibility;
-	}
-
-	private float DistanceToTown() {
-		if (Town != null) return 0;
-
-		int minDist = int.MaxValue;
+		Town nearestTown = null;
+		int minDistSquared = 64;
 
 		foreach (Town town in world.towns) {
 			int dist = DistanceSquared(this, town.tile);
-			if (dist < minDist) {
-				minDist = dist;
+			if (dist < minDistSquared) {
+				minDistSquared = dist;
+				nearestTown = town;
 			}
 		}
 
-		return Mathf.Sqrt(minDist);
+		if (nearestTown == null) return raceCompatibility;
+
+		float influenceRange = 1 + Mathf.Log(nearestTown.population / 31.25f, 2);
+
+		float distance = Mathf.Sqrt(minDistSquared);
+
+		if (distance >= influenceRange) return raceCompatibility;
+
+		float townCompatiblity = distance / influenceRange;
+
+		return raceCompatibility * townCompatiblity;
 	}
 
 	public Color GetColor(MapDrawMode mapDrawMode, float transparency, [CanBeNull] Race race) =>
@@ -126,6 +126,8 @@ public class Tile {
 				return IsWater ? color : region.color;
 			case MapDrawMode.Race:
 				return Color.Lerp(LowColor, HighColor, GetRaceCompatibility(race));
+			case MapDrawMode.Town:
+				return Color.Lerp(LowColor, HighColor, GetTownCompatibility(race));
 			default:
 				throw new ArgumentOutOfRangeException(nameof(mapDrawMode), mapDrawMode, null);
 		}

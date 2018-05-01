@@ -42,7 +42,6 @@ public class WorldSettings {
 	[Range(0, 1)] public float maxHumidityHeight = .33f, heightHumidityMultiplier;
 
 	[Header("Civilizations")] public AnimationCurve townDistanceFactor;
-	public bool drawRoads;
 	[Range(0, 1000)] public int days;
 
 	public void GenerateHeightMap(float[,] map) {

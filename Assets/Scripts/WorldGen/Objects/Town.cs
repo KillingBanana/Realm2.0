@@ -41,7 +41,7 @@ public class Town : Location {
 			CreateSettlers();
 		}
 
-		float compatibility = tile.GetTownCompatibility(Race);
+		float compatibility = tile.GetRaceCompatibility(Race);
 
 		population += (int) (compatibility * population / 300);
 

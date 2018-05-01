@@ -32,7 +32,7 @@ public class WorldGenUI : MonoBehaviour {
 	public void OnDrawModeChanged() {
 		MapDrawMode mapDrawMode = (MapDrawMode) mapDrawModeDropdown.value;
 
-		raceDropdown.gameObject.SetActive(mapDrawMode == MapDrawMode.Race);
+		raceDropdown.gameObject.SetActive(mapDrawMode == MapDrawMode.Race || mapDrawMode == MapDrawMode.Town);
 
 		mapDisplay.drawMode = mapDrawMode;
 
@@ -93,7 +93,7 @@ public class WorldGenUI : MonoBehaviour {
 
 
 			if (Input.GetMouseButtonDown(0)) {
-				Debug.Log(tile.GetRaceCompatibility(mapDisplay.race));
+				Debug.Log($"Race Compatibility: {tile.GetRaceCompatibility(mapDisplay.race)}\nTown Compatibility: {tile.GetTownCompatibility(mapDisplay.race)}");
 			}
 
 			if (Input.GetMouseButtonDown(1)) {
