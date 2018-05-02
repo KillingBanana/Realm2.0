@@ -31,19 +31,32 @@ public class World {
 		random = new Random(settings.seed);
 	}
 
+	private void Benchmark(string str, Stopwatch stopwatch) {
+		if (settings.benchmark) {
+			Debug.Log(string.Format(str, stopwatch.ElapsedMilliseconds));
+			stopwatch.Restart();
+		}
+	}
+
 	public void Generate() {
 		Stopwatch stopwatch = new Stopwatch();
 		stopwatch.Start();
 
 		GenerateTileMap();
+
+		Benchmark("Tilemap generated in {0}ms", stopwatch);
+
 		GenerateRegions();
+
+		Benchmark("Regions generated in {0}ms", stopwatch);
+
 		GenerateCivs();
 
-		if (settings.benchmark) Debug.Log($"World generation finished in {stopwatch.ElapsedMilliseconds}ms");
+		Benchmark("World generated in {0}ms", stopwatch);
 
 		while (Days < settings.days) Update();
 
-		if (settings.benchmark && Days > 0) Debug.Log($"Simulated {Days} days in {stopwatch.ElapsedMilliseconds}ms");
+		Benchmark("Days simulated in {0}ms", stopwatch);
 
 		stopwatch.Stop();
 	}

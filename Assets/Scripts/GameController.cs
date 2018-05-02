@@ -12,8 +12,6 @@ public class GameController : MonoBehaviour {
 
 	private static GameController instance;
 
-	private static readonly Stopwatch Stopwatch = new Stopwatch();
-
 	private static int Seed => Instance.randomSeed ? Instance.seed = UnityEngine.Random.Range(0, 9999) : Instance.seed;
 	[SerializeField] private bool randomSeed;
 
@@ -110,16 +108,10 @@ public class GameController : MonoBehaviour {
 	}
 
 	private static void OnWorldUpdated(bool reset) {
-		Stopwatch.Start();
-
 		MapDisplay.DrawMap(reset);
 		WorldGenUI.OnMapChanged();
 
 		if (reset) WorldCamera.targetPos = new Vector3(World.size / 2, World.size / 2, World.size / 2);
-
-		Stopwatch.Stop();
-		if (Instance.worldSettings.benchmark) Debug.Log($"Display time: {Stopwatch.ElapsedMilliseconds}ms");
-		Stopwatch.Reset();
 	}
 
 	private void StartAutoUpdate() {
