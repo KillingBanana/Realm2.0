@@ -527,7 +527,6 @@ MonoBehaviour:
   zoomSensitivity: 50
   panSensitivity: 0.2
   targetPos: {x: 64, y: 64, z: 64}
-  dragged: 0
   camera: {fileID: 103803227}
 --- !u!114 &103803230
 MonoBehaviour:
@@ -5024,7 +5023,7 @@ MonoBehaviour:
   seed: 1858
   startAutoUpdate: 1
   randomMapSeed: 1
-  secondsPerStep: 0.1
+  secondsPerStep: 0.05
   autoUpdateRunning: 0
   worldSettings:
     benchmark: 0
@@ -5074,6 +5073,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    wigglyRoads: 1
     days: 0
 --- !u!4 &2035694075
 Transform:

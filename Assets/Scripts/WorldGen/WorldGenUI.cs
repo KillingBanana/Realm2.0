@@ -64,12 +64,10 @@ public class WorldGenUI : MonoBehaviour {
 			mapText += $"\n{regionsCount} {climate.name}s ({tilesCount} tiles)";
 		}
 
-		if (mapInfo != null) mapInfo.text = mapText;
+		mapInfo.text = mapText;
 	}
 
 	private void Update() {
-		if (GameController.Location != null || World == null || GameController.WorldCamera.dragged) return;
-
 		RaycastHit hit;
 		if (Physics.Raycast(GameController.WorldCamera.camera.ScreenPointToRay(Input.mousePosition), out hit)) {
 			Vector2Int pos = WorldGenUtility.MeshToWorldPoint(hit.point);
@@ -78,10 +76,10 @@ public class WorldGenUI : MonoBehaviour {
 
 			if (tile == null) return;
 
-			string text = $"Position: {pos}" +
-			              $"\nHeight: {GameController.WorldGenUtility.WorldHeightToMeters(tile.height)}m ({tile.height:F2})" +
-			              $"\nTemp: {GameController.WorldGenUtility.TemperatureToCelsius(tile.temp)}°C ({tile.temp:F2})" +
-			              $"\nRegion: {tile.region}";
+			float height = GameController.WorldGenUtility.WorldHeightToMeters(tile.height);
+			float temp = GameController.WorldGenUtility.TemperatureToCelsius(tile.temp);
+
+			string text = $"Position: {tile.position}\nHeight: {height}m ({tile.height:F3})\nTemp: {temp}°C ({tile.temp:F3})\nRegion: {tile.region}";
 
 			if (tile.location != null) text += $"\n{tile.location}";
 
@@ -90,7 +88,6 @@ public class WorldGenUI : MonoBehaviour {
 			if (town != null) text += $"\nPopulation: {town.population}";
 
 			tileInfo.text = text;
-
 
 			if (Input.GetMouseButtonDown(0)) {
 				Debug.Log($"Race Compatibility: {tile.GetRaceCompatibility(mapDisplay.race)}\nTown Compatibility: {tile.GetTownCompatibility(mapDisplay.race)}");

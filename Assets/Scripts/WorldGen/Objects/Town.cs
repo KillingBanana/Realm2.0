@@ -17,7 +17,9 @@ public class Town : Location {
 
 	private int yearsSinceLastSettlers;
 
-	public Town(World world, Tile tile, Faction faction, int population, Town parent) : base(world, tile) {
+	private readonly int dx, dy;
+
+	public Town(World world, Tile tile, Faction faction, int population, Town parent, int dx, int dy) : base(world, tile) {
 		if (faction == null) {
 			Debug.LogError($"Faction Null ({parent})");
 		}
@@ -28,6 +30,8 @@ public class Town : Location {
 		Name = Race.GetPlaceName();
 
 		this.parent = parent;
+		this.dx = dx;
+		this.dy = dy;
 		parent?.childTowns.Add(this);
 	}
 
@@ -41,9 +45,7 @@ public class Town : Location {
 			CreateSettlers();
 		}
 
-		float compatibility = tile.GetRaceCompatibility(Race);
-
-		population += (int) (compatibility * population / 300);
+		population++;
 
 		foreach (Settler settler in settlers) {
 			settler.Update();
@@ -54,7 +56,7 @@ public class Town : Location {
 
 	private void CreateSettlers() {
 		int settlerCount = population / 4;
-		Settler settler = new Settler(this, settlerCount);
+		Settler settler = new Settler(this, settlerCount, dx, dy);
 		population -= settlerCount;
 
 		settlers.Add(settler);

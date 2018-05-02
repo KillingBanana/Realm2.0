@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Settler {
@@ -18,7 +19,9 @@ public class Settler {
 	private int steps;
 	private float standards = 1;
 
-	public Settler(Town town, int population) {
+	private int dx, dy;
+
+	public Settler(Town town, int population, int dx, int dy) {
 		startingTown = town;
 		this.population = population;
 		world = town.world;
@@ -26,6 +29,9 @@ public class Settler {
 		road = new Road(startingTown, population);
 
 		tiles = new List<Tile> {town.tile};
+
+		this.dx = dx;
+		this.dy = dy;
 	}
 
 	public void Update() {
@@ -39,7 +45,7 @@ public class Settler {
 		road.AddTile(Tile);
 
 		Tile nextTile = tiles.Count == 1
-			? FindBestTile(Tile, startingTown.parent?.tile)
+			? FindBestTile(Tile)
 			: FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile);
 
 		if (nextTile == null) {
@@ -63,7 +69,7 @@ public class Settler {
 			return;
 		}
 
-		Town town = new Town(world, tile, Faction, population, startingTown);
+		Town town = new Town(world, tile, Faction, population, startingTown, dx, dy);
 		world.towns.Add(town);
 
 		town.roads.Add(road);
@@ -73,10 +79,11 @@ public class Settler {
 		Active = false;
 	}
 
-	private Tile FindBestTile(Tile currentTile, Tile previousTile = null) {
-		int dx = 0, dy = 0;
-
-		if (previousTile != null) {
+	private Tile FindBestTile([NotNull] Tile currentTile, Tile previousTile = null) {
+		if (previousTile == null) {
+			dx = 0;
+			dy = 0;
+		} else {
 			dx = (currentTile.x - previousTile.x).Sign();
 			dy = (currentTile.y - previousTile.y).Sign();
 		}
@@ -106,11 +113,12 @@ public class Settler {
 				: Mathf.Max(0, dy);
 
 		Tile bestTile = null;
-		float bestCompatibility = 0;
 
+		float bestCompatibility = 0;
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
 				if (x == 0 && y == 0) continue;
+				if (world.settings.wigglyRoads && x == dx && y == dy) continue;
 
 				Tile tile = GameController.World.GetTile(currentTile.x + x, currentTile.y + y);
 

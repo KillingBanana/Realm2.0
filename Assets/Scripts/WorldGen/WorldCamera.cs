@@ -13,8 +13,6 @@ public class WorldCamera : MonoBehaviour {
 
 	public Vector3 targetPos;
 
-	[HideInInspector] public bool dragged;
-
 	[Required] public new Camera camera;
 
 	private void Update() {
@@ -29,7 +27,7 @@ public class WorldCamera : MonoBehaviour {
 			initialPosition = transform.position;
 		}
 
-		if (dragged = Input.GetMouseButton(MouseButtonPan)) {
+		if (Input.GetMouseButton(MouseButtonPan)) {
 			Vector3 mousePosDiff = initialMousePosition - Input.mousePosition;
 			Vector3 cameraPosDiff = panSensitivity * (targetPos.y / 100) * new Vector3(mousePosDiff.x, 0, mousePosDiff.y);
 			targetPos.x = initialPosition.x + cameraPosDiff.x;
