@@ -4,7 +4,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class Tile {
+public class Tile : IHeapItem<Tile> {
 	public readonly int x, y;
 
 	public readonly Vector2Int position;
@@ -21,6 +21,17 @@ public class Tile {
 	public readonly List<Road> roads = new List<Road>();
 
 	private readonly Color color, heightColor, tempColor, humidityColor;
+
+	#region Pathfinding
+
+	public int gCost, hCost;
+	public int FCost => gCost + hCost;
+
+	public Tile parent;
+
+	public int HeapIndex { get; set; }
+
+	#endregion
 
 	private static readonly Color
 		LowColor = Color.black,
@@ -110,6 +121,20 @@ public class Tile {
 		return raceCompatibility * townCompatiblity;
 	}
 
+	public List<Tile> GetNeighbors() {
+		List<Tile> neighbors = new List<Tile>();
+
+		for (int x = this.x - 1; x <= this.x + 1; x++) {
+			for (int y = this.y - 1; y <= this.y + 1; y++) {
+				Tile tile = world.GetTile(x, y);
+				if (tile != null) {
+					neighbors.Add(tile);
+				}
+			}
+		}
+
+		return neighbors;
+	}
 
 	public Color GetColor(MapDrawMode mapDrawMode, float transparency, [CanBeNull] Race race) =>
 		IsWater || mapDrawMode == MapDrawMode.Normal
@@ -135,6 +160,16 @@ public class Tile {
 			default:
 				throw new ArgumentOutOfRangeException(nameof(mapDrawMode), mapDrawMode, null);
 		}
+	}
+
+	public int CompareTo(Tile other) {
+		int costCompare = FCost.CompareTo(other.FCost);
+
+		if (costCompare == 0) {
+			costCompare = hCost.CompareTo(other.hCost);
+		}
+
+		return -costCompare;
 	}
 
 	public override string ToString() => $"{climate} tile ({x}, {y})";

@@ -71,7 +71,7 @@ public class MapDisplay : MonoBehaviour {
 		foreach (Town town in GameController.World.towns) {
 			foreach (Settler settler in town.settlers) {
 				if (!settlerObjects.ContainsKey(settler)) {
-					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.tile.position);
+					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
 					settlerObject.Init(settler);
 
 					settlerObjects.Add(settler, settlerObject);
@@ -117,7 +117,7 @@ public class MapDisplay : MonoBehaviour {
 	}
 
 	private Texture2D GetTexture(Texture2D texture) {
-		Color[] colors = new Color[World.size * World.size];
+		Color[] colors = new Color[World.squareSize];
 
 
 		for (int x = 0; x < World.size; x++) {

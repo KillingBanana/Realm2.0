@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using JetBrains.Annotations;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class World {
 	public readonly int size;
+	public readonly int squareSize;
 
 	public readonly WorldSettings settings;
 
@@ -25,6 +27,7 @@ public class World {
 	public World(WorldSettings settings) {
 		this.settings = settings;
 		size = settings.Size;
+		squareSize = size * size;
 		tileMap = new Tile[size, size];
 		heightMap = new float[size, size];
 
@@ -61,8 +64,10 @@ public class World {
 		stopwatch.Stop();
 	}
 
+	[CanBeNull]
 	public Tile GetTile(Vector2Int v) => GetTile(v.x, v.y);
 
+	[CanBeNull]
 	public Tile GetTile(int x, int y) => IsInMap(x, y) ? tileMap[x, y] : null;
 
 	private bool IsInMap(int x, int y) => x >= 0 && x < size && y >= 0 && y < size;
@@ -148,7 +153,7 @@ public class World {
 		Tile bestTile = null;
 		do {
 			Tile tile = GetRandomTile(race);
-			if (bestTile == null || tile.GetRaceCompatibility(race) > bestTile.GetRaceCompatibility(race)) bestTile = tile;
+			if (bestTile == null || tile.GetTownCompatibility(race) > bestTile.GetTownCompatibility(race)) bestTile = tile;
 
 			attempts++;
 		} while (attempts < tries && attempts < MaxAttempts);
@@ -183,5 +188,5 @@ public enum MapDrawMode {
 	Humidity,
 	Region,
 	Race,
-	Town	
+	Town
 }

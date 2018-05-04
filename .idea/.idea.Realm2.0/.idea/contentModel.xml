@@ -243,6 +243,7 @@
           <e p="WorldGen" t="Include">
             <e p="Climate.cs" t="Include" />
             <e p="Faction.cs" t="Include" />
+            <e p="Heap.cs" t="Include" />
             <e p="MapDisplay.cs" t="Include" />
             <e p="MeshGenerator.cs" t="Include" />
             <e p="Objects" t="Include">
@@ -255,6 +256,7 @@
               <e p="Town.cs" t="Include" />
               <e p="TownObject.cs" t="Include" />
             </e>
+            <e p="Pathfinding.cs" t="Include" />
             <e p="Race.cs" t="Include" />
             <e p="Region.cs" t="Include" />
             <e p="TextureGenerator.cs" t="Include" />

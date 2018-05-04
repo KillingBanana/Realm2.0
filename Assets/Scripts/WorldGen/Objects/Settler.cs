@@ -10,7 +10,10 @@ public class Settler {
 
 	public readonly int population;
 
-	public Tile tile;
+	private int pathIndex = 0;
+	private readonly Tile[] path;
+	public Tile Tile => path[Mathf.Min(pathIndex, path.Length - 1)];
+
 	private readonly Tile goal;
 
 	public bool Active { get; private set; } = true;
@@ -18,40 +21,40 @@ public class Settler {
 	public Settler(Town town, Tile goal, int population) {
 		startingTown = town;
 		this.population = population;
+		this.goal = goal;
 		world = town.tile.world;
 
 		road = new Road(startingTown, population);
 
-		tile = goal; //town.tile;
-		this.goal = goal;
+
+		path = Pathfinding.FindPath(town.tile, goal, town.Race);
+
+		if (path == null) {
+			Debug.LogError($"No path found from {town} to {goal}");
+			Destroy();
+		}
 	}
 
 	public void Update() {
-		if (tile == goal) {
-			road.AddTile(tile);
+		if (Tile == goal) {
+			road.AddTile(Tile);
 			CreateTown();
 			return;
 		}
 
-		Tile nextTile = FindBestTile();
+		pathIndex++;
 
-		tile = nextTile;
-
-		road.AddTile(tile);
-	}
-
-	private void Destroy() {
-		Active = false;
+		road.AddTile(Tile);
 	}
 
 	private void CreateTown() {
-		if (tile.location != null) {
-			Debug.LogError($"{tile} already contains location, removing settlers");
+		if (Tile.location != null) {
+			Debug.LogError($"{Tile} already contains location, removing settlers");
 			Destroy();
 			return;
 		}
 
-		Town town = new Town(tile, Faction, population, startingTown);
+		Town town = new Town(Tile, Faction, population, startingTown);
 		world.towns.Add(town);
 
 		town.roads.Add(road);
@@ -59,8 +62,12 @@ public class Settler {
 		Destroy();
 	}
 
+	private void Destroy() {
+		Active = false;
+	}
+
 	private Tile FindBestTile() {
-		Vector2Int dir = GetDirection(goal, tile);
+		Vector2Int dir = GetDirection(goal, Tile);
 
 		int minX = dir.x == 0
 			? -1
@@ -93,7 +100,7 @@ public class Settler {
 				if (x == 0 && y == 0) continue;
 				if (world.settings.wigglyRoads && x == dir.x && y == dir.y) continue;
 
-				Tile newTile = GameController.World.GetTile(tile.x + x, tile.y + y);
+				Tile newTile = GameController.World.GetTile(Tile.x + x, Tile.y + y);
 
 				if (newTile == null || newTile.location != null || newTile.IsWater) continue;
 

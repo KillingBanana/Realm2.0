@@ -38,7 +38,7 @@ public class Town : Location {
 
 		if (childTowns.Count < desiredTowns && Race.expansionism * yearsSinceLastSettlers >= 1500 * Mathf.Pow(population, -.5f)) {
 			yearsSinceLastSettlers = 0;
-			CreateSettlers();
+			CreateSettlers(GetTownTile());
 		}
 
 		population++;
@@ -50,16 +50,10 @@ public class Town : Location {
 		}
 	}
 
-	private void CreateSettlers() {
+	private void CreateSettlers(Tile goal) {
 		int settlerCount = population / 4;
-		Tile goalTile = GetTownTile();
 
-		if (goalTile == null) {
-			Debug.LogError("Null goal");
-			return;
-		}
-
-		Settler settler = new Settler(this, goalTile, settlerCount);
+		Settler settler = new Settler(this, goal, settlerCount);
 		population -= settlerCount;
 
 		settlers.Add(settler);
