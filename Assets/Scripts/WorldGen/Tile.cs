@@ -11,7 +11,7 @@ public class Tile {
 
 	public readonly float height, temp, humidity;
 
-	private readonly World world;
+	public readonly World world;
 	public Region region;
 	public readonly Climate climate;
 
@@ -84,19 +84,22 @@ public class Tile {
 		if (raceCompatibility <= 0) return 0;
 
 		Town nearestTown = null;
+
 		int minDistSquared = 64;
 
 		foreach (Town town in world.towns) {
 			int dist = DistanceSquared(this, town.tile);
+
 			if (dist < minDistSquared) {
 				minDistSquared = dist;
+
 				nearestTown = town;
 			}
 		}
 
 		if (nearestTown == null) return raceCompatibility;
 
-		float influenceRange = 1 + Mathf.Log(nearestTown.population / 31.25f, 2);
+		float influenceRange = nearestTown.GetInfluenceRange();
 
 		float distance = Mathf.Sqrt(minDistSquared);
 
@@ -107,8 +110,9 @@ public class Tile {
 		return raceCompatibility * townCompatiblity;
 	}
 
+
 	public Color GetColor(MapDrawMode mapDrawMode, float transparency, [CanBeNull] Race race) =>
-		mapDrawMode == MapDrawMode.Normal
+		IsWater || mapDrawMode == MapDrawMode.Normal
 			? GetColor(MapDrawMode.Normal, race)
 			: Color.Lerp(GetColor(MapDrawMode.Normal, race), GetColor(mapDrawMode, race), transparency);
 
@@ -123,7 +127,7 @@ public class Tile {
 			case MapDrawMode.Humidity:
 				return humidityColor;
 			case MapDrawMode.Region:
-				return IsWater ? color : region.color;
+				return region.color;
 			case MapDrawMode.Race:
 				return Color.Lerp(LowColor, HighColor, GetRaceCompatibility(race));
 			case MapDrawMode.Town:
@@ -135,7 +139,7 @@ public class Tile {
 
 	public override string ToString() => $"{climate} tile ({x}, {y})";
 
-	private static int DistanceSquared(Tile tile1, Tile tile2) {
-		return (tile1.x - tile2.x) * (tile1.x - tile2.x) + (tile1.y - tile2.y) * (tile1.y - tile2.y);
+	public static int DistanceSquared(Tile a, Tile b) {
+		return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 	}
 }

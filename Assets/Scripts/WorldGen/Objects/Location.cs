@@ -2,15 +2,14 @@
 using UnityEngine;
 
 public abstract class Location {
-	public readonly World world;
+	protected World World => tile.world;
 	public readonly Tile tile;
 	public Region Region => tile.region;
 	public Climate Climate => Region.climate;
 
 	public readonly List<Room> rooms = new List<Room>();
 
-	protected Location(World world, Tile tile) {
-		this.world = world;
+	protected Location(Tile tile) {
 		this.tile = tile;
 
 		if (tile.location == null) {

@@ -121,19 +121,22 @@ public class World {
 	}
 
 	private void GenerateCivs() {
-		foreach (Race race in GameController.Races) {
+		int failedFactions = 0;
+		while (factions.Count + failedFactions < settings.factions) {
+			Race race = GameController.Races.RandomItem();
 			Faction faction = new Faction(race);
 			factions.Add(faction);
 
-			Tile tile = GetBestTile(race, 3);
+			Tile tile = GetBestTile(race, 100);
 
 			if (tile == null) {
 				Debug.Log($"Could not find suitable tile for {race}");
+				failedFactions++;
 				continue;
 			}
 
-			int population = (int) (tile.GetTownCompatibility(race) * 5000);
-			faction.capital = new Town(this, tile, faction, population, null, 0, 0);
+			int population = (int) (tile.GetRaceCompatibility(race) * 5000);
+			faction.capital = new Town(tile, faction, population, null);
 
 			towns.Add(faction.capital);
 		}
@@ -141,8 +144,8 @@ public class World {
 
 	private Tile GetBestTile(Race race, int tries) {
 		int attempts = 0;
-		Tile bestTile = null;
 
+		Tile bestTile = null;
 		do {
 			Tile tile = GetRandomTile(race);
 			if (bestTile == null || tile.GetRaceCompatibility(race) > bestTile.GetRaceCompatibility(race)) bestTile = tile;
@@ -156,7 +159,6 @@ public class World {
 	private Tile GetRandomTile(Race race) {
 		int attempts = 0;
 		Tile tile;
-
 		do {
 			tile = RandomTile();
 			attempts++;
@@ -181,5 +183,5 @@ public enum MapDrawMode {
 	Humidity,
 	Region,
 	Race,
-	Town
+	Town	
 }

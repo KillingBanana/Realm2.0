@@ -40,7 +40,7 @@ public class MapDisplay : MonoBehaviour {
 	public float GetHeight(int x, int y) => heightCurve.Evaluate(GameController.World.GetTile(x, y).height) * HeightMultiplier;
 
 	public void DrawTexture() {
-		Texture2D mapTexture = GetTexture();
+		Texture2D mapTexture = GetTexture(meshRenderer.sharedMaterial.mainTexture as Texture2D);
 		meshRenderer.sharedMaterial.mainTexture = mapTexture;
 	}
 
@@ -71,7 +71,7 @@ public class MapDisplay : MonoBehaviour {
 		foreach (Town town in GameController.World.towns) {
 			foreach (Settler settler in town.settlers) {
 				if (!settlerObjects.ContainsKey(settler)) {
-					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
+					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.tile.position);
 					settlerObject.Init(settler);
 
 					settlerObjects.Add(settler, settlerObject);
@@ -116,10 +116,9 @@ public class MapDisplay : MonoBehaviour {
 		return instance;
 	}
 
-	private Texture2D GetTexture() {
+	private Texture2D GetTexture(Texture2D texture) {
 		Color[] colors = new Color[World.size * World.size];
 
-		Texture2D texture = new Texture2D(World.size, World.size) {filterMode = FilterMode.Point};
 
 		for (int x = 0; x < World.size; x++) {
 			for (int y = 0; y < World.size; y++) {
@@ -127,8 +126,13 @@ public class MapDisplay : MonoBehaviour {
 			}
 		}
 
+		if (texture == null || texture.height != World.size || texture.width != World.size) {
+			texture = new Texture2D(World.size, World.size) {filterMode = FilterMode.Point};
+		}
+
 		texture.SetPixels(colors);
 		texture.Apply();
+
 		return texture;
 	}
 }

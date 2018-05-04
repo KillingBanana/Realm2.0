@@ -1,139 +1,120 @@
-﻿using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Settler {
 	private readonly World world;
 	public readonly Town startingTown;
 	private readonly Road road;
 
-	public readonly List<Tile> tiles;
-	public readonly int population;
-
-	public Tile Tile => tiles[0];
 	private Faction Faction => startingTown.faction;
 	private Race Race => startingTown.Race;
 
+	public readonly int population;
+
+	public Tile tile;
+	private readonly Tile goal;
+
 	public bool Active { get; private set; } = true;
 
-	private int steps;
-	private float standards = 1;
-
-	private int dx, dy;
-
-	public Settler(Town town, int population, int dx, int dy) {
+	public Settler(Town town, Tile goal, int population) {
 		startingTown = town;
 		this.population = population;
-		world = town.world;
+		world = town.tile.world;
 
 		road = new Road(startingTown, population);
 
-		tiles = new List<Tile> {town.tile};
-
-		this.dx = dx;
-		this.dy = dy;
+		tile = goal; //town.tile;
+		this.goal = goal;
 	}
 
 	public void Update() {
-		if (!Active) {
-			Debug.LogError("This shouldn't be happening");
+		if (tile == goal) {
+			road.AddTile(tile);
+			CreateTown();
 			return;
 		}
 
-		steps++;
+		Tile nextTile = FindBestTile();
 
-		road.AddTile(Tile);
+		tile = nextTile;
 
-		Tile nextTile = tiles.Count == 1
-			? FindBestTile(Tile)
-			: FindBestTile(Tile, tiles[1]) ?? FindBestTile(Tile);
-
-		if (nextTile == null) {
-			CreateTown(Tile);
-			return;
-		}
-
-		if (nextTile.GetTownCompatibility(Race) >= standards) {
-			CreateTown(nextTile);
-			return;
-		}
-
-		tiles.Insert(0, nextTile);
-		standards -= .025f;
+		road.AddTile(tile);
 	}
 
-	private void CreateTown(Tile tile) {
+	private void Destroy() {
+		Active = false;
+	}
+
+	private void CreateTown() {
 		if (tile.location != null) {
 			Debug.LogError($"{tile} already contains location, removing settlers");
-			Active = false;
+			Destroy();
 			return;
 		}
 
-		Town town = new Town(world, tile, Faction, population, startingTown, dx, dy);
+		Town town = new Town(tile, Faction, population, startingTown);
 		world.towns.Add(town);
 
 		town.roads.Add(road);
 
-		road.AddTile(tile);
-
-		Active = false;
+		Destroy();
 	}
 
-	private Tile FindBestTile([NotNull] Tile currentTile, Tile previousTile = null) {
-		if (previousTile == null) {
-			dx = 0;
-			dy = 0;
-		} else {
-			dx = (currentTile.x - previousTile.x).Sign();
-			dy = (currentTile.y - previousTile.y).Sign();
-		}
+	private Tile FindBestTile() {
+		Vector2Int dir = GetDirection(goal, tile);
 
-		int minX = dx == 0
+		int minX = dir.x == 0
 			? -1
-			: dy == 0
-				? dx
-				: Mathf.Min(0, dx);
+			: dir.y == 0
+				? dir.x
+				: Mathf.Min(0, dir.x);
 
-		int maxX = dx == 0
+		int maxX = dir.x == 0
 			? 1
-			: dy == 0
-				? dx
-				: Mathf.Max(0, dx);
+			: dir.y == 0
+				? dir.x
+				: Mathf.Max(0, dir.x);
 
-		int minY = dy == 0
+		int minY = dir.y == 0
 			? -1
-			: dx == 0
-				? dy
-				: Mathf.Min(0, dy);
+			: dir.x == 0
+				? dir.y
+				: Mathf.Min(0, dir.y);
 
-		int maxY = dy == 0
+		int maxY = dir.y == 0
 			? 1
-			: dx == 0
-				? dy
-				: Mathf.Max(0, dy);
+			: dir.x == 0
+				? dir.y
+				: Mathf.Max(0, dir.y);
 
 		Tile bestTile = null;
 
-		float bestCompatibility = 0;
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
 				if (x == 0 && y == 0) continue;
-				if (world.settings.wigglyRoads && x == dx && y == dy) continue;
+				if (world.settings.wigglyRoads && x == dir.x && y == dir.y) continue;
 
-				Tile tile = GameController.World.GetTile(currentTile.x + x, currentTile.y + y);
+				Tile newTile = GameController.World.GetTile(tile.x + x, tile.y + y);
 
-				if (tile == null || tile.location != null || tile.IsWater) continue;
+				if (newTile == null || newTile.location != null || newTile.IsWater) continue;
 
-				float compatibility = tile.GetTownCompatibility(Race);
+				float compatibility = newTile.GetRaceCompatibility(Race);
 
-				if (bestTile == null || compatibility > bestCompatibility) {
-					bestTile = tile;
-					bestCompatibility = compatibility;
+				if (bestTile == null || compatibility > bestTile.GetRaceCompatibility(Race)) {
+					bestTile = newTile;
 				}
 			}
 		}
 
 		return bestTile;
+	}
+
+	private static Vector2Int GetDirection(Tile goalTile, Tile startTile) {
+		Vector2Int dir = new Vector2Int(
+			(goalTile.x - startTile.x).Sign(),
+			(goalTile.y - startTile.y).Sign()
+		);
+
+		return dir;
 	}
 
 	public override string ToString() => $"Settlers from {startingTown.Name}";

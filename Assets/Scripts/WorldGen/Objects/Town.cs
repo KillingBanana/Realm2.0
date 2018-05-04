@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Town : Location {
@@ -17,11 +17,9 @@ public class Town : Location {
 
 	private int yearsSinceLastSettlers;
 
-	private readonly int dx, dy;
-
-	public Town(World world, Tile tile, Faction faction, int population, Town parent, int dx, int dy) : base(world, tile) {
-		if (faction == null) {
-			Debug.LogError($"Faction Null ({parent})");
+	public Town(Tile tile, Faction faction, int population, [CanBeNull] Town parent) : base(tile) {
+		if (parent != null && parent.faction != faction) {
+			Debug.LogError($"Faction mismatch: {parent}: {parent.faction}, {faction}");
 		}
 
 		this.faction = faction;
@@ -30,8 +28,6 @@ public class Town : Location {
 		Name = Race.GetPlaceName();
 
 		this.parent = parent;
-		this.dx = dx;
-		this.dy = dy;
 		parent?.childTowns.Add(this);
 	}
 
@@ -47,20 +43,52 @@ public class Town : Location {
 
 		population++;
 
+		settlers.RemoveAll(settler => !settler.Active);
+
 		foreach (Settler settler in settlers) {
 			settler.Update();
 		}
-
-		settlers.RemoveAll(settler => !settler.Active);
 	}
 
 	private void CreateSettlers() {
 		int settlerCount = population / 4;
-		Settler settler = new Settler(this, settlerCount, dx, dy);
+		Tile goalTile = GetTownTile();
+
+		if (goalTile == null) {
+			Debug.LogError("Null goal");
+			return;
+		}
+
+		Settler settler = new Settler(this, goalTile, settlerCount);
 		population -= settlerCount;
 
 		settlers.Add(settler);
 	}
+
+	private Tile GetTownTile() {
+		float influenceRange = GetInfluenceRange();
+
+		int influenceRangeCeil = (int) influenceRange + 1;
+
+		Tile townTile = null;
+
+		for (int x = -influenceRangeCeil; x <= influenceRangeCeil; x++) {
+			for (int y = -influenceRangeCeil; y <= influenceRangeCeil; y++) {
+				int distanceSquared = x * x + y * y;
+				if ((distanceSquared - influenceRange * influenceRange) < 2f) {
+					Tile newTile = World.GetTile(tile.x + x, tile.y + y);
+
+					if (newTile != null && !newTile.IsWater && (townTile == null || newTile.GetTownCompatibility(Race) > townTile.GetTownCompatibility(Race))) {
+						townTile = newTile;
+					}
+				}
+			}
+		}
+
+		return townTile;
+	}
+
+	public float GetInfluenceRange() => Mathf.Log(population / 15.625f, 2);
 
 	private string GetSize() => population > 2000 ? "city" : (population > 1000 ? "town" : (population > 500 ? "village" : "settlement"));
 

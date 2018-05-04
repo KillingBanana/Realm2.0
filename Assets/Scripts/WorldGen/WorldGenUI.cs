@@ -32,8 +32,6 @@ public class WorldGenUI : MonoBehaviour {
 	public void OnDrawModeChanged() {
 		MapDrawMode mapDrawMode = (MapDrawMode) mapDrawModeDropdown.value;
 
-		raceDropdown.gameObject.SetActive(mapDrawMode == MapDrawMode.Race || mapDrawMode == MapDrawMode.Town);
-
 		mapDisplay.drawMode = mapDrawMode;
 
 		mapDisplay.DrawTexture();
@@ -85,12 +83,14 @@ public class WorldGenUI : MonoBehaviour {
 
 			Town town = tile.Town;
 
-			if (town != null) text += $"\nPopulation: {town.population}";
+			if (town != null) {
+				text += $"\nPopulation: {town.population}";
+			}
 
 			tileInfo.text = text;
 
 			if (Input.GetMouseButtonDown(0)) {
-				Debug.Log($"Race Compatibility: {tile.GetRaceCompatibility(mapDisplay.race)}\nTown Compatibility: {tile.GetTownCompatibility(mapDisplay.race)}");
+				Debug.Log($"Race Compatibility: {tile.GetRaceCompatibility(mapDisplay.race)}");
 			}
 
 			if (Input.GetMouseButtonDown(1)) {
