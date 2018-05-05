@@ -2,72 +2,82 @@
 
 public class Settler {
 	private readonly World world;
-	public readonly Town startingTown;
-	private readonly Road road;
+	private readonly Town startingTown;
+	private Town childTown;
+	private Road road;
 
 	private Faction Faction => startingTown.faction;
 	private Race Race => startingTown.Race;
 
 	public readonly int population;
 
-	private int pathIndex = 0;
-	private readonly Tile[] path;
-	public Tile Tile => path[Mathf.Min(pathIndex, path.Length - 1)];
+	private int pathIndex;
 
-	private readonly Tile goal;
+	private Tile[] Path {
+		get { return path; }
+		set {
+			path = value;
+			pathIndex = 0;
+		}
+	}
+
+	private Tile[] path;
+
+	public Tile tile;
+	public Tile Goal => Path?[Path.Length - 1];
 
 	public bool Active { get; private set; } = true;
 
 	public Settler(Town town, Tile goal, int population) {
 		startingTown = town;
 		this.population = population;
-		this.goal = goal;
 		world = town.tile.world;
 
-		road = new Road(startingTown, population);
+		tile = town.tile;
 
-
-		path = Pathfinding.FindPath(town.tile, goal, town.Race);
-
-		if (path == null) {
-			Debug.LogError($"No path found from {town} to {goal}");
-			Destroy();
-		}
+		Path = Pathfinding.FindPath(town.tile, goal, town.Race);
 	}
 
 	public void Update() {
-		if (Tile == goal) {
-			road.AddTile(Tile);
-			CreateTown();
-			return;
+		if (Path != null) {
+			if (road != null) {
+				road.AddTile(tile);
+				if (tile == Goal) {
+					Destroy();
+					return;
+				}
+			} else {
+				if (tile == Goal) {
+					CreateTown();
+					return;
+				}
+			}
+
+			pathIndex++;
+			tile = Path[pathIndex];
 		}
-
-		pathIndex++;
-
-		road.AddTile(Tile);
 	}
 
 	private void CreateTown() {
-		if (Tile.location != null) {
-			Debug.LogError($"{Tile} already contains location, removing settlers");
+		if (tile.location != null) {
+			Debug.LogError($"{tile} already contains location, removing settlers");
 			Destroy();
 			return;
 		}
 
-		Town town = new Town(Tile, Faction, population, startingTown);
-		world.towns.Add(town);
+		childTown = new Town(tile, Faction, population, startingTown);
+		world.towns.Add(childTown);
 
-		town.roads.Add(road);
-
-		Destroy();
+		road = new Road(childTown);
+		Path = Pathfinding.FindPath(tile, startingTown.tile, Race);
 	}
 
 	private void Destroy() {
 		Active = false;
 	}
 
-	private Tile FindBestTile() {
-		Vector2Int dir = GetDirection(goal, Tile);
+	/*private Tile FindBestTile() {
+		Vector2Int dir = GetDirection(Goal, Tile);
 
 		int minX = dir.x == 0
 			? -1
@@ -122,7 +132,7 @@ public class Settler {
 		);
 
 		return dir;
-	}
+	}*/
 
-	public override string ToString() => $"Settlers from {startingTown.Name}";
+	public override string ToString() => $"Settlers from {startingTown}";
 }

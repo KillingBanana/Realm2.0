@@ -2,26 +2,22 @@
 using UnityEngine;
 
 public class Road {
-	private readonly Town parent;
-	public Town child;
+	public readonly Town child;
 
 	private readonly List<Tile> tiles = new List<Tile>();
 	public IReadOnlyList<Tile> Tiles => tiles.AsReadOnly();
 
 	private readonly string name;
 
-	public int Population => child?.population ?? population;
-	private readonly int population;
+	public int Population => child.population;
 
-	public Road(Town parent, int population) {
-		this.population = population;
+	public Road(Town child) {
+		this.child = child;
+		child.roads.Add(this);
 
-		this.parent = parent;
-		parent.roads.Add(this);
+		name = $"{child.Race.GetPlaceName()} Road";
 
-		name = $"{parent.Race.GetPlaceName()} Road";
-
-		AddTile(parent.tile);
+		AddTile(child.tile);
 	}
 
 	public void AddTile(Tile tile) {

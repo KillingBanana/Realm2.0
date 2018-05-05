@@ -71,7 +71,7 @@ public class MapDisplay : MonoBehaviour {
 		foreach (Town town in GameController.World.towns) {
 			foreach (Settler settler in town.settlers) {
 				if (!settlerObjects.ContainsKey(settler)) {
-					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.Tile.position);
+					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.tile.position);
 					settlerObject.Init(settler);
 
 					settlerObjects.Add(settler, settlerObject);

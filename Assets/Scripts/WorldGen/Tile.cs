@@ -99,7 +99,7 @@ public class Tile : IHeapItem<Tile> {
 		int minDistSquared = 64;
 
 		foreach (Town town in world.towns) {
-			int dist = DistanceSquared(this, town.tile);
+			int dist = GetDistanceSquared(this, town.tile);
 
 			if (dist < minDistSquared) {
 				minDistSquared = dist;
@@ -174,7 +174,11 @@ public class Tile : IHeapItem<Tile> {
 
 	public override string ToString() => $"{climate} tile ({x}, {y})";
 
-	public static int DistanceSquared(Tile a, Tile b) {
+	public static float GetDistance(Tile a, Tile b) {
+		return Mathf.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+	}
+
+	public static int GetDistanceSquared(Tile a, Tile b) {
 		return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 	}
 }

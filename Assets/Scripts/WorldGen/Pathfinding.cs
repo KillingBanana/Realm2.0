@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
+using UnityEngine;
 
 public static class Pathfinding {
 	[CanBeNull]
@@ -20,7 +21,7 @@ public static class Pathfinding {
 			foreach (Tile neighbor in current.GetNeighbors()) {
 				if (neighbor.IsWater || closed.Contains(neighbor)) continue;
 
-				int movementCost = current.gCost + GetDistance(current, neighbor);
+				int movementCost = current.gCost + GetDistance(current, neighbor) + Mathf.RoundToInt((1 - neighbor.GetRaceCompatibility(race)) * 10);
 
 				if (movementCost < neighbor.gCost || !open.Contains(neighbor)) {
 					neighbor.gCost = movementCost;
