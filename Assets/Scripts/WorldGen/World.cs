@@ -173,11 +173,12 @@ public class World {
 	}
 
 	public void Update() {
-		Days++;
 		for (int i = 0; i < towns.Count; i++) {
 			Town town = towns[i];
 			town.Update();
 		}
+
+		Days++;
 	}
 }
 

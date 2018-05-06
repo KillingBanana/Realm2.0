@@ -59,7 +59,7 @@ public class Town : Location {
 		settlers.Add(settler);
 	}
 
-	private Tile GetTownTile() {
+	public Tile GetTownTile() {
 		float influenceRange = GetInfluenceRange();
 
 		int influenceRangeCeil = (int) influenceRange + 1;

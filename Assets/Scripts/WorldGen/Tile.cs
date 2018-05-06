@@ -94,31 +94,23 @@ public class Tile : IHeapItem<Tile> {
 
 		if (raceCompatibility <= 0) return 0;
 
-		Town nearestTown = null;
+		const int minDistSquared = 64;
 
-		int minDistSquared = 64;
+		float townCompatibility = 1f;
 
 		foreach (Town town in world.towns) {
 			int dist = GetDistanceSquared(this, town.tile);
 
 			if (dist < minDistSquared) {
-				minDistSquared = dist;
+				float influenceRange = town.GetInfluenceRange();
 
-				nearestTown = town;
+				float distance = Mathf.Sqrt(dist);
+
+				if (distance < influenceRange) townCompatibility *= distance / influenceRange;
 			}
 		}
 
-		if (nearestTown == null) return raceCompatibility;
-
-		float influenceRange = nearestTown.GetInfluenceRange();
-
-		float distance = Mathf.Sqrt(minDistSquared);
-
-		if (distance >= influenceRange) return raceCompatibility;
-
-		float townCompatiblity = distance / influenceRange;
-
-		return raceCompatibility * townCompatiblity;
+		return raceCompatibility * townCompatibility;
 	}
 
 	public List<Tile> GetNeighbors() {

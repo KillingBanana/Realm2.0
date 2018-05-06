@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Settler {
 	private readonly World world;
@@ -11,20 +12,10 @@ public class Settler {
 
 	public readonly int population;
 
-	private int pathIndex;
-
-	private Tile[] Path {
-		get { return path; }
-		set {
-			path = value;
-			pathIndex = 0;
-		}
-	}
-
-	private Tile[] path;
-
+	private LinkedList<Tile> path;
+	private LinkedListNode<Tile> node;
 	public Tile tile;
-	public Tile Goal => Path?[Path.Length - 1];
+	public Tile Goal => path.Last.Value;
 
 	public bool Active { get; private set; } = true;
 
@@ -35,33 +26,43 @@ public class Settler {
 
 		tile = town.tile;
 
-		Path = Pathfinding.FindPath(town.tile, goal, town.Race);
+		SetPath(Pathfinding.FindPath(town.tile, goal, Race));
 	}
 
 	public void Update() {
-		if (Path != null) {
-			if (road != null) {
-				road.AddTile(tile);
-				if (tile == Goal) {
-					Destroy();
-					return;
-				}
-			} else {
-				if (tile == Goal) {
-					CreateTown();
-					return;
-				}
-			}
-
-			pathIndex++;
-			tile = Path[pathIndex];
+		if (path != null) {
+			CheckTile();
+			ProcessPath();
 		}
+	}
+
+	private void SetPath(LinkedList<Tile> newPath) {
+		path = newPath;
+		node = newPath?.First;
+	}
+
+	private void CheckTile() {
+		if (road != null) { //On the way back
+			road.AddTile(tile);
+			if (tile == Goal) {
+				Destroy();
+			}
+		} else { //On the way to create a town
+			if (tile == Goal) {
+				CreateTown();
+			}
+		}
+	}
+
+	private void ProcessPath() {
+		node = node?.Next;
+		if (node != null) tile = node.Value;
 	}
 
 	private void CreateTown() {
 		if (tile.location != null) {
-			Debug.LogError($"{tile} already contains location, removing settlers");
-			Destroy();
+			Debug.LogError($"{tile} already contains location, requesting new location");
+			SetPath(Pathfinding.FindPath(tile, startingTown.GetTownTile(), Race));
 			return;
 		}
 
@@ -69,7 +70,7 @@ public class Settler {
 		world.towns.Add(childTown);
 
 		road = new Road(childTown);
-		Path = Pathfinding.FindPath(tile, startingTown.tile, Race);
+		SetPath(Pathfinding.FindPath(tile, startingTown.tile, Race));
 	}
 
 	private void Destroy() {

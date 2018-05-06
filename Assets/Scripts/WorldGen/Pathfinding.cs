@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Pathfinding {
 	[CanBeNull]
-	public static Tile[] FindPath(Tile start, Tile goal, Race race) {
+	public static LinkedList<Tile> FindPath(Tile start, Tile goal, Race race) {
 		Heap<Tile> open = new Heap<Tile>(start.world.squareSize);
 		HashSet<Tile> closed = new HashSet<Tile>();
 
@@ -21,7 +21,9 @@ public static class Pathfinding {
 			foreach (Tile neighbor in current.GetNeighbors()) {
 				if (neighbor.IsWater || closed.Contains(neighbor)) continue;
 
-				int movementCost = current.gCost + GetDistance(current, neighbor) + Mathf.RoundToInt((1 - neighbor.GetRaceCompatibility(race)) * 10);
+				float compatibility = neighbor.GetRaceCompatibility(race);
+
+				int movementCost = current.gCost + GetDistance(current, neighbor) + Mathf.RoundToInt((1 - compatibility * compatibility) * 100);
 
 				if (movementCost < neighbor.gCost || !open.Contains(neighbor)) {
 					neighbor.gCost = movementCost;
@@ -40,16 +42,17 @@ public static class Pathfinding {
 		return null;
 	}
 
-	private static Tile[] RetracePath(Tile start, Tile goal) {
-		List<Tile> path = new List<Tile>();
+	private static LinkedList<Tile> RetracePath(Tile start, Tile goal) {
+		LinkedList<Tile> path = new LinkedList<Tile>();
 
-		Tile current = goal;
-		while (current != start) {
-			path.Insert(0, current);
-			current = current.parent;
+		LinkedListNode<Tile> current = new LinkedListNode<Tile>(goal);
+		path.AddLast(current);
+
+		while (current.Value != start) {
+			current = path.AddBefore(current, current.Value.parent);
 		}
 
-		return path.ToArray();
+		return path;
 	}
 
 	private static int GetDistance(Tile a, Tile b) {

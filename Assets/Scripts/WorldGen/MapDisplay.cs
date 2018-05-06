@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MapDisplay : MonoBehaviour {
-	[SerializeField] private Transform parent;
-	[SerializeField] private MeshFilter meshFilter;
-	[SerializeField] private MeshRenderer meshRenderer;
-	[SerializeField] private MeshCollider meshCollider;
+	[SerializeField, Required] private Transform townsParent, settlersParent, roadsParent;
+	[SerializeField, Required] private MeshFilter meshFilter;
+	[SerializeField, Required] private MeshRenderer meshRenderer;
+	[SerializeField, Required] private MeshCollider meshCollider;
+	[SerializeField, Required] private Slider transparencySlider;
 	[SerializeField] private AnimationCurve heightCurve;
-	[SerializeField] private Slider transparencySlider;
 	[SerializeField] private float heightMultiplier;
 
 	[HideInInspector] public MapDrawMode drawMode;
@@ -37,7 +37,10 @@ public class MapDisplay : MonoBehaviour {
 		DisplayObjects(reset);
 	}
 
-	public float GetHeight(int x, int y) => heightCurve.Evaluate(GameController.World.GetTile(x, y).height) * HeightMultiplier;
+	public float GetHeight(int x, int y) {
+		Tile tile = GameController.World.GetTile(x, y);
+		return tile == null ? 0 : heightCurve.Evaluate(tile.height) * HeightMultiplier;
+	}
 
 	public void DrawTexture() {
 		Texture2D mapTexture = GetTexture(meshRenderer.sharedMaterial.mainTexture as Texture2D);
@@ -57,7 +60,7 @@ public class MapDisplay : MonoBehaviour {
 
 		foreach (Town town in GameController.World.towns) {
 			if (!townObjects.ContainsKey(town)) {
-				TownObject townObject = InstantiateOnMap(PrefabManager.Town, town.tile.position);
+				TownObject townObject = InstantiateOnMap(PrefabManager.Town, town.tile.position, townsParent);
 				townObject.Init(town);
 
 				townObjects.Add(town, townObject);
@@ -71,7 +74,7 @@ public class MapDisplay : MonoBehaviour {
 		foreach (Town town in GameController.World.towns) {
 			foreach (Settler settler in town.settlers) {
 				if (!settlerObjects.ContainsKey(settler)) {
-					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.tile.position);
+					SettlerObject settlerObject = InstantiateOnMap(PrefabManager.Settler, settler.tile.position, settlersParent);
 					settlerObject.Init(settler);
 
 					settlerObjects.Add(settler, settlerObject);
@@ -86,7 +89,7 @@ public class MapDisplay : MonoBehaviour {
 		foreach (Town town in GameController.World.towns) {
 			foreach (Road road in town.roads) {
 				if (!roadObjects.ContainsKey(road)) {
-					RoadObject roadObject = InstantiateOnMap(PrefabManager.Road, town.tile.position);
+					RoadObject roadObject = InstantiateOnMap(PrefabManager.Road, town.tile.position, roadsParent);
 					roadObject.Init(road);
 
 					roadObjects.Add(road, roadObject);
@@ -96,7 +99,7 @@ public class MapDisplay : MonoBehaviour {
 	}
 
 	private void DestroyChildren() {
-		Transform[] children = parent.Cast<Transform>().ToArray();
+		Transform[] children = townsParent.Cast<Transform>().Concat(settlersParent.Cast<Transform>()).Concat(roadsParent.Cast<Transform>()).ToArray();
 
 		foreach (Transform child in children) {
 			SafeDestroy(child.gameObject);
@@ -111,7 +114,7 @@ public class MapDisplay : MonoBehaviour {
 		}
 	}
 
-	private T InstantiateOnMap<T>(T t, Vector2Int position) where T : Object {
+	private T InstantiateOnMap<T>(T t, Vector2Int position, Transform parent) where T : Object {
 		T instance = Instantiate(t, WorldGenUtility.WorldToMeshPoint(position), Quaternion.identity, parent);
 		return instance;
 	}
