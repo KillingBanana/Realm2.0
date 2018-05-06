@@ -55,7 +55,7 @@ public class World {
 
 		GenerateCivs();
 
-		Benchmark("World generated in {0}ms", stopwatch);
+		Benchmark("Civs generated in {0}ms", stopwatch);
 
 		while (Days < settings.days) Update();
 
@@ -98,6 +98,8 @@ public class World {
 	}
 
 	private void FindRegion(Tile firstTile) {
+		Climate climate = firstTile.climate;
+
 		HashSet<Tile> tiles = new HashSet<Tile>();
 		Queue<Tile> queue = new Queue<Tile>();
 		queue.Enqueue(firstTile);
@@ -110,17 +112,13 @@ public class World {
 				for (int i = -1; i <= 1; i++) {
 					Tile newTile = GetTile(tile.x + i, tile.y + j);
 
-					if (newTile != null && !(tiles.Contains(newTile) || queue.Contains(newTile)) && newTile.climate == tile.climate) {
+					if (newTile != null && newTile.climate == climate && !tiles.Contains(newTile) && !queue.Contains(newTile)) {
 						queue.Enqueue(newTile);
 					}
 				}
 			}
 		}
 
-		OnRegionFound(firstTile.climate, tiles);
-	}
-
-	private void OnRegionFound(Climate climate, HashSet<Tile> tiles) {
 		Region region = new Region(climate, tiles);
 		regions.Add(region);
 	}

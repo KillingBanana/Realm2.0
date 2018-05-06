@@ -19,7 +19,15 @@ public class Climate {
 		return color;
 	}
 
-	public bool CorrectTile(Tile tile) => height.Contains(tile.height) && temp.Contains(tile.temp) && humidity.Contains(tile.humidity);
+	private bool CorrectTile(float tileHeight, float tileTemp, float tileHumidity) => height.Contains(tileHeight) && temp.Contains(tileTemp) && humidity.Contains(tileHumidity);
+
+	public static Climate GetClimate(float height, float temp, float humidity) {
+		foreach (Climate climate in GameController.Climates) {
+			if (climate.CorrectTile(height, temp, humidity)) return climate;
+		}
+
+		return null;
+	}
 
 	public override string ToString() => name;
 }

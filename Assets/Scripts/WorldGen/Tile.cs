@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -52,12 +53,10 @@ public class Tile : IHeapItem<Tile> {
 		this.temp = temp;
 		this.humidity = humidity;
 
-		try {
-			climate = GameController.Climates.First(climate => climate.CorrectTile(this));
-		}
-		catch (Exception) {
+		climate = Climate.GetClimate(height, temp, humidity);
+		if (climate == null) {
 			Debug.LogError($"Can't find matching climate for tile (height: {height:F3}, temp: {temp:F3}, humidity: {humidity:F3})");
-			throw;
+			throw new ArgumentException();
 		}
 
 		color = climate.GetColor(height);
@@ -90,6 +89,8 @@ public class Tile : IHeapItem<Tile> {
 		  race.HumidityWeight * GetCompatibility(humidity, race.humidityRange, race.humidityPreferred);
 
 	public float GetTownCompatibility(Race race) {
+		if (Town != null) return 0;
+
 		float raceCompatibility = GetRaceCompatibility(race);
 
 		if (raceCompatibility <= 0) return 0;
@@ -167,10 +168,10 @@ public class Tile : IHeapItem<Tile> {
 	public override string ToString() => $"{climate} tile ({x}, {y})";
 
 	public static float GetDistance(Tile a, Tile b) {
-		return Mathf.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+		return a == b ? 0 : Mathf.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 	}
 
 	public static int GetDistanceSquared(Tile a, Tile b) {
-		return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+		return a == b ? 0 : (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
 	}
 }

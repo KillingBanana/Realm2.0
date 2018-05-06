@@ -5115,7 +5115,7 @@ MonoBehaviour:
   worldSettings:
     benchmark: 0
     worldSize: 2
-    lodMultiplier: 2
+    lodMultiplier: 0
     seed: 945010
     heightSettings:
       octaves: 4
@@ -5160,9 +5160,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    wigglyRoads: 0
-    factions: 6
-    days: 0
+    wigglyRoads: 1
+    factions: 7
+    days: 20
 --- !u!4 &2035694075
 Transform:
   m_ObjectHideFlags: 0

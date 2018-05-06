@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = System.Random;
 
@@ -25,7 +26,7 @@ public class WorldSettings {
 
 	public int Lod => Size / 256 * lodMultiplier;
 
-	[Range(0, 999999)] public int seed;
+	[MinValue(0)] public int seed;
 
 	[Header("Heightmap"), SerializeField] private NoiseSettings heightSettings;
 
@@ -43,8 +44,8 @@ public class WorldSettings {
 
 	[Header("Civilizations")] public AnimationCurve townDistanceFactor;
 	public bool wigglyRoads;
-	[Range(0, 20)] public int factions;
-	[Range(0, 1000)] public int days;
+	[MinValue(0)] public int factions;
+	[MinValue(0)] public int days;
 
 	public void GenerateHeightMap(float[,] map) {
 		float[,] heightMap = GenerateNoiseMap(Size, seed, heightSettings);

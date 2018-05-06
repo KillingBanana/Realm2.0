@@ -61,7 +61,7 @@ public class Settler {
 
 	private void CreateTown() {
 		if (tile.location != null) {
-			Debug.LogError($"{tile} already contains location, requesting new location");
+			Debug.Log($"{tile} already contains location, requesting new location");
 			SetPath(Pathfinding.FindPath(tile, startingTown.GetTownTile(), Race));
 			return;
 		}
