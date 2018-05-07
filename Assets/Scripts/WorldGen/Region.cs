@@ -21,7 +21,7 @@ public sealed class Region {
 
 		this.tiles = tiles;
 		foreach (Tile tile in tiles) {
-			tile.SetRegion(this);
+			tile.region = this;
 		}
 	}
 

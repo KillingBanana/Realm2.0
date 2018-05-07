@@ -4,6 +4,8 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable 0649
+
 public class MapDisplay : MonoBehaviour {
 	[SerializeField, Required] private Transform townsParent, settlersParent, roadsParent;
 	[SerializeField, Required] private MeshFilter meshFilter;
@@ -114,7 +116,7 @@ public class MapDisplay : MonoBehaviour {
 		}
 	}
 
-	private T InstantiateOnMap<T>(T t, Vector2Int position, Transform parent) where T : Object {
+	private static T InstantiateOnMap<T>(T t, Vector2Int position, Transform parent) where T : Object {
 		T instance = Instantiate(t, WorldGenUtility.WorldToMeshPoint(position), Quaternion.identity, parent);
 		return instance;
 	}

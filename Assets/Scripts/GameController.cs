@@ -8,7 +8,7 @@ using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class GameController : MonoBehaviour {
-	private static GameController Instance => instance ?? (instance = FindObjectOfType<GameController>());
+	public static GameController Instance => instance ?? (instance = FindObjectOfType<GameController>());
 
 	private static GameController instance;
 
@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 	[HideInInspector] public bool autoUpdateRunning;
 
 	[SerializeField] private WorldSettings worldSettings;
+	public static WorldSettings WorldSettings => Instance.worldSettings;
 
 	public static World World { get; private set; }
 

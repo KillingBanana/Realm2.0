@@ -3,13 +3,17 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = System.Random;
 
+#pragma warning disable 0649
+
 [Serializable]
 public class WorldSettings {
 	public bool benchmark;
-	public WorldSize worldSize;
+	[SerializeField] private bool updateOnRefresh;
+
+	[OnValueChanged(nameof(OnUpdate))] public WorldSize worldSize;
 	private WorldSize lastWorldSize;
 
-	[SerializeField] [Range(0, 2)] private int lodMultiplier;
+	[SerializeField, Range(0, 2)] private int lodMultiplier;
 
 	public int Size {
 		get {
@@ -26,7 +30,8 @@ public class WorldSettings {
 
 	public int Lod => Size / 256 * lodMultiplier;
 
-	[MinValue(0)] public int seed;
+	[MinValue(0), OnValueChanged(nameof(OnUpdate))]
+	public int seed;
 
 	[Header("Heightmap"), SerializeField] private NoiseSettings heightSettings;
 
@@ -42,9 +47,9 @@ public class WorldSettings {
 	[Header("Humidity"), SerializeField] private NoiseSettings humiditySettings;
 	[Range(0, 1)] public float maxHumidityHeight = .33f, heightHumidityMultiplier;
 
-	[Header("Civilizations")] public AnimationCurve townDistanceFactor;
-	public bool wigglyRoads;
-	[MinValue(0)] public int factions;
+	[Header("Civilizations")] [MinValue(0)]
+	public int factions;
+
 	[MinValue(0)] public int days;
 
 	public void GenerateHeightMap(float[,] map) {
@@ -169,6 +174,10 @@ public class WorldSettings {
 			default:
 				throw new ArgumentOutOfRangeException();
 		}
+	}
+
+	private void OnUpdate() {
+		if (updateOnRefresh) GameController.Instance.GenerateWorld();
 	}
 }
 

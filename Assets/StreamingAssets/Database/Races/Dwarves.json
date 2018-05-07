@@ -2,26 +2,6 @@
     "collectiveName": "dwarves",
     "individualName": "dwarf",
     "adjective": "dwarven",
-    "expansionism": 0.5,
-    "hostility": 0.5,
-    "heightRange": {
-        "x": 0.6000000238418579,
-        "y": 1.0
-    },
-    "tempRange": {
-        "x": 0.0,
-        "y": 0.800000011920929
-    },
-    "humidityRange": {
-        "x": 0.0,
-        "y": 1.0
-    },
-    "heightPreferred": 0.800000011920929,
-    "tempPreferred": 0.4000000059604645,
-    "humidityPreferred": 0.5,
-    "heightWeight": 0.699999988079071,
-    "tempWeight": 0.30000001192092898,
-    "humidityWeight": 0.0,
     "placeNames": [
         "bruk",
         "buk",
@@ -70,5 +50,26 @@
     "lastNameLength": {
         "x": 2,
         "y": 4
-    }
+    },
+    "expansionism": 0.5,
+    "hostility": 0.5,
+    "likesWater": false,
+    "heightRange": {
+        "x": 0.6000000238418579,
+        "y": 1.0
+    },
+    "tempRange": {
+        "x": 0.0,
+        "y": 0.800000011920929
+    },
+    "humidityRange": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "heightPreferred": 0.800000011920929,
+    "tempPreferred": 0.4000000059604645,
+    "humidityPreferred": 0.5,
+    "heightWeight": 0.699999988079071,
+    "tempWeight": 0.30000001192092898,
+    "humidityWeight": 0.0
 }

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class WorldGenUI : MonoBehaviour {
 	[SerializeField, Required] private Text tileInfo, mapInfo;
-	[SerializeField, Required] private Dropdown mapDrawModeDropdown, raceDropdown;
+	[SerializeField, Required] private Dropdown mapSizeDropdown, mapDrawModeDropdown, raceDropdown;
 
 	private static World World => GameController.World;
 
@@ -18,6 +18,8 @@ public class WorldGenUI : MonoBehaviour {
 
 	private void Awake() {
 		mapDisplay = GetComponent<MapDisplay>();
+
+		mapSizeDropdown.value = (int) GameController.WorldSettings.worldSize;
 
 		mapDrawModeDropdown.options = Enum.GetNames(typeof(MapDrawMode)).Select(drawModeName => new Dropdown.OptionData(drawModeName)).ToList();
 

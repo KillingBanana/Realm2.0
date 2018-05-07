@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -15,6 +13,22 @@ public class Tile : IHeapItem<Tile> {
 	public readonly World world;
 	public Region region;
 	public readonly Climate climate;
+	public bool IsWater => climate.isWater;
+
+	private bool IsCoast {
+		get {
+			for (int i = x - 1; i <= x + 1; i++) {
+				for (int j = y - 1; j <= y + 1; j++) {
+					Tile tile = world.GetTile(i, j);
+					if (tile != null && tile.IsWater) {
+						return true;
+					}
+				}
+			}
+
+			return false;
+		}
+	}
 
 	public Location location;
 	public Town Town => location as Town;
@@ -42,7 +56,6 @@ public class Tile : IHeapItem<Tile> {
 		DryColor = Color.yellow,
 		HumidColor = Color.blue;
 
-	public bool IsWater => climate.isWater;
 
 	public Tile(World world, int x, int y, float height, float temp, float humidity) {
 		this.world = world;
@@ -65,21 +78,12 @@ public class Tile : IHeapItem<Tile> {
 		humidityColor = Color.Lerp(DryColor, HumidColor, humidity);
 	}
 
-	public void SetRegion(Region newRegion) {
-		if (region != null) {
-			Debug.LogWarning($"Region not null, cancelling ({this}, {region}, {newRegion})");
-			return;
-		}
-
-		region = newRegion;
-	}
-
 	private static float GetCompatibility(float param, Vector2 range, float preferred) {
 		if (param <= preferred) {
 			return (param - range.x) / (preferred - range.x);
-		} else {
-			return 1 - (param - preferred) / (range.y - preferred);
 		}
+
+		return 1 - (param - preferred) / (range.y - preferred);
 	}
 
 	public float GetRaceCompatibility(Race race) => IsWater
@@ -111,15 +115,19 @@ public class Tile : IHeapItem<Tile> {
 			}
 		}
 
-		return raceCompatibility * townCompatibility;
+		float total = raceCompatibility * townCompatibility;
+
+		return race.likesWater && IsCoast
+			? Mathf.Sqrt(total)
+			: total;
 	}
 
 	public List<Tile> GetNeighbors() {
 		List<Tile> neighbors = new List<Tile>();
 
-		for (int x = this.x - 1; x <= this.x + 1; x++) {
-			for (int y = this.y - 1; y <= this.y + 1; y++) {
-				Tile tile = world.GetTile(x, y);
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				Tile tile = world.GetTile(i, j);
 				if (tile != null) {
 					neighbors.Add(tile);
 				}
@@ -155,6 +163,14 @@ public class Tile : IHeapItem<Tile> {
 		}
 	}
 
+	public static float GetDistance(Tile a, Tile b) {
+		return a == b ? 0 : Mathf.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+	}
+
+	public static int GetDistanceSquared(Tile a, Tile b) {
+		return a == b ? 0 : (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+	}
+
 	public int CompareTo(Tile other) {
 		int costCompare = FCost.CompareTo(other.FCost);
 
@@ -166,12 +182,4 @@ public class Tile : IHeapItem<Tile> {
 	}
 
 	public override string ToString() => $"{climate} tile ({x}, {y})";
-
-	public static float GetDistance(Tile a, Tile b) {
-		return a == b ? 0 : Mathf.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
-	}
-
-	public static int GetDistanceSquared(Tile a, Tile b) {
-		return a == b ? 0 : (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
-	}
 }

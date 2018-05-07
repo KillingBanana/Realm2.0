@@ -69,7 +69,7 @@ public class Town : Location {
 		for (int x = -influenceRangeCeil; x <= influenceRangeCeil; x++) {
 			for (int y = -influenceRangeCeil; y <= influenceRangeCeil; y++) {
 				int distanceSquared = x * x + y * y;
-				if (distanceSquared - influenceRange * influenceRange < 2f) {
+				if (distanceSquared < influenceRangeCeil * influenceRangeCeil + 2) {
 					Tile newTile = World.GetTile(tile.x + x, tile.y + y);
 
 					if (newTile != null && !newTile.IsWater && (townTile == null || newTile.GetTownCompatibility(Race) > townTile.GetTownCompatibility(Race))) {

@@ -2,26 +2,6 @@
     "collectiveName": "elves",
     "individualName": "elf",
     "adjective": "elven",
-    "expansionism": 0.4000000059604645,
-    "hostility": 0.25,
-    "heightRange": {
-        "x": 0.0,
-        "y": 0.6600000262260437
-    },
-    "tempRange": {
-        "x": 0.0,
-        "y": 0.4000000059604645
-    },
-    "humidityRange": {
-        "x": 0.0,
-        "y": 1.0
-    },
-    "heightPreferred": 0.4000000059604645,
-    "tempPreferred": 0.25,
-    "humidityPreferred": 0.5,
-    "heightWeight": 0.25,
-    "tempWeight": 0.75,
-    "humidityWeight": 0.0,
     "placeNames": [
         "a",
         "an",
@@ -80,5 +60,26 @@
     "lastNameLength": {
         "x": 2,
         "y": 4
-    }
+    },
+    "expansionism": 0.4000000059604645,
+    "hostility": 0.25,
+    "likesWater": true,
+    "heightRange": {
+        "x": 0.0,
+        "y": 0.6600000262260437
+    },
+    "tempRange": {
+        "x": 0.0,
+        "y": 0.4000000059604645
+    },
+    "humidityRange": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "heightPreferred": 0.4000000059604645,
+    "tempPreferred": 0.25,
+    "humidityPreferred": 0.5,
+    "heightWeight": 0.25,
+    "tempWeight": 0.75,
+    "humidityWeight": 0.0
 }
