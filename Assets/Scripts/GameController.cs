@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
@@ -9,7 +10,6 @@ using Random = System.Random;
 
 public class GameController : MonoBehaviour {
 	public static GameController Instance => instance ?? (instance = FindObjectOfType<GameController>());
-
 	private static GameController instance;
 
 	private static int Seed => Instance.randomSeed ? Instance.seed = UnityEngine.Random.Range(0, 9999) : Instance.seed;
@@ -112,7 +112,10 @@ public class GameController : MonoBehaviour {
 		MapDisplay.DrawMap(reset);
 		WorldGenUI.OnMapChanged();
 
-		if (reset) WorldCamera.targetPos = new Vector3(World.size / 2, World.size / 2, World.size / 2);
+		if (reset) {
+			int i = World.size / 2;
+			WorldCamera.Set(new Vector3(i, i, i));
+		}
 	}
 
 	private void StartAutoUpdate() {

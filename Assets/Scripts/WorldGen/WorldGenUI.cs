@@ -91,14 +91,8 @@ public class WorldGenUI : MonoBehaviour {
 
 			tileInfo.text = text;
 
-			if (Input.GetMouseButtonDown(0)) {
-				Debug.Log($"Race Compatibility: {tile.GetRaceCompatibility(mapDisplay.race)}");
-			}
-
 			if (Input.GetMouseButtonDown(1)) {
-				Vector3 point = hit.point;
-				point.y = GameController.WorldCamera.targetPos.y;
-				GameController.WorldCamera.targetPos = point;
+				GameController.WorldCamera.target = hit.point;
 			}
 		}
 	}

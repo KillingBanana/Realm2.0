@@ -11,22 +11,10 @@ public class WorldSettings {
 	[SerializeField] private bool updateOnRefresh;
 
 	[OnValueChanged(nameof(OnUpdate))] public WorldSize worldSize;
-	private WorldSize lastWorldSize;
 
 	[SerializeField, Range(0, 2)] private int lodMultiplier;
 
-	public int Size {
-		get {
-			if (cachedSize == -1 || lastWorldSize != worldSize) {
-				cachedSize = GetSize(worldSize);
-				lastWorldSize = worldSize;
-			}
-
-			return cachedSize;
-		}
-	}
-
-	private int cachedSize = -1;
+	public int Size => GetSize(worldSize);
 
 	public int Lod => Size / 256 * lodMultiplier;
 

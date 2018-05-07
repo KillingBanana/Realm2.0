@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class RoadObject : DisplayObject<Road> {
 	[SerializeField] private LineRenderer lineRenderer;
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Settler {
@@ -33,6 +34,14 @@ public class Settler {
 		if (path != null) {
 			CheckTile();
 			ProcessPath();
+		} else {
+			LinkedList<Tile> newPath = Pathfinding.FindPath(tile, startingTown.GetTownTile(), Race);
+			if (newPath != null) {
+				SetPath(newPath);
+			} else {
+				Debug.Log("Path not found, destroying");
+				Destroy();
+			}
 		}
 	}
 
@@ -76,64 +85,6 @@ public class Settler {
 	private void Destroy() {
 		Active = false;
 	}
-
-	/*private Tile FindBestTile() {
-		Vector2Int dir = GetDirection(Goal, Tile);
-
-		int minX = dir.x == 0
-			? -1
-			: dir.y == 0
-				? dir.x
-				: Mathf.Min(0, dir.x);
-
-		int maxX = dir.x == 0
-			? 1
-			: dir.y == 0
-				? dir.x
-				: Mathf.Max(0, dir.x);
-
-		int minY = dir.y == 0
-			? -1
-			: dir.x == 0
-				? dir.y
-				: Mathf.Min(0, dir.y);
-
-		int maxY = dir.y == 0
-			? 1
-			: dir.x == 0
-				? dir.y
-				: Mathf.Max(0, dir.y);
-
-		Tile bestTile = null;
-
-		for (int x = minX; x <= maxX; x++) {
-			for (int y = minY; y <= maxY; y++) {
-				if (x == 0 && y == 0) continue;
-				if (world.settings.wigglyRoads && x == dir.x && y == dir.y) continue;
-
-				Tile newTile = GameController.World.GetTile(Tile.x + x, Tile.y + y);
-
-				if (newTile == null || newTile.location != null || newTile.IsWater) continue;
-
-				float compatibility = newTile.GetRaceCompatibility(Race);
-
-				if (bestTile == null || compatibility > bestTile.GetRaceCompatibility(Race)) {
-					bestTile = newTile;
-				}
-			}
-		}
-
-		return bestTile;
-	}
-
-	private static Vector2Int GetDirection(Tile goalTile, Tile startTile) {
-		Vector2Int dir = new Vector2Int(
-			(goalTile.x - startTile.x).Sign(),
-			(goalTile.y - startTile.y).Sign()
-		);
-
-		return dir;
-	}*/
 
 	public override string ToString() => $"Settlers from {startingTown}";
 }

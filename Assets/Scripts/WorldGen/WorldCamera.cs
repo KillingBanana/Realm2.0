@@ -2,43 +2,53 @@
 using UnityEngine;
 
 public class WorldCamera : MonoBehaviour {
-	[SerializeField] private float zoomSensitivity = 10;
+	[SerializeField] private float zoomSensitivity = 10, panSensitivity = 1f, panSmoothing = 0.1f, rotateSensitivity = 1f;
 
-	private const int MouseButtonPan = 2;
+	private float zoom;
 
-	[SerializeField] private float panSensitivity = 1f;
+	private const int MouseButtonPan = 0, MouseButtonRotate = 2;
 
-	private Vector3 initialMousePosition;
-	private Vector3 initialPosition;
+	[ReadOnly] public Vector3 target;
+	private Vector3 Position => target - transform.forward * zoom;
 
-	public Vector3 targetPos;
+	[HideInInspector] public new Camera camera;
 
-	[Required] public new Camera camera;
+	private void Awake() {
+		camera = GetComponent<Camera>();
+	}
+
+	public void Set(Vector3 position) {
+		transform.eulerAngles = new Vector3(90, 0, 0);
+		zoom = position.y;
+
+		target = new Vector3(position.x, 0, position.z);
+	}
 
 	private void Update() {
 		if (GameController.World == null) return;
 
-		float mouseWheel = -Input.GetAxis("Mouse ScrollWheel");
-
-		targetPos.y = Mathf.Clamp(targetPos.y + mouseWheel * zoomSensitivity, (float) GameController.World.size / 10, (float) GameController.World.size / 2);
-
-		if (Input.GetMouseButtonDown(MouseButtonPan)) {
-			initialMousePosition = Input.mousePosition;
-			initialPosition = transform.position;
-		}
+		zoom = Mathf.Clamp(zoom - Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity, GameController.World.size / 10, GameController.World.size / 2);
 
 		if (Input.GetMouseButton(MouseButtonPan)) {
-			Vector3 mousePosDiff = initialMousePosition - Input.mousePosition;
-			Vector3 cameraPosDiff = panSensitivity * (targetPos.y / 100) * new Vector3(mousePosDiff.x, 0, mousePosDiff.y);
-			targetPos.x = initialPosition.x + cameraPosDiff.x;
-			targetPos.z = initialPosition.z + cameraPosDiff.z;
+			float x = Input.GetAxisRaw("Mouse X");
+			float y = Input.GetAxisRaw("Mouse Y");
+
+			target -= Time.deltaTime * panSensitivity * (zoom / 100) * new Vector3(x, 0, y);
+
+			target.x = Mathf.Clamp(target.x, 0, GameController.World.size);
+			target.z = Mathf.Clamp(target.z, 0, GameController.World.size);
+
+			transform.position = Position;
+		} else if (Input.GetMouseButton(MouseButtonRotate)) {
+			float x = Input.GetAxisRaw("Mouse X");
+			float y = Input.GetAxisRaw("Mouse Y");
+
+			transform.RotateAround(target, Vector3.up, x * Time.deltaTime * rotateSensitivity);
+			transform.RotateAround(target, transform.right, -y * Time.deltaTime * rotateSensitivity);
+
+			transform.position = Position;
 		}
 
-		targetPos.x = Mathf.Clamp(targetPos.x, 0, GameController.World.size);
-		targetPos.z = Mathf.Clamp(targetPos.z, 0, GameController.World.size);
-
-		transform.position = (transform.position - targetPos).magnitude > 0.01f
-			? Vector3.Lerp(transform.position, targetPos, 0.1f)
-			: targetPos;
+		transform.position = (transform.position - Position).magnitude > 0.01f ? Vector3.Lerp(transform.position, Position, panSmoothing) : Position;
 	}
 }
