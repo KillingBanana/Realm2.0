@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PrefabManager : MonoBehaviour {
 	private static PrefabManager instance;
-	private static PrefabManager Instance => instance ?? (instance = FindObjectOfType<PrefabManager>());
+	private static PrefabManager Instance => instance ? instance : (instance = FindObjectOfType<PrefabManager>());
 
 	[SerializeField, AssetsOnly] private TownObject town;
 	public static TownObject Town => Instance.town;

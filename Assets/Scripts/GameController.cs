@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
 	[Header("World Settings"), SerializeField]
 	private bool startAutoUpdate;
 
-	[SerializeField] private bool randomMapSeed;
+	[SerializeField] private bool randomMapSeed, resetCamera;
 
 	[SerializeField, Range(0.01f, 1)] private float secondsPerStep;
 	[HideInInspector] public bool autoUpdateRunning;
@@ -114,13 +114,13 @@ public class GameController : MonoBehaviour {
 		OnWorldUpdated(false);
 	}
 
-	private static void OnWorldUpdated(bool reset) {
+	private void OnWorldUpdated(bool reset) {
 		MapDisplay.DrawMap(reset);
 		WorldGenUI.OnMapChanged();
 
 		if (reset) {
 			int i = World.size / 2;
-			WorldCamera.Set(new Vector3(i, i, i));
+			if (resetCamera) WorldCamera.Set(new Vector3(i, i, i));
 		}
 	}
 

@@ -507,7 +507,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 103803223}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.4501, y: 28.128918, z: 36.450104}
+  m_LocalPosition: {x: 64, y: 64, z: 64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -524,11 +524,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f38ea7291a52ad4d953ac59846b8750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clamp: 1
-  zoomSensitivity: 50
+  clampRotation: 1
+  minZoom: 2
+  zoomSensitivity: 1000
   smoothing: 0.1
+  keyboardSensitivity: 100
   panSensitivity: 2
   rotateSensitivity: 3
+  zoom: 0
   target: {x: 64, y: 0, z: 64}
   camera: {fileID: 103803227}
 --- !u!114 &103803230
@@ -5620,6 +5623,7 @@ MonoBehaviour:
   seed: 9594
   startAutoUpdate: 1
   randomMapSeed: 1
+  resetCamera: 1
   secondsPerStep: 0.05
   autoUpdateRunning: 0
   worldSettings:
