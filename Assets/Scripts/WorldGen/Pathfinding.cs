@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Pathfinding {
 	[CanBeNull]
-	public static LinkedList<Tile> FindPath(Tile start, Tile goal, Race race) {
+	public static LinkedList<Tile> FindPath([NotNull] Tile start, [NotNull] Tile goal, [CanBeNull] Race race) {
 		Heap<Tile> open = new Heap<Tile>(start.world.squareSize);
 		HashSet<Tile> closed = new HashSet<Tile>();
 
@@ -21,9 +21,13 @@ public static class Pathfinding {
 			foreach (Tile neighbor in current.GetNeighbors()) {
 				if (neighbor.IsWater || closed.Contains(neighbor)) continue;
 
-				float compatibility = neighbor.GetRaceCompatibility(race);
+				int movementCost = current.gCost + GetDistance(current, neighbor);
 
-				int movementCost = current.gCost + GetDistance(current, neighbor) + Mathf.RoundToInt((1 - compatibility * compatibility) * 100);
+				if (race != null) {
+					float compatibility = neighbor.GetRaceCompatibility(race);
+
+					movementCost += Mathf.RoundToInt((1 - compatibility * compatibility) * 100);
+				}
 
 				if (movementCost < neighbor.gCost || !open.Contains(neighbor)) {
 					neighbor.gCost = movementCost;
@@ -42,6 +46,7 @@ public static class Pathfinding {
 		return null;
 	}
 
+	[NotNull]
 	private static LinkedList<Tile> RetracePath(Tile start, Tile goal) {
 		LinkedList<Tile> path = new LinkedList<Tile>();
 

@@ -2,11 +2,12 @@
 using UnityEngine;
 
 public class WorldCamera : MonoBehaviour {
-	[SerializeField] private float zoomSensitivity = 10, panSensitivity = 1f, panSmoothing = 0.1f, rotateSensitivity = 1f;
+	public bool clamp;
+	[SerializeField] private float zoomSensitivity = 10, smoothing = 0.1f, panSensitivity = 1f, rotateSensitivity = 1f;
 
 	private float zoom;
 
-	private const int MouseButtonPan = 0, MouseButtonRotate = 2;
+	private const int MouseButtonPan = 2, MouseButtonRotate = 0;
 
 	[ReadOnly] public Vector3 target;
 	private Vector3 Position => target - transform.forward * zoom;
@@ -33,7 +34,15 @@ public class WorldCamera : MonoBehaviour {
 			float x = Input.GetAxisRaw("Mouse X");
 			float y = Input.GetAxisRaw("Mouse Y");
 
-			target -= Time.deltaTime * panSensitivity * (zoom / 100) * new Vector3(x, 0, y);
+			Vector3 movement = Time.deltaTime * panSensitivity * (zoom / 100) * new Vector3(x, 0, y);
+
+			target -= transform.right * movement.x;
+
+			Vector3 movementZ = transform.forward * movement.z;
+			float magnitude = movementZ.magnitude;
+			movementZ.y = 0;
+
+			target -= magnitude * movementZ.normalized;
 
 			target.x = Mathf.Clamp(target.x, 0, GameController.World.size);
 			target.z = Mathf.Clamp(target.z, 0, GameController.World.size);
@@ -46,9 +55,17 @@ public class WorldCamera : MonoBehaviour {
 			transform.RotateAround(target, Vector3.up, x * Time.deltaTime * rotateSensitivity);
 			transform.RotateAround(target, transform.right, -y * Time.deltaTime * rotateSensitivity);
 
-			transform.position = Position;
-		}
+			Vector3 clampedRotation = transform.eulerAngles;
 
-		transform.position = (transform.position - Position).magnitude > 0.01f ? Vector3.Lerp(transform.position, Position, panSmoothing) : Position;
+			if (clampedRotation.x > 180f) clampedRotation.x = 0;
+
+			if (clamp) transform.eulerAngles = clampedRotation;
+
+			transform.position = Position;
+		} else {
+			transform.position = (transform.position - Position).magnitude > 0.01f
+				? Vector3.Lerp(transform.position, Position, smoothing)
+				: Position;
+		}
 	}
 }

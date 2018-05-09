@@ -86,7 +86,7 @@ public class Tile : IHeapItem<Tile> {
 		return 1 - (param - preferred) / (range.y - preferred);
 	}
 
-	public float GetRaceCompatibility(Race race) => IsWater
+	public float GetRaceCompatibility([NotNull] Race race) => IsWater
 		? 0
 		: race.HeightWeight * GetCompatibility(height, race.heightRange, race.heightPreferred) +
 		  race.TempWeight * GetCompatibility(temp, race.tempRange, race.tempPreferred) +
@@ -104,7 +104,7 @@ public class Tile : IHeapItem<Tile> {
 		float townCompatibility = 1f;
 
 		foreach (Town town in world.towns) {
-			int dist = GetDistanceSquared(this, town.tile);
+			int dist = GetDistanceSquared(this, town.Tile);
 
 			if (dist < minDistSquared) {
 				float influenceRange = town.GetInfluenceRange();

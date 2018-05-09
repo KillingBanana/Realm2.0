@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
 
-public class Road {
-	public readonly Town child;
+public class Road : WorldEntity {
+	public readonly Town town;
 
 	private readonly List<Tile> tiles = new List<Tile>();
 	public IReadOnlyList<Tile> Tiles => tiles.AsReadOnly();
 
+	public override Tile Tile { get; }
 	private readonly string name;
 
-	public int Population => child.population;
+	public int Population => town.population;
 
-	public Road(Town child) {
-		this.child = child;
-		child.roads.Add(this);
+	public Road(Town town) {
+		this.town = town;
+		town.roads.Add(this);
 
-		name = $"{child.Race.GetPlaceName()} Road";
+		name = $"{town.Race.GetPlaceName()} Road";
 
-		AddTile(child.tile);
+		AddTile(town.Tile);
 	}
 
 	public void AddTile(Tile tile) {
-//		if (tiles.Contains(tile)) Debug.LogWarning($"{this} already contains {tile}");
-
 		tiles.Add(tile);
 		if (!tile.roads.Contains(this)) tile.roads.Add(this);
 	}

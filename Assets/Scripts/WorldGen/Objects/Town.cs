@@ -18,10 +18,6 @@ public class Town : Location {
 	private int yearsSinceLastSettlers;
 
 	public Town(Tile tile, Faction faction, int population, [CanBeNull] Town parent) : base(tile) {
-		if (parent != null && parent.faction != faction) {
-			Debug.LogError($"Faction mismatch: {parent}: {parent.faction}, {faction}");
-		}
-
 		this.faction = faction;
 		this.population = population;
 
@@ -70,7 +66,7 @@ public class Town : Location {
 			for (int y = -influenceRangeCeil; y <= influenceRangeCeil; y++) {
 				int distanceSquared = x * x + y * y;
 				if (distanceSquared < influenceRangeCeil * influenceRangeCeil + 2) {
-					Tile newTile = World.GetTile(tile.x + x, tile.y + y);
+					Tile newTile = World.GetTile(Tile.x + x, Tile.y + y);
 
 					if (newTile != null && !newTile.IsWater && (townTile == null || newTile.GetTownCompatibility(Race) > townTile.GetTownCompatibility(Race))) {
 						townTile = newTile;

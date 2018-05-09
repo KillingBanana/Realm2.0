@@ -2,8 +2,7 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class Settler {
-	private readonly World world;
+public class Settler : WorldUnit {
 	private readonly Town startingTown;
 	private Town childTown;
 	private Road road;
@@ -13,29 +12,21 @@ public class Settler {
 
 	public readonly int population;
 
-	private LinkedList<Tile> path;
-	private LinkedListNode<Tile> node;
-	public Tile tile;
-	public Tile Goal => path.Last.Value;
-
 	public bool Active { get; private set; } = true;
 
-	public Settler(Town town, Tile goal, int population) {
+	public Settler(Town town, Tile goal, int population) : base(town.Tile) {
 		startingTown = town;
 		this.population = population;
-		world = town.tile.world;
 
-		tile = town.tile;
-
-		SetPath(Pathfinding.FindPath(town.tile, goal, Race));
+		SetPath(FindPath(goal));
 	}
 
 	public void Update() {
 		if (path != null) {
 			CheckTile();
-			ProcessPath();
+			Move();
 		} else {
-			LinkedList<Tile> newPath = Pathfinding.FindPath(tile, startingTown.GetTownTile(), Race);
+			LinkedList<Tile> newPath = FindPath(startingTown.GetTownTile());
 			if (newPath != null) {
 				SetPath(newPath);
 			} else {
@@ -43,6 +34,10 @@ public class Settler {
 				Destroy();
 			}
 		}
+	}
+
+	private LinkedList<Tile> FindPath(Tile goal) {
+		return Pathfinding.FindPath(tile, goal, Race);
 	}
 
 	private void SetPath(LinkedList<Tile> newPath) {
@@ -63,28 +58,25 @@ public class Settler {
 		}
 	}
 
-	private void ProcessPath() {
-		node = node?.Next;
-		if (node != null) tile = node.Value;
-	}
-
 	private void CreateTown() {
 		if (tile.location != null) {
 			Debug.Log($"{tile} already contains location, requesting new location");
-			SetPath(Pathfinding.FindPath(tile, startingTown.GetTownTile(), Race));
+			SetPath(FindPath(startingTown.GetTownTile()));
 			return;
 		}
 
 		childTown = new Town(tile, Faction, population, startingTown);
-		world.towns.Add(childTown);
+		World.towns.Add(childTown);
+
+		World.log.Add(new TownCreationEvent(World.Days, WorldEventImportance.Interesting, childTown));
 
 		road = new Road(childTown);
-		SetPath(Pathfinding.FindPath(tile, startingTown.tile, Race));
+		SetPath(FindPath(startingTown.Tile));
 	}
 
 	private void Destroy() {
 		Active = false;
 	}
 
-	public override string ToString() => $"Settlers from {startingTown}";
+	public override string ToString() => $"Settlers from {startingTown.Name}";
 }

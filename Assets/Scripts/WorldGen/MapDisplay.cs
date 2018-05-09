@@ -62,7 +62,7 @@ public class MapDisplay : MonoBehaviour {
 
 		foreach (Town town in GameController.World.towns) {
 			if (!townObjects.ContainsKey(town)) {
-				TownObject townObject = InstantiateOnMap(PrefabManager.Town, town.tile.position, townsParent);
+				TownObject townObject = InstantiateOnMap(PrefabManager.Town, town.Tile.position, townsParent);
 				townObject.Init(town);
 
 				townObjects.Add(town, townObject);
@@ -91,7 +91,7 @@ public class MapDisplay : MonoBehaviour {
 		foreach (Town town in GameController.World.towns) {
 			foreach (Road road in town.roads) {
 				if (!roadObjects.ContainsKey(road)) {
-					RoadObject roadObject = InstantiateOnMap(PrefabManager.Road, town.tile.position, roadsParent);
+					RoadObject roadObject = InstantiateOnMap(PrefabManager.Road, town.Tile.position, roadsParent);
 					roadObject.Init(road);
 
 					roadObjects.Add(road, roadObject);

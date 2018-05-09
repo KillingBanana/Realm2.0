@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Location {
+/// <summary>
+/// A location on a tile that you can enter.
+/// </summary>
+public abstract class Location : WorldEntity {
 	protected World World => tile.world;
-	public readonly Tile tile;
-	public Region Region => tile.region;
-	public Climate Climate => Region.climate;
 
-	public readonly List<Room> rooms = new List<Room>();
+	private readonly Tile tile;
+	public override Tile Tile => tile;
 
 	protected Location(Tile tile) {
 		this.tile = tile;

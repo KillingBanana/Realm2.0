@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\killi\.Rider2017.3\system\resharper-host\Local\Transient\ReSharperHost\v11\SolutionCaches\_Realm2.0.947556771.00" t="ExcludeRecursive" />
+    <e p="C:\Users\killi\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_Realm2.0.947556771.00" t="ExcludeRecursive" />
     <e p="D:\Documents\Unity Projects\Realm2.0" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Plugins" t="Include">
-          <e p="Editor" t="Include">
-            <e p="JetBrains" t="Include">
-              <e p="Unity3DRider.cs" t="Include" />
-            </e>
-          </e>
           <e p="Sirenix" t="Include">
             <e p="Odin Inspector" t="Include">
               <e p="Scripts" t="Include">
@@ -240,6 +235,7 @@
           </e>
           <e p="PrefabManager.cs" t="Include" />
           <e p="Utility.cs" t="Include" />
+          <e p="WorldEntity.cs" t="Include" />
           <e p="WorldGen" t="Include">
             <e p="Climate.cs" t="Include" />
             <e p="Faction.cs" t="Include" />
@@ -266,6 +262,12 @@
             <e p="WorldGenUI.cs" t="Include" />
             <e p="WorldGenUtility.cs" t="Include" />
             <e p="WorldSettings.cs" t="Include" />
+            <e p="WorldUnit.cs" t="Include" />
+          </e>
+          <e p="WorldLog" t="Include">
+            <e p="TownCreationEvent.cs" t="Include" />
+            <e p="WorldEvent.cs" t="Include" />
+            <e p="WorldLog.cs" t="Include" />
           </e>
         </e>
       </e>

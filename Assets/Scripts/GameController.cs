@@ -9,13 +9,13 @@ using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class GameController : MonoBehaviour {
-	public static GameController Instance => instance ?? (instance = FindObjectOfType<GameController>());
 	private static GameController instance;
+	public static GameController Instance => instance ? instance : (instance = FindObjectOfType<GameController>());
 
-	private static int Seed => Instance.randomSeed ? Instance.seed = UnityEngine.Random.Range(0, 9999) : Instance.seed;
 	[SerializeField] private bool randomSeed;
 
 	[SerializeField] private int seed;
+	private int Seed => randomSeed ? seed = UnityEngine.Random.Range(0, 9999) : seed;
 
 	[Header("World Settings"), SerializeField]
 	private bool startAutoUpdate;
@@ -49,25 +49,25 @@ public class GameController : MonoBehaviour {
 	}
 
 	private static MapDisplay mapDisplay;
-	public static MapDisplay MapDisplay => mapDisplay ?? (mapDisplay = Instance.GetComponent<MapDisplay>());
+	public static MapDisplay MapDisplay => mapDisplay ? mapDisplay : (mapDisplay = Instance.GetComponent<MapDisplay>());
 
 	private static WorldGenUI worldGenUI;
-	public static WorldGenUI WorldGenUI => worldGenUI ?? (worldGenUI = Instance.GetComponent<WorldGenUI>());
+	public static WorldGenUI WorldGenUI => worldGenUI ? worldGenUI : (worldGenUI = Instance.GetComponent<WorldGenUI>());
 
 	private static WorldGenUtility worldGenUtility;
-	public static WorldGenUtility WorldGenUtility => worldGenUtility ?? (worldGenUtility = Instance.GetComponent<WorldGenUtility>());
+	public static WorldGenUtility WorldGenUtility => worldGenUtility ? worldGenUtility : (worldGenUtility = Instance.GetComponent<WorldGenUtility>());
 
 	private static WorldCamera worldCamera;
-	public static WorldCamera WorldCamera => worldCamera ?? (worldCamera = FindObjectOfType<WorldCamera>());
+	public static WorldCamera WorldCamera => worldCamera ? worldCamera : (worldCamera = FindObjectOfType<WorldCamera>());
 
 	private static DialogueManager dialogueManager;
-	public static DialogueManager DialogueManager => dialogueManager ?? (dialogueManager = FindObjectOfType<DialogueManager>());
+	public static DialogueManager DialogueManager => dialogueManager ? dialogueManager : (dialogueManager = FindObjectOfType<DialogueManager>());
 
 	private static DatabaseManager databaseManager;
-	private static DatabaseManager DatabaseManager => databaseManager ?? (databaseManager = Instance.GetComponent<DatabaseManager>());
+	private static DatabaseManager DatabaseManager => databaseManager ? databaseManager : (databaseManager = Instance.GetComponent<DatabaseManager>());
 
 	private static Random random;
-	public static Random Random => random ?? (random = new Random(Seed));
+	public static Random Random => random ?? (random = new Random(Instance.Seed));
 
 	private static AsyncOperation loadingLevel;
 
@@ -75,6 +75,12 @@ public class GameController : MonoBehaviour {
 		DontDestroyOnLoad(this);
 
 		GenerateWorld();
+	}
+
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			Debug.Log(World.log.GetLog());
+		}
 	}
 
 	[UsedImplicitly]

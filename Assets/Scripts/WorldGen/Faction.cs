@@ -1,10 +1,12 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-public class Faction {
+public class Faction : WorldEntity {
 	public string Name { get; }
 	public readonly Race race;
+
 	public Town capital;
+	public override Tile Tile => capital.Tile;
 
 	public readonly Color color;
 

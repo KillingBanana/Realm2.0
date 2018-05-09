@@ -10,6 +10,7 @@ public class World {
 	public readonly int squareSize;
 
 	public readonly WorldSettings settings;
+	public readonly WorldLog log;
 
 	private readonly Tile[,] tileMap;
 	public readonly float[,] heightMap;
@@ -26,12 +27,16 @@ public class World {
 
 	public World(WorldSettings settings) {
 		this.settings = settings;
+
 		size = settings.Size;
 		squareSize = size * size;
+
+		random = new Random(settings.seed);
+
 		tileMap = new Tile[size, size];
 		heightMap = new float[size, size];
 
-		random = new Random(settings.seed);
+		log = new WorldLog(this);
 	}
 
 	private void Benchmark(string str, Stopwatch stopwatch) {
