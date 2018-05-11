@@ -13,13 +13,13 @@ public class WorldLog {
 		events.Add(worldEvent);
 	}
 
-	public string GetLog() {
+	public string GetLog(WorldEventImportance minImportance) {
 		string str = "";
 
 		for (int day = 0; day <= world.Days; day++) {
 			bool eventFound = false;
 			foreach (WorldEvent worldEvent in events) {
-				if (worldEvent.day == day) {
+				if (worldEvent.day == day && worldEvent.importance >= minImportance) {
 					if (!eventFound) {
 						str += $"On {GetDay(day)},";
 						eventFound = true;

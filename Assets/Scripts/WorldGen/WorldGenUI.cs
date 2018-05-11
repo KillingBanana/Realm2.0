@@ -21,11 +21,11 @@ public class WorldGenUI : MonoBehaviour {
 
 		mapSizeDropdown.value = (int) GameController.WorldSettings.worldSize;
 
-		mapDrawModeDropdown.options = Enum.GetNames(typeof(MapDrawMode)).Select(drawModeName => new Dropdown.OptionData(drawModeName)).ToList();
+		mapDrawModeDropdown.FromList(Enum.GetNames(typeof(MapDrawMode)));
 
 		OnDrawModeChanged();
 
-		raceDropdown.options = GameController.Races.Select(race => new Dropdown.OptionData(race.collectiveName.Capitalize())).ToList();
+		raceDropdown.FromList(GameController.Races.Select(race => race.collectiveName.Capitalize()).ToArray());
 
 		OnRaceChanged();
 	}

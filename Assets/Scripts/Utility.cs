@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public static class Utility {
@@ -12,6 +13,20 @@ public static class Utility {
 	public static T RandomItem<T>(this IList<T> list, Random random = null) => list[(random ?? GameController.Random).Next(list.Count)];
 
 	public static T RandomValue<T>() where T : IConvertible, IFormattable, IComparable => ((T[]) Enum.GetValues(typeof(T))).RandomItem();
+
+	public static void FromList(this Dropdown dropdown, string[] values) {
+		float height = 50 * values.Length;
+
+		Rect template = dropdown.template.rect;
+
+		template.height = height;
+
+		dropdown.template.anchoredPosition = new Vector2(0, height + 60);
+
+		dropdown.options = values.Select(name => new Dropdown.OptionData(name)).ToList();
+
+		dropdown.onValueChanged.Invoke(dropdown.value);
+	}
 
 	public static int Abs(this int i) => i < 0 ? -i : i;
 	public static float Abs(this float i) => i < 0 ? -i : i;
@@ -29,8 +44,8 @@ public static class Utility {
 		int x, y;
 
 		do {
-			x = GameController.Random.Next(-1, 1);
-			y = GameController.Random.Next(-1, 1);
+			x = GameController.Random.Next(-1, 2);
+			y = GameController.Random.Next(-1, 2);
 		} while (x == 0 && y == 0);
 
 		return new Vector2Int(x, y);

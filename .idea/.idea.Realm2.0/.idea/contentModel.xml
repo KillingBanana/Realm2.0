@@ -261,6 +261,7 @@
             <e p="WorldCamera.cs" t="Include" />
             <e p="WorldGenUI.cs" t="Include" />
             <e p="WorldGenUtility.cs" t="Include" />
+            <e p="WorldLogUI.cs" t="Include" />
             <e p="WorldSettings.cs" t="Include" />
             <e p="WorldUnit.cs" t="Include" />
           </e>

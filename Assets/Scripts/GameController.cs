@@ -54,6 +54,9 @@ public class GameController : MonoBehaviour {
 	private static WorldGenUI worldGenUI;
 	public static WorldGenUI WorldGenUI => worldGenUI ? worldGenUI : (worldGenUI = Instance.GetComponent<WorldGenUI>());
 
+	private static WorldLogUI worldLogUI;
+	private static WorldLogUI WorldLogUI => worldLogUI ? worldLogUI : (worldLogUI = Instance.GetComponent<WorldLogUI>());
+
 	private static WorldGenUtility worldGenUtility;
 	public static WorldGenUtility WorldGenUtility => worldGenUtility ? worldGenUtility : (worldGenUtility = Instance.GetComponent<WorldGenUtility>());
 
@@ -75,12 +78,6 @@ public class GameController : MonoBehaviour {
 		DontDestroyOnLoad(this);
 
 		GenerateWorld();
-	}
-
-	private void Update() {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			Debug.Log(World.log.GetLog());
-		}
 	}
 
 	[UsedImplicitly]
@@ -117,6 +114,8 @@ public class GameController : MonoBehaviour {
 	private void OnWorldUpdated(bool reset) {
 		MapDisplay.DrawMap(reset);
 		WorldGenUI.OnMapChanged();
+
+		WorldLogUI.UpdateLog();
 
 		if (reset) {
 			int i = World.size / 2;
