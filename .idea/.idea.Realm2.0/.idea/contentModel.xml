@@ -234,6 +234,7 @@
             <e p="UIPanels.cs" t="Include" />
           </e>
           <e p="PrefabManager.cs" t="Include" />
+          <e p="Relationship.cs" t="Include" />
           <e p="Utility.cs" t="Include" />
           <e p="WorldEntity.cs" t="Include" />
           <e p="WorldGen" t="Include">

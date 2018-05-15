@@ -482,7 +482,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70
+  field of view: 60
   orthographic: 0
   orthographic size: 255
   m_Depth: -1
@@ -6968,7 +6968,6 @@ MonoBehaviour:
   seed: 9594
   startAutoUpdate: 1
   randomMapSeed: 1
-  resetCamera: 1
   secondsPerStep: 0.05
   autoUpdateRunning: 0
   worldSettings:

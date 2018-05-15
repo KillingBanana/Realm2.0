@@ -58,13 +58,13 @@ public class WorldCamera : MonoBehaviour {
 	}
 
 	private void Zoom(float amount) {
-		zoom = Mathf.Clamp(zoom + amount * Time.deltaTime, minZoom, GameController.World.size / 2);
+		zoom = Mathf.Clamp(zoom + amount * Time.deltaTime, minZoom, GameController.World.size);
 	}
 
 	private void Update() {
 		if (GameController.World == null) return;
 
-		Zoom(-Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity * (zoom / 20));
+		Zoom(-Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity);
 
 		Move(keyboardSensitivity * Input.GetAxis("Horizontal"), keyboardSensitivity * Input.GetAxis("Vertical"));
 
